@@ -1,121 +1,65 @@
 
 import java.util.*;
 
-/**
- * 
- */
-public class Driver extends Person {
 
-    /**
-     * Default constructor
-     */
-    public Driver() {
-    }
-
-    /**
-     * 
-     */
+public class Driver extends Person
+{
     private double totalEarning;
-
-    /**
-     * 
-     */
     private float rating;
-
-    /**
-     * 
-     */
     private List<Trip> trips;
 
-
-
-
-    /**
-     * @return
-     */
-    public float getRating() {
-        // TODO implement here
-        return 0.0f;
+    public Driver(String a, String b, Date c, String d, String e, Boolean f)
+    {
+        super(a,b,c,d,e,f);
+        super.setDriver(true);
+        totalEarning = 0;
+        rating = 0;
+        trips = null;
     }
-
-    /**
-     * @return
-     */
-    public double getEarnings() {
-        // TODO implement here
-        return 0.0d;
+    public float getRating()
+    {
+        return this.rating;
     }
-
-    /**
-     * @param r
-     */
-    public void recalibrateRating(Integer r) {
+    public double getTotalEarning()
+    {
+        return this.totalEarning;
+    }
+    public void recalibrateRating(Integer r)
+    {
         // TODO implement here
     }
-
-    /**
-     * @param amount
-     */
-    public void addToEarnings(double amount) {
-        // TODO implement here
+    public void addToEarnings(double amount)
+    {
+        this.totalEarning += amount;
     }
-
-    /**
-     * @return
-     */
-    public Boolean acceptRide() {
+    public Boolean acceptRide()
+    {
         // TODO implement here
         return null;
     }
-
-    /**
-     * @return
-     */
-    public void displayTrips() {
+    public void displayTrips()
+    {
+        // TODO implement here
+    }
+    public void requestAssistance()
+    {
+        // TODO implement here
+    }
+    public void addRide(Trip trip)
+    {
+        // TODO implement here
+    }
+    public Boolean withdrawMoney(double amount)
+    {
         // TODO implement here
         return null;
     }
-
-    /**
-     * @return
-     */
-    public void requestAssistance() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param trip 
-     * @return
-     */
-    public void addRide(Trip trip) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param Double 
-     * @return
-     */
-    public Boolean withdrawMoney(void Double) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
     public Trip getCurrentRide() {
         // TODO implement here
         return null;
     }
-
-    /**
-     * @return
-     */
     public List<Trip> getPreviousRides() {
         // TODO implement here
         return null;
     }
-
 }

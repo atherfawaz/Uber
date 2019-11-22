@@ -1,129 +1,73 @@
 
 import java.util.*;
 
-/**
- * 
- */
-public class UberStaff extends Person {
-
-    /**
-     * Default constructor
-     */
-    public UberStaff() {
+public class UberStaff extends Person
+{
+    public UberStaff(String a, String b, Date c, String d, String e, Boolean f)
+    {
+        super(a,b,c,d,e,f);
     }
 
-    /**
-     * @param tripId
-     */
-    public void cancelRide(Trip tripId) {
+    public void cancelRide(Trip tripId)
+    {
         // TODO implement here
     }
-
-    /**
-     * @param riderID
-     */
-    public void helpRider(String riderID) {
+    public void helpRider(String riderID)
+    {
         // TODO implement here
     }
-
-    /**
-     * @param driverID
-     */
-    public void helpDriver(String driverID) {
+    public void helpDriver(String driverID)
+    {
         // TODO implement here
     }
-
-    /**
-     * @return
-     */
-    public void operatorAssistance() {
+    public void operatorAssistance()
+    {
+        // TODO implement here
+    }
+    public void refundPassenger(String passengerID, double amount)
+    {
+        // TODO implement here
+    }
+    public void notifyVehicleCondition()
+    {
+        // TODO implement here
+    }
+    public Boolean verifyDriverDetails(List<String> details)
+    {
         // TODO implement here
         return null;
     }
-
-    /**
-     * @param passengerID 
-     * @param amount
-     */
-    public void refundPassenger(String passengerID, double amount) {
-        // TODO implement here
-    }
-
-    /**
-     * @return
-     */
-    public void notifyVehicleCondition() {
+    public Boolean verifyVehicleDetails(Vehicle vehicleDetails)
+    {
         // TODO implement here
         return null;
     }
-
-    /**
-     * @param details 
-     * @return
-     */
-    public Boolean verifyDriverDetails(List<String> details) {
+    public void addDriver()
+    {
+        // TODO implement here
+    }
+    public void rejectDriver()
+    {
+        // TODO implement here
+    }
+    public Boolean checkConflictOfInterest(String nationalID)
+    {
         // TODO implement here
         return null;
     }
-
-    /**
-     * @param vehicleDetails 
-     * @return
-     */
-    public Boolean verifyVehicleDetails(Vehicle vehicleDetails) {
+    public Boolean checkIdentity(String nationalID)
+    {
         // TODO implement here
         return null;
     }
-
-    /**
-     * @return
-     */
-    public void addDriver() {
+    public Boolean checkCriminalRecord(String nationalID)
+    {
         // TODO implement here
         return null;
     }
-
-    /**
-     * @return
-     */
-    public void rejectDriver() {
+    public Boolean checkCarDetails()
+    {
         // TODO implement here
         return null;
     }
-
-    /**
-     * @param nationalID 
-     * @return
-     */
-    public Boolean checkConflictOfInterest(String nationalID) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param nationalID 
-     * @return
-     */
-    public Boolean checkIdentity(String nationalID) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param nationalID 
-     * @return
-     */
-    public Boolean checkCriminalRecord(String nationalID) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public Boolean checkCarDetails() {
-        // TODO implement here
-        return null;
-    }
-
 }
