@@ -1,147 +1,72 @@
 
 import java.util.*;
 
-/**
- * 
- */
 public class Person {
-
-    /**
-     * Default constructor
-     */
-    public Person() {
-    }
-
-    /**
-     * 
-     */
     private String name;
-
-    /**
-     * 
-     */
-    private String national_ID;
-
-    /**
-     * 
-     */
+    private String nationalId;
     private Date dateOfBirth;
-
-    /**
-     * 
-     */
     private String email;
-
-    /**
-     * 
-     */
     private String phoneNum;
+    private Boolean isDriver;
 
-    /**
-     * 
-     */
-    public Boolean isDriver;
-
-
-    /**
-     * @return
-     */
-    public List<String> getContactInfo() {
-        // TODO implement here
-        return null;
+    public Person(String a, String b, Date c, String d, String e, Boolean f) {
+        name = new String(e);
+        nationalId = new String(b);
+        dateOfBirth = c;
+        email = new String(d);
+        phoneNum = new String(e);
+        isDriver = f;
     }
-
-    /**
-     * @return
-     */
-    public Trip getCurrentRide() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public List<Trip> getPreviousRides() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public String getNID() {
-        // TODO implement here
-        return "";
-    }
-
-    /**
-     * @return
-     */
     public String getName() {
-        // TODO implement here
-        return "";
+        return name;
     }
-
-    /**
-     * @return
-     */
-    public Date getDOB() {
-        // TODO implement here
-        return null;
+    public String getNationalId() {
+        return nationalId;
     }
-
-    /**
-     * @param name 
-     * @return
-     */
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+    public Boolean getIsDriver() {
+        return isDriver;
+    }
     public void setName(String name) {
-        // TODO implement here
-        return null;
+        this.name = name;
     }
-
-    /**
-     * @param dob 
-     * @return
-     */
-    public void setDOB(Date dob) {
-        // TODO implement here
-        return null;
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
     }
-
-    /**
-     * @param nid 
-     * @return
-     */
-    public void setNID(String nid) {
-        // TODO implement here
-        return null;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
-
-    /**
-     * @param email 
-     * @return
-     */
-    public void setEmail(String email) {
-        // TODO implement here
-        return null;
+    public void setEmail(String email)
+    {
+        this.email = email;
     }
-
-    /**
-     * @param num 
-     * @return
-     */
-    public void setPhoneNum(String num) {
-        // TODO implement here
-        return null;
+    public void setDriver(Boolean driver) {
+        isDriver = driver;
     }
-
-    /**
-     * @return
-     */
-    public void changeDetails() {
-        // TODO implement here
-        return null;
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
-
+    public List<String> getContactInfo()
+    {
+        List<String> rList = new ArrayList<String>();
+        rList.add(this.email);
+        rList.add(this.phoneNum);
+        return rList; // Return email & phoneNum
+    }
+    public Trip getCurrentRide()
+    {
+        return null; //Implementation later
+    }
+    public void changeDetails()
+    {
+        //Implementation later
+    }
 }
