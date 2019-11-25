@@ -17,6 +17,7 @@ public class Person {
         phoneNum = new String(e);
         isDriver = f;
     }
+
     public String getName() {
         return name;
     }
@@ -54,6 +55,7 @@ public class Person {
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
+
     public List<String> getContactInfo()
     {
         List<String> rList = new ArrayList<String>();
