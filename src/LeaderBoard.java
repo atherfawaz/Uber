@@ -1,65 +1,32 @@
 
 import java.util.*;
 
-/**
- * 
- */
 public class LeaderBoard {
 
-    /**
-     * Default constructor
-     */
-    public LeaderBoard() {
-    }
-
-    /**
-     * 
-     */
-    private List<Driver> drivers;
-
-    /**
-     * 
-     */
-    public Set<Driver> driverList;
-
-    /**
-     * @return
-     */
-    public List<Driver> showHighestRated() {
-        // TODO implement here
+    private List<Driver> drivers = new ArrayList<Driver>();
+    public List<Driver> showHighestRated()
+    {
+        //TODO implement here;
         return null;
     }
-
-    /**
-     * @return
-     */
-    public List<Driver> showOldest() {
-        // TODO implement here
+    public List<Driver> showOldest()
+    {
+        //TODO implement here;
         return null;
     }
-
-    /**
-     * @return
-     */
-    public List<Driver> showLowestRated() {
-        // TODO implement here
+    public List<Driver> showLowestRated()
+    {
+        //TODO implement here;
         return null;
     }
-
-    /**
-     * @return
-     */
-    public List<Driver> showBonusEarners() {
-        // TODO implement here
+    public List<Driver> showBonusEarners()
+    {
+        //TODO implement here;
         return null;
     }
-
-    /**
-     * @return
-     */
-    public void computeBonus() {
-        // TODO implement here
-        return null;
+    public void computeBonus()
+    {
+        //TODO implement here;
     }
 
 }
