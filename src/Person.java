@@ -18,6 +18,15 @@ public class Person {
         isDriver = f;
     }
 
+    public Person() {
+        name = "Default staff";
+        nationalId = "35000-UBER-STAFF";
+        dateOfBirth = new Date();
+        email = "support@uber.com";
+        phoneNum = "111-111-111";
+        isDriver = false;
+    }
+
     public String getName() {
         return name;
     }
