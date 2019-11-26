@@ -4,17 +4,19 @@ import java.util.*;
 
 public class Driver extends Person
 {
+    private Date startDate;
     private double totalEarning;
     private float rating;
     private List<Trip> trips;
 
-    public Driver(String a, String b, Date c, String d, String e, Boolean f)
+    public Driver(String a, String b, Date c, String d, String e, Boolean f, Date x)
     {
         super(a,b,c,d,e,f);
         super.setDriver(true);
         totalEarning = 0;
         rating = 0;
         trips = null;
+        startDate = x;
     }
     public float getRating()
     {
@@ -24,6 +26,8 @@ public class Driver extends Person
     {
         return this.totalEarning;
     }
+    public Date getStartDate() { return startDate; }
+
     public void recalibrateRating(Integer r)
     {
         // TODO implement here

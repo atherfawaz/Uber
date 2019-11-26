@@ -13,11 +13,11 @@ public class Uber {
 
   public static void main(String[] args) {
     //parameters
-    int staffcount = 5;
-
+    int STAFFCOUNT = 5;
+    int HIGHESTRATED = 5;
     //initial setup
     LeaderBoard leaderBoard = LeaderBoard.getInstance();
-    List<UberStaff> uberstaff = recruitStaff(staffcount);
+    List<UberStaff> uberstaff = recruitStaff(STAFFCOUNT);
 
     System.out.println("Welcome to Uber");
   }
