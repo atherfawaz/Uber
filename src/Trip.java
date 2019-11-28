@@ -68,9 +68,7 @@ public class Trip
         return passengerNId;
     }
 
-    public void setPassengerNId(String passengerNId) {
-        this.passengerNId = passengerNId;
-    }
+    public void setPassengerNId(String passengerNId) { this.passengerNId = passengerNId; }
 
     public DateTimeSyntax getDateTime() {
         return dateTime;

@@ -7,8 +7,8 @@ public class UberStaff extends Person {
         super();
     }
 
-  public UberStaff(String a, String b, Date c, String d, String e, Boolean f) {
-    super(a, b, c, d, e, f);
+  public UberStaff(String a, String b, Date c, String d, String e, Boolean f, Account acc) {
+    super(a, b, c, d, e, f,acc);
   }
 
   public void cancelRide(Trip tripId) {
