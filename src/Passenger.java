@@ -48,19 +48,26 @@ public class Passenger extends Person
     }
     public void addRide(Trip trip)
     {
-        // TODO implement here
+        trips.add(trip);
     }
     public void displayRides()
     {
-        // TODO implement here
+
+        for (Trip t:trips)
+        {
+            System.out.println("Trip " + t+1 + " was conducted on " + t.getDateTime());
+            System.out.println("It began at " + t.getStartingPoint() + " and ended at " + t.getDestination() + ".");
+            System.out.println("The total money you the ride cost the passenger was " + t.getTotalCost() + "\n");
+        }
+
     }
     public Trip getCurrentRide()
     {
-        // TODO implement here
-        return null;
+        return trips.get(trips.size() - 1);
     }
     public void callARide()
     {
+        Trip temp = new Trip();
         // TODO implement here
     }
 }

@@ -38,13 +38,14 @@ public class Driver extends Person
         this.totalEarning += amount;
         System.out.println(amount + "has been added to your total earnings.");
     }
-    public Boolean acceptRide(Passenger P, Trip trip)
+    public Boolean acceptRide(Trip trip)
     {
-        int acceptNum = P.getName().length() - trip.getStartingPoint().length() - trip.getDestination().length(); //Jawad algorithm
+        int acceptNum = getName().length() +  trip.getStartingPoint().length() - trip.getDestination().length(); //Jawad algorithm
         if (acceptNum>0)
         {
+            trip.setDriverNID(super.getNationalId()); // adding all the stuff specific to the driver.
             addRide(trip);
-            System.out.println(this.getName() + " has accepted the ride requested by " + P.getName());
+            System.out.println(this.getName() + " has accepted the ride requested.");
             return true;
         }
         return false;
@@ -53,9 +54,8 @@ public class Driver extends Person
     {
         for (Trip t:trips)
         {
-            int i = 1;
             String pID = t.getPassengerNId();
-            System.out.println("Trip " + i + " was conducted on " + t.getDateTime());
+            System.out.println("Trip " + t + 1 + " was conducted on " + t.getDateTime());
             System.out.println("It began at " + t.getStartingPoint() + " and ended at " + t.getDestination() + ".");
             System.out.println("The total money you the ride cost the passenger was " + t.getTotalCost() + "\n");
         }

@@ -14,6 +14,7 @@ public class Trip
     private Double totalCost;
     private String uberStaffNID;
 
+    Trip() {}
     public Trip(String startingPoint, String destination, DateTimeSyntax timeForSchedule, String vehicle, String driverNId, String passengerNId, DateTimeSyntax dateTime, Double totalCost,String usNID) {
         this.startingPoint = startingPoint;
         this.destination = destination;
@@ -25,7 +26,7 @@ public class Trip
         this.totalCost = totalCost;
         this.uberStaffNID = usNID;
     }
-
+    public void setDriverNID(String a) {this.driverNId = a;}
     public String getStartingPoint() {
         return startingPoint;
     }
