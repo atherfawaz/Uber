@@ -10,17 +10,21 @@ public class Passenger extends Person
     }
    public double getExpenditure()
     {
-        // TODO implement here
-        return 0.0d;
+        return trips.get(trips.size() - 1).getTotalCost();
     }
     public Boolean creditAccount(Double Amount)
     {
-        // TODO implement here
-        return null;
+        account.addCredit(Amount);
+        return true;
     }
-    public void initiatePayment(String pType)
+    public void initiatePayment(String pType, Double amount)
     {
-        // TODO implement here
+        if (pType.equalsIgnoreCase("cash"))
+        {
+            System.out.println("You have successfully paid the driver.");
+            return;
+        }
+        makePayment(amount);
     }
     public Boolean rateDriver(Integer r)
     {
@@ -34,8 +38,9 @@ public class Passenger extends Person
     }
     public Boolean makePayment(Double amount)
     {
-        // TODO implement here
-        return null;
+        account.debitAccount(amount);
+        System.out.println("You have successfully paid the driver");
+        return true;
     }
     public void requestAssistance()
     {

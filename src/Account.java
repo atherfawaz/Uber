@@ -26,10 +26,11 @@ public class Account
     public void setTotalCredit(double totalCredit) {
         this.totalCredit = totalCredit;
     }
-    public Boolean credit(Double amount)
+    public Boolean addCredit(Double amount)
     {
-        //TODO implement here
-        return null;
+        totalCredit += amount;
+        System.out.println("RS" + amount + " has been added to your account. The total amount in your account is now " + totalCredit);
+        return true;
     }
     public Boolean debitAccount(Double amount)
     {

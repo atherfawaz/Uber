@@ -9,7 +9,7 @@ public class Person {
     private String email;
     private String phoneNum;
     private Boolean isDriver;
-    private Account account;
+    protected Account account;
 
     public Person(String a, String b, Date c, String d, String e, Boolean f, Account acc) {
         name = new String(e);
