@@ -3,8 +3,7 @@ import java.util.List;
 
 public class Uber {
 
-  public static List<UberStaff> recruitStaff(int staffcount)
-  {
+  public static List<UberStaff> recruitStaff(int staffcount) {
     List<UberStaff> ls = new ArrayList<>();
     for (int i = 0; i < staffcount; i++) {
       ls.add(new UberStaff());
@@ -12,10 +11,11 @@ public class Uber {
     return ls;
   }
 
-  public static void main(String[] args)
-  {
+  public static void main(String[] args) {
+    //parameters
     int STAFFCOUNT = 5;
     int HIGHESTRATED = 5;
+    //initial setup
     LeaderBoard leaderBoard = LeaderBoard.getInstance();
     List<UberStaff> uberstaff = recruitStaff(STAFFCOUNT);
 
