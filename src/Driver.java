@@ -39,7 +39,7 @@ public class Driver extends Person
     }
     public Boolean acceptRide(Passenger P, Trip trip)
     {
-        int acceptNum = P.getName().length() - trip.getStartingPoint().length() - trip.getDestination().length();
+        int acceptNum = P.getName().length() - trip.getStartingPoint().length() - trip.getDestination().length(); //Jawad algorithm
         if (acceptNum>0)
         {
             addRide(trip);
