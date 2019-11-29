@@ -19,6 +19,7 @@ public class Person {
         phoneNum = new String(e);
         isDriver = f;
         account = acc;
+
     }
 
     public Person() {

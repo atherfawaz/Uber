@@ -12,8 +12,9 @@ public class Trip
     private String passengerNId;
     private DateTimeSyntax dateTime;
     private Double totalCost;
+    private String uberStaffNID;
 
-    public Trip(String startingPoint, String destination, DateTimeSyntax timeForSchedule, String vehicle, String driverNId, String passengerNId, DateTimeSyntax dateTime, Double totalCost) {
+    public Trip(String startingPoint, String destination, DateTimeSyntax timeForSchedule, String vehicle, String driverNId, String passengerNId, DateTimeSyntax dateTime, Double totalCost,String usNID) {
         this.startingPoint = startingPoint;
         this.destination = destination;
         this.timeForSchedule = timeForSchedule;
@@ -22,6 +23,7 @@ public class Trip
         this.passengerNId = passengerNId;
         this.dateTime = dateTime;
         this.totalCost = totalCost;
+        this.uberStaffNID = usNID;
     }
 
     public String getStartingPoint() {
@@ -112,5 +114,9 @@ public class Trip
     {
         //TODO implement here
         return null;
+    }
+    public void helpDriver()
+    {
+
     }
 }

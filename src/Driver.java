@@ -36,6 +36,7 @@ public class Driver extends Person
     public void addToEarnings(double amount)
     {
         this.totalEarning += amount;
+        System.out.println(amount + "has been added to your total earnings.");
     }
     public Boolean acceptRide(Passenger P, Trip trip)
     {
@@ -55,14 +56,13 @@ public class Driver extends Person
             int i = 1;
             String pID = t.getPassengerNId();
             System.out.println("Trip " + i + " was conducted on " + t.getDateTime());
-            System.out.println("The passenger for this trip was " + t.getPassengerNId());
             System.out.println("It began at " + t.getStartingPoint() + " and ended at " + t.getDestination() + ".");
             System.out.println("The total money you the ride cost the passenger was " + t.getTotalCost() + "\n");
         }
     }
     public void requestAssistance() //unsure about implementation
     {
-        // TODO implement here
+        System.out.println("Requesting assistance from the uber staff assigned ");
     }
     public void addRide(Trip trip)
     {

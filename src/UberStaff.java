@@ -3,6 +3,7 @@ import java.util.*;
 
 public class UberStaff extends Person {
 
+    private List<String> pNIDList = new ArrayList<String> ();
     public UberStaff() {
         super();
     }
@@ -71,5 +72,9 @@ public class UberStaff extends Person {
   public Boolean checkCarDetails() {
     // TODO implement here
     return null;
+  }
+  public void addPerson(String p)
+  {
+    pNIDList.add(p);
   }
 }
