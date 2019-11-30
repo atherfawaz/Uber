@@ -3,18 +3,26 @@ import java.util.List;
 public class PaymentSystem {
 
 
-  public Boolean verifyFromBank(List<String> details) {
-    //TODO implement here;
-    return null;
+  public Boolean verifyFromBank(String IBAN) {
+    if(IBAN.length() == 14)
+    {
+      return true;
+    }
+    return false;
   }
 
   public Boolean withdrawToBank(Double amount, String IBAN) {
-    //TODO implement here
-    return null;
+    //withdrawing broooo ayeeee
+    //Bank withdrawal are out of our scope, there exists no bank in this virtual world
+    if(verifyFromBank(IBAN))
+    {
+      return true;
+    }
+    return false;
   }
 
-  public Boolean makePayment(Double amount, String driverAccount) {
-    //TODO implement here
-    return null;
+  public Boolean makePayment(Double amount, Driver driverAccount) {
+    driverAccount.addToEarnings(amount);
+    return true;
   }
 }
