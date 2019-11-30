@@ -7,7 +7,7 @@ import java.text.*;
 public class Passenger extends Person
 {
     private List<Trip> trips;
-    public Passenger(String a, String b, Date c, String d, String e, Boolean f, Account account)
+    public Passenger(String a, String b, String c, String d, String e, Boolean f, Account account)
     {
         super(a,b,c,d,e,f,account);
     }
