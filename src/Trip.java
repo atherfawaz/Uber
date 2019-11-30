@@ -1,6 +1,9 @@
 
 import javax.print.attribute.DateTimeSyntax;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Trip {
 
@@ -12,6 +15,7 @@ public class Trip {
   private Passenger passenger;
   private String dateTime;
   private Double totalCost;
+  private int tripID;
 
   Trip() {
 
@@ -19,7 +23,7 @@ public class Trip {
 
   public Trip(String startingPoint, String destination, String timeForSchedule,
       Vehicle vehicle, Driver d, Passenger passenger, String dateTime,
-      Double totalCost) {
+      Double totalCost, int tripID) {
     this.startingPoint = startingPoint;
     this.destination = destination;
     this.timeForSchedule = timeForSchedule;
@@ -28,15 +32,18 @@ public class Trip {
     this.driver = d;
     this.dateTime = dateTime;
     this.totalCost = totalCost;
+    this.tripID = tripID;
   }
 
-  public void setRating(Integer integer) {
+  public void giveRating(Integer integer) {
     driver.recalibrateRating((integer));
   }
 
   public void addDriver(Driver d) {
     this.driver = d;
   }
+
+  public void addVehicle(Vehicle v) {this.vehicle = v;}
 
   public String getStartingPoint() {
     return startingPoint;
@@ -62,21 +69,21 @@ public class Trip {
     this.timeForSchedule = timeForSchedule;
   }
 
-  public String getVehicle() {
+  public Vehicle getVehicle() {
     return vehicle;
   }
 
-  public void setVehicle(String vehicle) {
+  public void setVehicle(Vehicle vehicle) {
     this.vehicle = vehicle;
   }
 
-  public String getDriverNId() {
-    return driver.getNationalId();
+  public Driver getDriver() {
+    return driver;
   }
 
 
-  public String getPassengerNId() {
-    return passenger.getNationalId();
+  public Passenger getPassenger() {
+    return passenger;
   }
 
 
@@ -95,39 +102,108 @@ public class Trip {
   public void setTotalCost(Double totalCost) {
     this.totalCost = totalCost;
   }
-
-  public void startRide() {
-    //TODO implement here
+  public int getTripid() {
+	return tripID;
   }
 
-  public void calculateFare() {
-    //TODO implement here
+  public void setTotalCost(int tripID) {
+	this.tripID = tripID;
   }
 
-  public void calculateShortestRoute() {
-    //TODO implement here
+  public void startRide()
+  {
+    System.out.println("Your ride from " + startingPoint + " to " + destination + " is in progress.");
+    try
+    {
+      Thread.sleep(5000);
+    }
+    catch(InterruptedException ex)
+    {
+      Thread.currentThread().interrupt();
+    }
+    System.out.println("Ride completed. Please pay the driver " + totalCost + "\n");
   }
 
-  public List<String> getTripInfo() {
-    //TODO implement here
-    return null;
+  public void calculateFare()
+  {
+    double baseFair = 100;
+    double tripDistance = (Math.random() * ((30 - 1) + 1)) + 1;
+    double peakFactor = calculatePeakHours();
+    double totalCost = Math.round(peakFactor * (baseFair + tripDistance * 25));
+  }
+
+  public void calculateShortestRoute()
+  {
+    ;
+  }
+
+  public List<String> getTripInfo()
+  {
+    List<String> tripInfo = new ArrayList<>();
+    tripInfo.add(this.dateTime);
+    tripInfo.add(this.startingPoint);
+    tripInfo.add(this.destination);
+    tripInfo.add(this.driver.getName());
+    tripInfo.add(this.passenger.getName());
+    tripInfo.add(Double.toString(this.totalCost));
+    tripInfo.add(Integer.toString(this.tripID));
+    return tripInfo;
   }
 
   public Boolean checkRouteValidity(String pLoc, String dLoc) {
-    //TODO implement here
-    return null;
+    if (!(pLoc.equalsIgnoreCase(dLoc))
+            &&     (startingPoint.equalsIgnoreCase("Eden Avenue") || startingPoint.equalsIgnoreCase("DHA Phase 1") || startingPoint.equalsIgnoreCase("Bhatta Chowk") || startingPoint.equalsIgnoreCase("Model Town"))
+            && (destination.equalsIgnoreCase("Eden Avenue") || destination.equalsIgnoreCase("DHA Phase 1") || destination.equalsIgnoreCase("Bhatta Chowk") || destination.equalsIgnoreCase("Model Town")))
+    {
+      return true;
+    }
+    return false;
   }
 
-  public Double calulatePeakHours() {
-    //TODO implement here
-    return null;
+  public Double calculatePeakHours() {
+    double peakFactor;
+    String currTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+    if (currTime.substring(11,12)=="01" || currTime.substring(11,12)=="02" || currTime.substring(11,12)=="03")
+    {
+      peakFactor = 1.2;
+    }
+    else if (currTime.substring(11,12)=="04" || currTime.substring(11,12)=="05" || currTime.substring(11,12)=="06")
+    {
+      peakFactor = 1.3;
+    }
+    else if (currTime.substring(11,12)=="07" || currTime.substring(11,12)=="08" || currTime.substring(11,12)=="09")
+    {
+      peakFactor = 1.4;
+    }
+    else if (currTime.substring(11,12)=="10" || currTime.substring(11,12)=="11" || currTime.substring(11,12)=="12")
+    {
+      peakFactor = 1.5;
+    }
+    return 1.0;
   }
 
-  public void helpDriver() {
-    ;//random index gen?
+  public void helpDriver(List<UberStaff> staff) {
+    boolean loopVar = true;
+    int randIndex;
+    while (loopVar) {
+      randIndex = (int) (Math.random() * ((staff.size() - 1) + 1));
+      if (staff.get(randIndex).getIsFree()) {
+        staff.get(randIndex).setIsFree(false);
+        staff.get(randIndex).helpDriver(this.getDriver().getNationalId());
+        loopVar = false;
+      }
+    }
   }
 
-  public void helpPassenger() {
-    ;//random index gen?
+  public void helpPassenger(List<UberStaff> staff) {
+    boolean loopVar = true;
+    while (loopVar) {
+      int randIndex = (int) (Math.random() * ((staff.size() - 1) + 1));
+      if (staff.get(randIndex).getIsFree()) {
+        staff.get(randIndex).setIsFree(false);
+        staff.get(randIndex).helpPassenger(this.getPassenger().getNationalId());
+        loopVar = false;
+      }
+    }
   }
 }

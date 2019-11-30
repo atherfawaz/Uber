@@ -50,13 +50,18 @@ public class Account
         totalCredit -= amount;
         return true;
     }
-    public Boolean verifyDetails(List<String> details)
+    public Boolean verifyDetails()
     {
-        //TODO implement here
-        return null;
+        if(Uber.paymentSystem.verifyFromBank(accountNum))
+            return true;
+        return false;
     }
-    public void cashout (Double amount)
+    public boolean cashout (Double amount)
     {
-        //TODO implement here
+        if(debitAccount(amount))
+        {
+            return Uber.paymentSystem.withdrawToBank(amount,accountNum);
+        }
+        return false;
     }
 }

@@ -11,10 +11,11 @@ public class Passenger extends Person {
 
   public Passenger(String name, String nationalId, String dateOfBirth, String email, String phonenumber, Boolean isdriver, Account account) {
     super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
+    trips = new ArrayList<>();
   }
 
   Passenger() {
-
+    trips = new ArrayList<>();
   }
 
   Passenger(Person passed) {
@@ -32,16 +33,16 @@ public class Passenger extends Person {
     return true;
   }
 
-  public void initiatePayment(String pType, Double amount) {
+  public void initiatePayment(String pType, Double amount, Driver d) {
     if (pType.equalsIgnoreCase("cash")) {
       System.out.println("You have successfully paid the driver.");
       return;
     }
-    makePayment(amount);
+    makePayment(amount, d);
   }
 
   public Boolean rateDriver(Integer r) {
-    trips.get(trips.size() - 1).setRating(r);
+    trips.get(trips.size() - 1).giveRating(r);
     return true;
   }
 
@@ -59,17 +60,21 @@ public class Passenger extends Person {
     }
   }
 
-  public Boolean makePayment(Double amount) {
+  public Boolean makePayment(Double amount, Driver d) {
     if (account.debitAccount(amount)) {
-      System.out.println("You have successfully paid the driver");
-      return true;
+      if(Uber.paymentSystem.makePayment(amount,d)) {
+        System.out.println("You have successfully paid the driver");
+        return true;
+      }
+
     }
+    System.out.println("Payment failed");
     return false;
   }
 
   public void requestAssistance() {
     System.out.println("Requesting assistance from the Uber staff assigned.");
-    trips.get(trips.size() - 1).helpPassenger();
+    trips.get(trips.size() - 1).helpPassenger(Automate.staff);
   }
 
   public void addRide(Trip trip) {
@@ -93,29 +98,42 @@ public class Passenger extends Person {
   }
 
   public void callARide(List<Driver> dList) {
-    double baseFair = 100;
-    double tripDistance = (Math.random() * ((30 - 1) + 1)) + 1;
-    double totalCost = baseFair + tripDistance * 25;
-    Scanner input = new Scanner(System.in);
-    System.out.println("Enter your starting point: ");
-    String startingPoint = input.nextLine();
-    System.out.println("Enter your destination: ");
-    String destination = input.nextLine();
-    String currTime = LocalDateTime.now()
-        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-    Trip trip = new Trip(startingPoint, destination, null, null, null, this, currTime, totalCost);
+    Boolean validTrip = false;
+    Boolean validLoc = false;
+    while (!(validTrip)) {
+      Scanner input = new Scanner(System.in);
+      System.out.println("Enter your starting point.\n - Eden Avenue\n - Bhatta Chowk\n - DHA Phase 1\n - Model Town\n");
+      String startingPoint = input.nextLine();
+      System.out.println("Enter your destination. \n - Eden Avenue\n - Bhatta Chowk\n - DHA Phase 1\n - Model Town\n");
+      String destination = input.nextLine();
+      String currTime = LocalDateTime.now()
+              .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+      Trip trip = new Trip(startingPoint, destination, null, null, null, this, currTime, null);
+      if (trip.checkRouteValidity(startingPoint, destination)) {
+        validTrip = true;
+        trip.calculateShortestRoute();
+        trip.calculateFare();
        /* gen random index
         If (person.get(randomIndex).getName().starts with 'u' && person.isFree)
         request assistance from him
         break; */
-    boolean loopVar = true;
-    while (loopVar) {
-      int randIndex = (int) (Math.random() * ((dList.size() - 1) + 1));
-      if (dList.get(randIndex).getIsFree()) {
-        dList.get(randIndex).setIsFree(false);
-        dList.get(randIndex).acceptRide(trip);
-        trip.addDriver(dList.get(randIndex));
-        loopVar = false;
+        boolean loopVar = true;
+        int randIndex;
+        while (loopVar) {
+          randIndex = (int) (Math.random() * ((dList.size() - 1) + 1));
+          if (dList.get(randIndex).getIsFree()) {
+            dList.get(randIndex).setIsFree(false);
+            dList.get(randIndex).acceptRide(trip);
+            trip.addDriver(dList.get(randIndex));
+            //trip.addVehicle(dList.get(randIndex).getVehicles().get(0));
+            addRide(trip);
+            loopVar = false;
+            trip.startRide();
+          }
+        }
+      }
+      else {
+        System.out.println("Sorry, you've input the same starting point as the destination, or chosen an unavailable location! Please re-enter your choices.\n");
       }
     }
   }

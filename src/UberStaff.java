@@ -3,6 +3,7 @@ import java.util.*;
 
 public class UberStaff extends Person {
 
+  private Boolean isFree = true;
   private List<String> pNIDList = new ArrayList<String>();
 
   public UberStaff() {
@@ -13,11 +14,19 @@ public class UberStaff extends Person {
     super(a, b, c, d, e, f, acc);
   }
 
+  public void setIsFree(Boolean isFree_) {
+    isFree = isFree_;
+  }
+
+  public Boolean getIsFree() {
+    return isFree;
+  }
+
   public void cancelRide(Trip tripId) {
     // TODO implement here
   }
 
-  public void helpRider(String riderID) {
+  public void helpPassenger(String riderID) {
     // TODO implement here
   }
 
