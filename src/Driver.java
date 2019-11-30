@@ -27,9 +27,10 @@ public class Driver extends Person {
       String phonenumber, Boolean isdriver, Account account) {
     super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
     super.setDriver(true);
+    isFree = true;
     totalEarning = 0;
     rating = 0;
-    trips = null;
+    trips = new ArrayList<>();
     startDate = "Current system date";
   }
 
