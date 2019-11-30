@@ -6,7 +6,7 @@ public class LeaderBoard {
   int HIGHESTRATED = 5;
   int LOWESTRATED = 5;
 
-  public static LeaderBoard obj;
+  private static LeaderBoard obj;
 
   private List<Driver> drivers = new ArrayList<Driver>();
 
@@ -26,6 +26,7 @@ public class LeaderBoard {
   class sortByRating implements Comparator<Driver> {
 
     public int compare(Driver a, Driver b) {
+
       return (int) (a.getRating() - b.getRating());
     }
   }
@@ -38,7 +39,8 @@ public class LeaderBoard {
     }
 
     public int compare(Driver a, Driver b) {
-      return (int) getDateDifference(a.getStartDate(), b.getStartDate(), TimeUnit.MINUTES);
+     // return (int) getDateDifference(a.getStartDate(), b.getStartDate(), TimeUnit.MINUTES);
+      return 0;
     }
   }
 

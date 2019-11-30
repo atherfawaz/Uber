@@ -5,27 +5,39 @@ public class Person {
 
   private String name;
   private String nationalId;
-  private Date dateOfBirth;
+  private String dateOfBirth;
   private String email;
   private String phoneNum;
   private Boolean isDriver;
   protected Account account;
 
-  public Person(String a, String b, Date c, String d, String e, Boolean f, Account acc) {
-    name = new String(e);
-    nationalId = new String(b);
-    dateOfBirth = c;
-    email = new String(d);
-    phoneNum = new String(e);
-    isDriver = f;
-    account = acc;
+  public Person(String name, String nationalId, String dateOfBirth, String email, String phoneNum,
+      Boolean isDriver, Account account) {
+
+    this.name = new String(name);
+    this.nationalId = new String(nationalId);
+    this.dateOfBirth = new String(dateOfBirth);
+    this.email = new String(email);
+    this.phoneNum = new String(phoneNum);
+    this.isDriver = isDriver;
+    this.account = account;
 
   }
 
-  public Person() {
+  public Person(Person passed) {
+    this.account = passed.account;
+    this.dateOfBirth = passed.dateOfBirth;
+    this.email = passed.email;
+    this.isDriver = passed.isDriver;
+    this.name = passed.name;
+    this.nationalId = passed.nationalId;
+    this.phoneNum = passed.phoneNum;
+  }
+
+  public Person() { //used only by uberstaff
     name = "Default staff";
     nationalId = "35000-UBER-STAFF";
-    dateOfBirth = new Date();
+    dateOfBirth = new String("31-08-1998");
     email = "support@uber.com";
     phoneNum = "111-111-111";
     isDriver = false;
@@ -39,7 +51,7 @@ public class Person {
     return nationalId;
   }
 
-  public Date getDateOfBirth() {
+  public String getDateOfBirth() {
     return dateOfBirth;
   }
 
@@ -63,7 +75,7 @@ public class Person {
     this.nationalId = nationalId;
   }
 
-  public void setDateOfBirth(Date dateOfBirth) {
+  public void setDateOfBirth(String dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
   }
 
@@ -125,6 +137,24 @@ public class Person {
         newVal = sc.nextLine();
         this.setPhoneNum(newVal);
       }
+    }
+  }
+
+  public static Person signUpAs(Person passed) {
+
+    System.out.println("1. Sign up as a driver");
+    System.out.println("2. Sign up as a passenger");
+    Scanner sc = new Scanner(System.in);
+
+    int choice = sc.nextInt();
+
+    if (choice == 1) {
+      return new Driver(passed);
+    } else if (choice == 2) {
+        return null;
+    } else {
+      System.out.println("Invalid input");
+      return null;
     }
   }
 }

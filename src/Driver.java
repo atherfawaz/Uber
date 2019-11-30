@@ -4,11 +4,13 @@ import java.util.*;
 
 public class Driver extends Person
 {
-    private Date startDate;
+    private String startDate;
     private double totalEarning;
     private float rating;
-    private List<Trip> trips;
-    public Driver(String a, String b, Date c, String d, String e, Boolean f, Date x, Account account)
+    private List<Trip> trips = new ArrayList<>();
+    private List<Vehicle> personalCars = new ArrayList<>();
+
+    public Driver (String a, String b, String c, String d, String e, Boolean f, String x, Account account)
     {
         super(a,b,c,d,e,f,account);
         super.setDriver(true);
@@ -16,6 +18,11 @@ public class Driver extends Person
         rating = 0;
         trips = null;
         startDate = x;
+    }
+
+    public Driver(Person passed) {
+        super(passed);
+        System.out.println("Enter your ");
     }
     public float getRating()
     {
@@ -25,7 +32,7 @@ public class Driver extends Person
     {
         return this.totalEarning;
     }
-    public Date getStartDate() { return startDate; }
+    public String getStartDate() { return startDate; }
 
     public void recalibrateRating(Integer r)
     {

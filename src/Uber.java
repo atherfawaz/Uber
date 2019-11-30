@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,8 +8,8 @@ public class Uber {
   public static void main(String[] args) {
 
     //parameters
-    int STAFFCOUNT = 5;
-    int HIGHESTRATED = 5;
+    final int STAFFCOUNT = 5;
+    final int HIGHESTRATED = 5;
 
     //initial setup
     LeaderBoard leaderBoard = LeaderBoard.getInstance();
@@ -25,4 +26,7 @@ public class Uber {
       System.out.println("Exiting now...");
     }
   }
+
+  Date x = new Date("");
+
 }

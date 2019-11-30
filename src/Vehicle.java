@@ -9,13 +9,13 @@ public class Vehicle
     private Integer mode;
     private String manufacturer;
 
-    Vehicle(String a, String b, String c, Integer d, String e)
+    Vehicle(String registrationNum, String condition, String make, Integer mode, String manufacturer)
     {
-        registrationNum = a;
-        condition = b;
-        make = c;
-        mode = d;
-        manufacturer = e;
+        this.registrationNum = registrationNum;
+        this.condition = condition;
+        this.make = make;
+        this.mode = mode;
+        this.manufacturer = manufacturer;
     }
     public String getRegistrationNum()
     {
