@@ -1,7 +1,9 @@
 
 import javax.swing.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
-
+import java.time.*;
+import java.text.*;
 public class Passenger extends Person
 {
     private List<Trip> trips;
@@ -29,12 +31,12 @@ public class Passenger extends Person
     }
     public Boolean rateDriver(Integer r)
     {
-        // TODO implement here
-        return null;
+        trips.get(trips.size() -1).setRating(r);
+        return true;
     }
     public Boolean requestCancellation()
     {
-        // TODO implement here
+        //TODO implement later
         return null;
     }
     public Boolean makePayment(Double amount)
@@ -57,14 +59,12 @@ public class Passenger extends Person
     }
     public void displayRides()
     {
-
-        for (Trip t:trips)
+        for(int t = trips.size(); t>=0 ; t--)
         {
-            System.out.println("Trip " + t+1 + " was conducted on " + t.getDateTime());
-            System.out.println("It began at " + t.getStartingPoint() + " and ended at " + t.getDestination() + ".");
-            System.out.println("The total money you the ride cost the passenger was " + t.getTotalCost() + "\n");
+            System.out.println("Trip " + t+1 + " was conducted on " + trips.get(t).getDateTime());
+            System.out.println("It began at " + trips.get(t).getStartingPoint() + " and ended at " + trips.get(t).getDestination() + ".");
+            System.out.println("The total money you the ride cost the passenger was " + trips.get(t).getTotalCost() + "\n");
         }
-
     }
     public Trip getCurrentRide()
     {

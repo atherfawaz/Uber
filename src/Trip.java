@@ -8,32 +8,34 @@ public class Trip {
   private String destination;
   private DateTimeSyntax timeForSchedule;
   private String vehicle;
-  private String driverNId;
-  private String passengerNId;
+  private Driver driver;
+  private Passenger passenger;
   private DateTimeSyntax dateTime;
   private Double totalCost;
-  private String uberStaffNID;
 
-  Trip () {
-
-  }
+  Trip () { }
 
   public Trip(String startingPoint, String destination, DateTimeSyntax timeForSchedule,
-      String vehicle, String driverNId, String passengerNId, DateTimeSyntax dateTime,
+      String vehicle, Driver d, Passenger passenger, DateTimeSyntax dateTime,
       Double totalCost, String usNID) {
     this.startingPoint = startingPoint;
     this.destination = destination;
     this.timeForSchedule = timeForSchedule;
     this.vehicle = vehicle;
-    this.driverNId = driverNId;
-    this.passengerNId = passengerNId;
+    this.passenger = passenger;
+    this.driver = null;
     this.dateTime = dateTime;
     this.totalCost = totalCost;
-    this.uberStaffNID = usNID;
   }
 
-  public void setDriverNID(String a) {
-    this.driverNId = a;
+  public void setRating(Integer integer)
+  {
+      driver.recalibrateRating((integer));
+  }
+
+  public void addDriver (Driver d)
+  {
+      this.driver = d;
   }
 
   public String getStartingPoint() {
@@ -69,20 +71,14 @@ public class Trip {
   }
 
   public String getDriverNId() {
-    return driverNId;
+    return driver.getNationalId();
   }
 
-  public void setDriverNId(String driverNId) {
-    this.driverNId = driverNId;
-  }
 
   public String getPassengerNId() {
-    return passengerNId;
+    return passenger.getNationalId();
   }
 
-  public void setPassengerNId(String passengerNId) {
-    this.passengerNId = passengerNId;
-  }
 
   public DateTimeSyntax getDateTime() {
     return dateTime;

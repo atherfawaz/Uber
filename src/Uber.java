@@ -14,6 +14,12 @@ public class Uber {
     //initial setup
     LeaderBoard leaderBoard = LeaderBoard.getInstance();
     List<UberStaff> uberstaff = UberStaff.recruitStaff(STAFFCOUNT);
+
+    List<Passenger> pList = new ArrayList<Passenger> ();
+    List<Driver> dList = new ArrayList<Driver> ();
+    List<UberStaff> uStaff = new ArrayList<UberStaff>();
+
+
     Scanner sc = new Scanner(System.in);
 
     System.out.println("Welcome to  Uber");
