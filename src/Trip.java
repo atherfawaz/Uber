@@ -7,7 +7,7 @@ public class Trip {
   private String startingPoint;
   private String destination;
   private String timeForSchedule;
-  private String vehicle;
+  private Vehicle vehicle;
   private Driver driver;
   private Passenger passenger;
   private String dateTime;
@@ -18,14 +18,14 @@ public class Trip {
   }
 
   public Trip(String startingPoint, String destination, String timeForSchedule,
-      String vehicle, Driver d, Passenger passenger, String dateTime,
+      Vehicle vehicle, Driver d, Passenger passenger, String dateTime,
       Double totalCost) {
     this.startingPoint = startingPoint;
     this.destination = destination;
     this.timeForSchedule = timeForSchedule;
     this.vehicle = vehicle;
     this.passenger = passenger;
-    this.driver = null;
+    this.driver = d;
     this.dateTime = dateTime;
     this.totalCost = totalCost;
   }
