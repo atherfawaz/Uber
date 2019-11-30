@@ -103,6 +103,7 @@ public class Driver extends Person {
     }
   }
 
+  public List<Vehicle> getVehicles() {return this.personalCars;};
   public float getRating() {
     return this.rating;
   }
@@ -123,6 +124,7 @@ public class Driver extends Person {
 
   public void addToEarnings(double amount) {
     this.totalEarning += amount;
+    account.addCredit(amount);
     System.out.println(amount + "has been added to your total earnings.");
   }
 
@@ -138,7 +140,6 @@ public class Driver extends Person {
 
   public void displayTrips() {
     for (Trip t : trips) {
-      String pID = t.getPassengerNId();
       System.out.println("Trip " + t + 1 + " was conducted on " + t.getDateTime());
       System.out.println(
           "It began at " + t.getStartingPoint() + " and ended at " + t.getDestination() + ".");
@@ -157,19 +158,9 @@ public class Driver extends Person {
     trips.add(trip);
   }
 
-  public Boolean withdrawMoney(double amount) {
-    if (amount <= totalEarning) {
-      totalEarning -= amount;
-      System.out.println(
-          amount + " has been withdrawn from your total earnings. Remaining amount is "
-              + totalEarning + "\n");
-      return true;
-    } else {
-      System.out.println("The amount i.e. " + amount
-          + " you're trying to withdraw is greater than the amount present in your total earnings! Your total earnings are "
-          + totalEarning + "\n");
-      return false;
-    }
+  public boolean withdrawMoney(Double amount)
+  {
+     return account.cashout(amount);
   }
 
   public Trip getCurrentRide() {
