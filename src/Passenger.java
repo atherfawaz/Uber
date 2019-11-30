@@ -1,7 +1,9 @@
 
 import javax.swing.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
-
+import java.time.*;
+import java.text.*;
 public class Passenger extends Person
 {
     private List<Trip> trips;
@@ -29,22 +31,12 @@ public class Passenger extends Person
     }
     public Boolean rateDriver(Integer r)
     {
-        Trip latestTrip = trips.get(trips.size() -1 );
-        String driverNID = latestTrip.getDriverNId();
-        for (int i = 0; i < pList.size(); i++)
-        {
-            if (driverNID.equals(pList.get(i).getNationalId()))
-            {
-                pList.get(i).
-            }
-        }
-
-        // TODO implement here
-        return null;
+        trips.get(trips.size() -1).setRating(r);
+        return true;
     }
     public Boolean requestCancellation()
     {
-        // TODO implement here
+        //TODO implement later
         return null;
     }
     public Boolean makePayment(Double amount)
