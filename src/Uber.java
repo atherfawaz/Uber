@@ -15,7 +15,7 @@ public class Uber {
     List<UberStaff> uberstaff = UberStaff.recruitStaff(STAFFCOUNT);
     Scanner sc = new Scanner(System.in);
 
-    System.out.println("Welcome to Uber");
+    System.out.println("Welcome to  Uber");
     System.out.println("Do you want to simulate the application? Y/N: ");
     String choice = sc.nextLine();
 

@@ -1,4 +1,5 @@
 import java.util.*;
 
-public class Cash extends PaymentSystem
-{ }
+public class Cash extends PaymentSystem {
+
+}
