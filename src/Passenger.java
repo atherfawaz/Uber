@@ -1,4 +1,5 @@
 
+import javax.swing.*;
 import java.util.*;
 
 public class Passenger extends Person
@@ -38,13 +39,17 @@ public class Passenger extends Person
     }
     public Boolean makePayment(Double amount)
     {
-        account.debitAccount(amount);
-        System.out.println("You have successfully paid the driver");
-        return true;
+        if (account.debitAccount(amount))
+        {
+            System.out.println("You have successfully paid the driver");
+            return true;
+        }
+        return false;
     }
     public void requestAssistance()
     {
-        // TODO implement here
+        System.out.println("Requesting assistance from the uber staff assigned.");
+        trips.get(trips.size()-1).helpPassenger();
     }
     public void addRide(Trip trip)
     {
@@ -68,6 +73,6 @@ public class Passenger extends Person
     public void callARide()
     {
         Trip temp = new Trip();
-        // TODO implement here
+        //random gen?
     }
 }

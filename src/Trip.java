@@ -118,6 +118,10 @@ public class Trip
     }
     public void helpDriver()
     {
-
+            ;//random index gen?
+    }
+    public void helpPassenger()
+    {
+            ;//random index gen?
     }
 }

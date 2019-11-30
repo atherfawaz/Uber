@@ -34,8 +34,13 @@ public class Account
     }
     public Boolean debitAccount(Double amount)
     {
-        //TODO implement here
-        return null;
+        if (amount>totalCredit)
+        {
+            System.out.println("Sorry, you do not have enough credit to pay " + amount + " through your account.");
+            return false;
+        }
+        totalCredit -= amount;
+        return true;
     }
     public Boolean verifyDetails(List<String> details)
     {

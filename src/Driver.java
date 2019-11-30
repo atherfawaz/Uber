@@ -62,7 +62,8 @@ public class Driver extends Person
     }
     public void requestAssistance() //unsure about implementation
     {
-        System.out.println("Requesting assistance from the uber staff assigned ");
+        System.out.println("Requesting assistance from the uber staff assigned.");
+        trips.get(trips.size()-1).helpDriver();
     }
     public void addRide(Trip trip)
     {
