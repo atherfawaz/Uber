@@ -3,15 +3,15 @@ import java.util.concurrent.TimeUnit;
 
 public class LeaderBoard {
 
-  int HIGHESTRATED = 5;
-  int LOWESTRATED = 5;
+  private final int HIGHESTRATED = 5;
+  private final int LOWESTRATED = 5;
 
   private static LeaderBoard obj;
 
-  private List<Driver> drivers = new ArrayList<Driver>();
+  private List<Driver> drivers = new ArrayList<>();
 
   private LeaderBoard() {
-    ;
+    //default constructor
   }
 
   static LeaderBoard getInstance() {
@@ -24,23 +24,61 @@ public class LeaderBoard {
   }
 
   class sortByRating implements Comparator<Driver> {
-
+    @Override
     public int compare(Driver a, Driver b) {
 
       return (int) (a.getRating() - b.getRating());
     }
   }
 
-  class sortByTime implements Comparator<Driver> {
+  class sortByBonus implements Comparator<Driver>{
+    @Override
+    public int compare(Driver a, Driver b)
+    {
+        float bonus1 = a.getPreviousRides().size() * a.getRating();
+        float bonus2 = b.getPreviousRides().size() * b.getRating();
 
-    public long getDateDifference(Date date1, Date date2, TimeUnit timeUnit) {
-      long diffInMillies = date2.getTime() - date1.getTime();
-      return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        return Math.round(bonus1-bonus2);
+
     }
 
+
+  }
+
+  class sortByTime implements Comparator<Driver> {
+
+    public int getDateDifference(String date1, String date2) {
+      //start comparing from year
+      //return immediately if difference found
+      //date format: DD-MM-YYYY
+
+      int diff = 0;
+      int year1 = Integer.parseInt(date1.substring(6, 9));
+      int year2 = Integer.parseInt(date2.substring(6, 9));
+      if(year1 - year2 == 0)
+      {
+        int month1 = Integer.parseInt(date1.substring(3,4));
+        int month2 = Integer.parseInt(date2.substring(3,4));
+        if (month1 - month2 == 0)
+        {
+          int d1 = Integer.parseInt(date1.substring(0,1));
+          int d2 = Integer.parseInt(date2.substring(0,1));
+          if (d1-d2 != 0)
+          {
+            diff = d1-d2;
+          }
+        }
+        else
+          diff = month1-month2;
+      }
+      else
+        diff = year1-year2;
+
+      return diff;
+    }
+    @Override
     public int compare(Driver a, Driver b) {
-     // return (int) getDateDifference(a.getStartDate(), b.getStartDate(), TimeUnit.MINUTES);
-      return 0;
+      return getDateDifference(a.getStartDate(), b.getStartDate());
     }
   }
 
@@ -75,12 +113,19 @@ public class LeaderBoard {
   }
 
   public List<Driver> showBonusEarners() {
-    //TODO implement here;
-    return null;
+    List<Driver> hrated = showHighestRated();
+    hrated.sort(new sortByBonus());
+
+    return hrated;
   }
 
   public void computeBonus() {
-    //TODO implement here;
+    List<Driver> hrated = showHighestRated();
+    for(Driver d: hrated)
+    {
+      float bonus = d.getPreviousRides().size() * d.getRating();
+      d.addToEarnings(bonus);
+    }
   }
 
 }
