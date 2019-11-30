@@ -11,10 +11,11 @@ public class Passenger extends Person {
 
   public Passenger(String name, String nationalId, String dateOfBirth, String email, String phonenumber, Boolean isdriver, Account account) {
     super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
+    trips = new ArrayList<>();
   }
 
   Passenger() {
-
+    trips = new ArrayList<>();
   }
 
   Passenger(Person passed) {
@@ -73,7 +74,7 @@ public class Passenger extends Person {
 
   public void requestAssistance() {
     System.out.println("Requesting assistance from the Uber staff assigned.");
-    trips.get(trips.size() - 1).helpPassenger();
+    trips.get(trips.size() - 1).helpPassenger(Automate.staff);
   }
 
   public void addRide(Trip trip) {
@@ -117,21 +118,22 @@ public class Passenger extends Person {
         request assistance from him
         break; */
         boolean loopVar = true;
+        int randIndex;
         while (loopVar) {
-          int randIndex = (int) (Math.random() * ((dList.size() - 1) + 1));
+          randIndex = (int) (Math.random() * ((dList.size() - 1) + 1));
           if (dList.get(randIndex).getIsFree()) {
             dList.get(randIndex).setIsFree(false);
             dList.get(randIndex).acceptRide(trip);
             trip.addDriver(dList.get(randIndex));
             //trip.addVehicle(dList.get(randIndex).getVehicles().get(0));
-            //addRide(trip);
+            addRide(trip);
             loopVar = false;
             trip.startRide();
           }
         }
       }
       else {
-        System.out.println("Sorry, you've input the same starting point as the destination, or chosen an unavailable location! Please re-enter your choices.");
+        System.out.println("Sorry, you've input the same starting point as the destination, or chosen an unavailable location! Please re-enter your choices.\n");
       }
     }
   }

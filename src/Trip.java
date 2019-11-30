@@ -172,11 +172,28 @@ public class Trip {
     return 1.0;
   }
 
-  public void helpDriver() {
-    ;//random index gen?
+  public void helpDriver(List<UberStaff> staff) {
+    boolean loopVar = true;
+    int randIndex;
+    while (loopVar) {
+      randIndex = (int) (Math.random() * ((staff.size() - 1) + 1));
+      if (staff.get(randIndex).getIsFree()) {
+        staff.get(randIndex).setIsFree(false);
+        staff.get(randIndex).helpDriver(this.getDriver().getNationalId());
+        loopVar = false;
+      }
+    }
   }
 
-  public void helpPassenger() {
-    ;//random index gen?
+  public void helpPassenger(List<UberStaff> staff) {
+    boolean loopVar = true;
+    while (loopVar) {
+      int randIndex = (int) (Math.random() * ((staff.size() - 1) + 1));
+      if (staff.get(randIndex).getIsFree()) {
+        staff.get(randIndex).setIsFree(false);
+        staff.get(randIndex).helpPassenger(this.getPassenger().getNationalId());
+        loopVar = false;
+      }
+    }
   }
 }
