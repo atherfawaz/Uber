@@ -9,8 +9,8 @@ public class Passenger extends Person {
 
   private List<Trip> trips;
 
-  public Passenger(String a, String b, String c, String d, String e, Boolean f, Account account) {
-    super(a, b, c, d, e, f, account);
+  public Passenger(String name, String nationalId, String dateOfBirth, String email, String phonenumber, Boolean isdriver, Account account) {
+    super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
   }
 
   Passenger() {

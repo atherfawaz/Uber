@@ -23,14 +23,14 @@ public class Driver extends Person {
     return isFree;
   }
 
-  public Driver(String a, String b, String c, String d, String e, Boolean f, String x,
-      Account account) {
-    super(a, b, c, d, e, f, account);
+  public Driver(String name, String nationalId, String dateOfBirth, String email,
+      String phonenumber, Boolean isdriver, Account account) {
+    super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
     super.setDriver(true);
     totalEarning = 0;
     rating = 0;
     trips = null;
-    startDate = x;
+    startDate = "Current system date";
   }
 
   public Driver(Person passed) {
