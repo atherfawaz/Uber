@@ -24,7 +24,7 @@ public class Driver extends Person {
   }
 
   public Driver(String name, String nationalId, String dateOfBirth, String email,
-      String phonenumber, Boolean isdriver, Account account) {
+                String phonenumber, Boolean isdriver, Account account) {
     super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
     super.setDriver(true);
     isFree = true;
@@ -32,16 +32,52 @@ public class Driver extends Person {
     rating = 0;
     trips = new ArrayList<>();
     startDate = "Current system date";
+    addVehicle();
   }
 
   public Driver(Person passed) {
     super(passed);
+    addVehicle();
+  }
+
+  public List<Vehicle> getVehicles() {
+    return this.personalCars;
+  }
+
+  ;
+
+  public float getRating() {
+    return this.rating;
+  }
+
+  public double getTotalEarning() {
+    return this.totalEarning;
+  }
+
+  public String getStartDate() {
+    return startDate;
+  }
+
+  public void recalibrateRating(Integer r) {
+    System.out.println(this.getName() + "'s rating before this trip ended was " + rating);
+    rating = ((rating * trips.size() - 1) + r) / trips.size();
+    System.out.println(this.getName() + "'s new rating is " + rating);
+  }
+
+  public void addToEarnings(double amount) {
+    this.totalEarning += amount;
+    account.addCredit(amount);
+    System.out.println(amount + "has been added to your total earnings.");
+  }
+
+  public void addVehicle()
+  {
     Scanner userInput = new Scanner(System.in);
     String choicestring;
     int choiceint;
 
     System.out.println(
-        "Enter the type of vehicle you want to enter into the system. (Car, Rickshaw, Motorcycle):");
+            "Enter the type of vehicle you want to enter into the system. (Car, Rickshaw, Motorcycle):");
     choicestring = userInput.nextLine();
 
     if (choicestring.equalsIgnoreCase("Car")) {
@@ -103,36 +139,6 @@ public class Driver extends Person {
     }
   }
 
-  public List<Vehicle> getVehicles() {
-    return this.personalCars;
-  }
-
-  ;
-
-  public float getRating() {
-    return this.rating;
-  }
-
-  public double getTotalEarning() {
-    return this.totalEarning;
-  }
-
-  public String getStartDate() {
-    return startDate;
-  }
-
-  public void recalibrateRating(Integer r) {
-    System.out.println(this.getName() + "'s rating before this trip ended was " + rating);
-    rating = ((rating * trips.size() - 1) + r) / trips.size();
-    System.out.println(this.getName() + "'s new rating is " + rating);
-  }
-
-  public void addToEarnings(double amount) {
-    this.totalEarning += amount;
-    account.addCredit(amount);
-    System.out.println(amount + "has been added to your total earnings.");
-  }
-
   public Boolean acceptRide(Trip trip) {
     //int acceptNum = getName().length() + trip.getStartingPoint().length() - trip.getDestination()
     //  .length(); //Jawad algorithm
@@ -147,9 +153,9 @@ public class Driver extends Person {
     for (Trip t : trips) {
       System.out.println("Trip " + t + 1 + " was conducted on " + t.getDateTime());
       System.out.println(
-          "It began at " + t.getStartingPoint() + " and ended at " + t.getDestination() + ".");
+              "It began at " + t.getStartingPoint() + " and ended at " + t.getDestination() + ".");
       System.out.println(
-          "The total money you the ride cost the passenger was " + t.getTotalCost() + "\n");
+              "The total money you the ride cost the passenger was " + t.getTotalCost() + "\n");
     }
   }
 
