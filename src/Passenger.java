@@ -34,11 +34,19 @@ public class Passenger extends Person
         trips.get(trips.size() -1).setRating(r);
         return true;
     }
-    public Boolean requestCancellation()
-    {
-        //TODO implement later
-        return null;
+    public Boolean requestCancellation() throws ParseException {
+        Trip lastTrip = trips.get(trips.size() - 1);
+        String scheduleTime = lastTrip.getTimeForSchedule();
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        Date start = format.parse(scheduleTime);
+        Date end = format.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+
+        if (end.getTime() - start.getTime() < 20* 10000)
+            return true;
+        else
+            return false;
     }
+
     public Boolean makePayment(Double amount)
     {
         if (account.debitAccount(amount))
