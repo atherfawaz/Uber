@@ -6,15 +6,18 @@ public class Vehicle
     private String registrationNum;
     private String condition;
     private String make;
-    private Integer mode;
+    private Integer model;
     private String manufacturer;
 
+    Vehicle() {
+
+    }
     Vehicle(String registrationNum, String condition, String make, Integer mode, String manufacturer)
     {
         this.registrationNum = registrationNum;
         this.condition = condition;
         this.make = make;
-        this.mode = mode;
+        this.model = mode;
         this.manufacturer = manufacturer;
     }
     public String getRegistrationNum()
@@ -31,7 +34,7 @@ public class Vehicle
     }
 
     public Integer getMode() {
-        return mode;
+        return model;
     }
 
     public String getManufacturer() {
@@ -49,8 +52,8 @@ public class Vehicle
         this.make = make;
     }
 
-    public void setMode(Integer mode) {
-        this.mode = mode;
+    public void setModel(Integer mode) {
+        this.model = mode;
     }
 
     public void setManufacturer(String manufacturer) {
