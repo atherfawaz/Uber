@@ -6,6 +6,14 @@ public class Account
     private String accountNum;
     private double totalCredit;
 
+    public Account()
+    {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Please input your IBAN below");
+        this.accountNum = userInput.nextLine();
+        this.totalCredit = 0.0;
+
+    }
     public Account(String accountNum, double totalCredit) {
         this.accountNum = accountNum;
         this.totalCredit = totalCredit;
