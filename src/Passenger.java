@@ -80,7 +80,16 @@ public class Passenger extends Person
     }
     public void callARide()
     {
-        Trip temp = new Trip();
+        double baseFair = 100;
+        double tripDistance = (Math.random() * ((30 - 5) + 1)) + 1;
+        double totalCost = baseFair + tripDistance * 25;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter your starting point: ");
+        String startingPoint = input.nextLine();
+        System.out.println("Enter your destination: ");
+        String destination = input.nextLine();
+        String currTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        Trip temp = new Trip(startingPoint,destination,null,null,null,this,currTime,totalCost);
         //random gen?
     }
 }
