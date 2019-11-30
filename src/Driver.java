@@ -3,7 +3,7 @@ import java.util.*;
 //abc
 
 public class Driver extends Person {
-
+  private Boolean isFree;
   private String startDate;
   private double totalEarning;
   private float rating;
@@ -11,9 +11,17 @@ public class Driver extends Person {
   private List<Vehicle> personalCars = new ArrayList<>();
 
   Driver() {
-
+    ;
   }
 
+  public void setIsFree(Boolean isFree_)
+  {
+      isFree = isFree_;
+  }
+  public Boolean getIsFree()
+  {
+      return isFree;
+  }
   public Driver(String a, String b, String c, String d, String e, Boolean f, String x,
       Account account) {
     super(a, b, c, d, e, f, account);
@@ -117,16 +125,14 @@ public class Driver extends Person {
   }
 
   public Boolean acceptRide(Trip trip) {
-    int acceptNum = getName().length() + trip.getStartingPoint().length() - trip.getDestination()
-        .length(); //Jawad algorithm
-    if (acceptNum > 0) {
+      //int acceptNum = getName().length() + trip.getStartingPoint().length() - trip.getDestination()
+      //  .length(); //Jawad algorithm
+      //if (acceptNum > 0) {
       trip.addDriver(this); // adding all the stuff specific to the driver.
       addRide(trip);
       System.out.println(this.getName() + " has accepted the ride requested.");
       return true;
     }
-    return false;
-  }
 
   public void displayTrips() {
     for (Trip t : trips) {

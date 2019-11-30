@@ -153,7 +153,7 @@ public class Person {
       newDriver = new Driver(passed);
       Boolean result = Automate.staff.get(0).verifyDriverDetails(newDriver);
       if (result) {
-        return newDriver;
+        return newDriver;+
       } else {
         return null;
       }

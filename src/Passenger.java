@@ -63,7 +63,7 @@ public class Passenger extends Person {
   }
 
   public void requestAssistance() {
-    System.out.println("Requesting assistance from the uber staff assigned.");
+    System.out.println("Requesting assistance from the Uber staff assigned.");
     trips.get(trips.size() - 1).helpPassenger();
   }
 
@@ -87,8 +87,33 @@ public class Passenger extends Person {
     return trips.get(trips.size() - 1);
   }
 
-  public void callARide() {
-    Trip temp = new Trip();
-    //random gen?
-  }
+    public void callARide(List<Driver> dList)
+    {
+        double baseFair = 100;
+        double tripDistance = (Math.random() * ((30 - 1) + 1)) + 1;
+        double totalCost = baseFair + tripDistance * 25;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter your starting point: ");
+        String startingPoint = input.nextLine();
+        System.out.println("Enter your destination: ");
+        String destination = input.nextLine();
+        String currTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        Trip trip = new Trip(startingPoint,destination,null,null,null,this,currTime,totalCost);
+       /* gen random index
+        If (person.get(randomIndex).getName().starts with 'u' && person.isFree)
+        request assistance from him
+        break; */
+        boolean loopVar = true;
+        while(loopVar)
+        {
+            int randIndex = (int) (Math.random() * ((dList.size()) + 1));
+            if (dList.get(randIndex).getIsFree())
+            {
+                dList.get(randIndex).setIsFree(false);
+                dList.get(randIndex).acceptRide(trip);
+                trip.addDriver(dList.get(randIndex));
+                loopVar = false;
+            }
+        }
+    }
 }

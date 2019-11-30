@@ -17,7 +17,7 @@ public class Trip {
 
   public Trip(String startingPoint, String destination, String timeForSchedule,
       String vehicle, Driver d, Passenger passenger, String dateTime,
-      Double totalCost, String usNID) {
+      Double totalCost) {
     this.startingPoint = startingPoint;
     this.destination = destination;
     this.timeForSchedule = timeForSchedule;
