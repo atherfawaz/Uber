@@ -13,6 +13,10 @@ public class Passenger extends Person {
     super(a, b, c, d, e, f, account);
   }
 
+  Passenger() {
+
+  }
+
   Passenger(Person passed) {
     super(passed);
     trips = new ArrayList<>();
@@ -106,7 +110,7 @@ public class Passenger extends Person {
         break; */
     boolean loopVar = true;
     while (loopVar) {
-      int randIndex = (int) (Math.random() * ((dList.size()) + 1));
+      int randIndex = (int) (Math.random() * ((dList.size() - 1) + 1));
       if (dList.get(randIndex).getIsFree()) {
         dList.get(randIndex).setIsFree(false);
         dList.get(randIndex).acceptRide(trip);

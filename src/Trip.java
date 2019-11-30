@@ -13,7 +13,9 @@ public class Trip {
   private String dateTime;
   private Double totalCost;
 
-  Trip () { }
+  Trip() {
+
+  }
 
   public Trip(String startingPoint, String destination, String timeForSchedule,
       String vehicle, Driver d, Passenger passenger, String dateTime,
@@ -28,14 +30,12 @@ public class Trip {
     this.totalCost = totalCost;
   }
 
-  public void setRating(Integer integer)
-  {
-      driver.recalibrateRating((integer));
+  public void setRating(Integer integer) {
+    driver.recalibrateRating((integer));
   }
 
-  public void addDriver (Driver d)
-  {
-      this.driver = d;
+  public void addDriver(Driver d) {
+    this.driver = d;
   }
 
   public String getStartingPoint() {

@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Driver extends Person {
 
-  private Boolean isFree;
+  private Boolean isFree = true;
   private String startDate;
   private double totalEarning;
   private float rating;
@@ -12,7 +12,7 @@ public class Driver extends Person {
   private List<Vehicle> personalCars = new ArrayList<>();
 
   Driver() {
-    ;
+    //
   }
 
   public void setIsFree(Boolean isFree_) {
