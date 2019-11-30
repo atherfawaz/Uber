@@ -149,11 +149,18 @@ public class Person {
     int choice = sc.nextInt();
 
     if (choice == 1) {
-      return new Driver(passed);
-    } else if (choice == 2) {
+      Driver newDriver;
+      newDriver = new Driver(passed);
+      Boolean result = Automate.staff.get(0).verifyDriverDetails(newDriver);
+      if (result) {
+        return newDriver;
+      } else {
         return null;
+      }
+    } else if (choice == 2) {
+      return new Passenger(passed);
     } else {
-      System.out.println("Invalid input");
+      System.out.println("Invalid input.");
       return null;
     }
   }

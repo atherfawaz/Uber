@@ -10,6 +10,10 @@ public class Driver extends Person {
   private List<Trip> trips = new ArrayList<>();
   private List<Vehicle> personalCars = new ArrayList<>();
 
+  Driver() {
+
+  }
+
   public Driver(String a, String b, String c, String d, String e, Boolean f, String x,
       Account account) {
     super(a, b, c, d, e, f, account);
@@ -27,14 +31,14 @@ public class Driver extends Person {
     int choiceint;
 
     System.out.println(
-        "Enter the type of vehicle you want to enter into the system. (Car, Rickshaw, Motorcycle");
+        "Enter the type of vehicle you want to enter into the system. (Car, Rickshaw, Motorcycle):");
     choicestring = userInput.nextLine();
 
     if (choicestring.equalsIgnoreCase("Car")) {
 
       Car newCar = new Car();
       newCar = new Car();
-      System.out.println("Enter your car type. (Sedan, Small, Luxury)");
+      System.out.println("Enter your car type. (Sedan, Small, Luxury):");
       choicestring = userInput.nextLine();
       newCar.setType(choicestring);
       System.out.println("Enter your car's registration number");

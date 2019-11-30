@@ -9,7 +9,7 @@ public class UberStaff extends Person {
     super();
   }
 
-  public UberStaff(String a, String b, Date c, String d, String e, Boolean f, Account acc) {
+  public UberStaff(String a, String b, String c, String d, String e, Boolean f, Account acc) {
     super(a, b, c, d, e, f, acc);
   }
 
@@ -39,7 +39,12 @@ public class UberStaff extends Person {
 
   public Boolean verifyDriverDetails(List<String> details) {
     // TODO implement here
-    return null;
+    return true;
+  }
+
+  public Boolean verifyDriverDetails(Driver passed) {
+    return true;
+    //connect with db and do subsequent checking
   }
 
   public Boolean verifyVehicleDetails(Vehicle vehicleDetails) {
