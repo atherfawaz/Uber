@@ -164,4 +164,39 @@ public class Person {
       return null;
     }
   }
+
+  public static Person makePerson() {
+
+    Person temp = new Person();
+    Scanner sc = new Scanner(System.in);
+    String choice;
+
+    System.out.println("Enter your name: ");
+    choice = sc.nextLine();
+    temp.setName(choice);
+    System.out.println("Enter your National Identification Number: ");
+    choice = sc.nextLine();
+    temp.setNationalId(choice);
+    System.out.println("Enter your date of birth: ");
+    choice = sc.nextLine();
+    temp.setDateOfBirth(choice);
+    System.out.println("Enter your email: ");
+    choice = sc.nextLine();
+    temp.setEmail(choice);
+    System.out.println("Enter your phone number: ");
+    choice = sc.nextLine();
+    temp.setPhoneNum(choice);
+    temp.setDriver(false);
+
+    Account temp2 = new Account();
+    System.out.println("Enter your account number: ");
+    choice = sc.nextLine();
+    temp2.setAccountNUm(choice);
+    System.out.println("Enter your balance: ");
+    Double val = sc.nextDouble();
+    temp2.setTotalCredit(val);
+
+    temp.setAccount(temp2);
+    return temp;
+  }
 }
