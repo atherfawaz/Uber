@@ -22,7 +22,17 @@ public class Driver extends Person
 
     public Driver(Person passed) {
         super(passed);
-        System.out.println("Enter your ");
+        Scanner userInput = new Scanner(System.in);
+        String regnum;
+        int regchoice;
+        System.out.println("Enter your car's registration number");
+        regnum = userInput.nextLine();
+        System.out.println("Enter your car's condition (new/minimal wear/old)");
+        regnum = userInput.nextLine();
+        System.out.println("Enter your car's make");
+        regnum = userInput.nextLine();
+        System.out.println("Enter your car's model");
+        regchoice = userInput.nextInt();
     }
     public float getRating()
     {
