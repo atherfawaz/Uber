@@ -120,7 +120,7 @@ public class Trip {
     double baseFair = 100;
     double tripDistance = (Math.random() * ((30 - 1) + 1)) + 1;
     double peakFactor = calculatePeakHours();
-    double totalCost = Math.round(peakFactor * (baseFair + tripDistance * 25));
+    this.totalCost = (double) Math.round(peakFactor * (baseFair + tripDistance * 25));
   }
 
   public void calculateShortestRoute()

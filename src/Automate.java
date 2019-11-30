@@ -35,7 +35,7 @@ public class Automate {
     drivers.add(ather);
     drivers.add(java);
     hamza.callARide(drivers);
-    hamza.makePayment(hamza.getCurrentRide().getTotalCost(),hamza.getCurrentRide().getDriver());
+    hamza.initiatePayment("notcashlul",hamza.getCurrentRide().getTotalCost(),hamza.getCurrentRide().getDriver());
     adan.callARide(drivers);
 
   }
