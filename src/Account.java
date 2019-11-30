@@ -1,49 +1,51 @@
 
 import java.util.*;
 
-public class Account
-{
-    private String accountNum;
-    private double totalCredit;
+public class Account {
 
-    public Account(String accountNum, double totalCredit) {
-        this.accountNum = accountNum;
-        this.totalCredit = totalCredit;
-    }
+  private String accountNum;
+  private double totalCredit;
 
-    public String getAccountNum() {
-        return accountNum;
-    }
+  public Account(String accountNum, double totalCredit) {
+    this.accountNum = accountNum;
+    this.totalCredit = totalCredit;
+  }
 
-    public void setAccountNUm(String accountNUm) {
-        this.accountNum = accountNum;
-    }
+  public String getAccountNum() {
+    return accountNum;
+  }
 
-    public double getTotalCredit() {
-        return totalCredit;
-    }
+  public void setAccountNUm(String accountNUm) {
+    this.accountNum = accountNum;
+  }
 
-    public void setTotalCredit(double totalCredit) {
-        this.totalCredit = totalCredit;
-    }
-    public Boolean addCredit(Double amount)
-    {
-        totalCredit += amount;
-        System.out.println("RS" + amount + " has been added to your account. The total amount in your account is now " + totalCredit);
-        return true;
-    }
-    public Boolean debitAccount(Double amount)
-    {
-        //TODO implement here
-        return null;
-    }
-    public Boolean verifyDetails(List<String> details)
-    {
-        //TODO implement here
-        return null;
-    }
-    public void cashout (Double amount)
-    {
-        //TODO implement here
-    }
+  public double getTotalCredit() {
+    return totalCredit;
+  }
+
+  public void setTotalCredit(double totalCredit) {
+    this.totalCredit = totalCredit;
+  }
+
+  public Boolean addCredit(Double amount) {
+    totalCredit += amount;
+    System.out.println(
+        "RS" + amount + " has been added to your account. The total amount in your account is now $"
+            + totalCredit);
+    return true;
+  }
+
+  public Boolean debitAccount(Double amount) {
+    //TODO implement here
+    return null;
+  }
+
+  public Boolean verifyDetails(List<String> details) {
+    //TODO implement here
+    return null;
+  }
+
+  public void cashout(Double amount) {
+    //TODO implement here
+  }
 }
