@@ -29,6 +29,16 @@ public class Passenger extends Person
     }
     public Boolean rateDriver(Integer r)
     {
+        Trip latestTrip = trips.get(trips.size() -1 );
+        String driverNID = latestTrip.getDriverNId();
+        for (int i = 0; i < pList.size(); i++)
+        {
+            if (driverNID.equals(pList.get(i).getNationalId()))
+            {
+                pList.get(i).
+            }
+        }
+
         // TODO implement here
         return null;
     }
@@ -57,14 +67,12 @@ public class Passenger extends Person
     }
     public void displayRides()
     {
-
-        for (Trip t:trips)
+        for(int t = trips.size(); t>=0 ; t--)
         {
-            System.out.println("Trip " + t+1 + " was conducted on " + t.getDateTime());
-            System.out.println("It began at " + t.getStartingPoint() + " and ended at " + t.getDestination() + ".");
-            System.out.println("The total money you the ride cost the passenger was " + t.getTotalCost() + "\n");
+            System.out.println("Trip " + t+1 + " was conducted on " + trips.get(t).getDateTime());
+            System.out.println("It began at " + trips.get(t).getStartingPoint() + " and ended at " + trips.get(t).getDestination() + ".");
+            System.out.println("The total money you the ride cost the passenger was " + trips.get(t).getTotalCost() + "\n");
         }
-
     }
     public Trip getCurrentRide()
     {
