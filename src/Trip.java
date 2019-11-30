@@ -62,11 +62,11 @@ public class Trip {
     this.timeForSchedule = timeForSchedule;
   }
 
-  public String getVehicle() {
+  public Vehicle getVehicle() {
     return vehicle;
   }
 
-  public void setVehicle(String vehicle) {
+  public void setVehicle(Vehicle vehicle) {
     this.vehicle = vehicle;
   }
 
