@@ -14,11 +14,8 @@ public class Uber {
     //initial setup
     LeaderBoard leaderBoard = LeaderBoard.getInstance();
     List<UberStaff> uberstaff = UberStaff.recruitStaff(STAFFCOUNT);
-
-    List<Passenger> pList = new ArrayList<Passenger> ();
-    List<Driver> dList = new ArrayList<Driver> ();
-    List<UberStaff> uStaff = new ArrayList<UberStaff>();
-
+    List<Passenger> passengers = new ArrayList<Passenger>();
+    List<Driver> drivers = new ArrayList<Driver>();
 
     Scanner sc = new Scanner(System.in);
 
@@ -32,7 +29,5 @@ public class Uber {
       System.out.println("Exiting now...");
     }
   }
-
-  Date x = new Date("");
 
 }
