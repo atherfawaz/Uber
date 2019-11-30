@@ -137,4 +137,11 @@ public class Passenger extends Person {
       }
     }
   }
+
+  void passengerInterface() {
+    //implement UI for passenger here
+    //maybe a while(true) loop to mimic the state of the app
+    //perform all operations here
+  }
+
 }

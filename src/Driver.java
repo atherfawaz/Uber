@@ -103,7 +103,12 @@ public class Driver extends Person {
     }
   }
 
-  public List<Vehicle> getVehicles() {return this.personalCars;};
+  public List<Vehicle> getVehicles() {
+    return this.personalCars;
+  }
+
+  ;
+
   public float getRating() {
     return this.rating;
   }
@@ -158,9 +163,8 @@ public class Driver extends Person {
     trips.add(trip);
   }
 
-  public boolean withdrawMoney(Double amount)
-  {
-     return account.cashout(amount);
+  public boolean withdrawMoney(Double amount) {
+    return account.cashout(amount);
   }
 
   public Trip getCurrentRide() {
@@ -174,4 +178,11 @@ public class Driver extends Person {
     System.out.println("You have not made any trips as a driver yet!\n");
     return null;
   }
+
+  void driverInterface() {
+    //implement UI for driver here
+    //maybe a while(true) loop to mimic the state of the app
+    //perform all operations here
+  }
+
 }
