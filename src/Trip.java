@@ -6,17 +6,17 @@ public class Trip {
 
   private String startingPoint;
   private String destination;
-  private DateTimeSyntax timeForSchedule;
+  private String timeForSchedule;
   private String vehicle;
   private Driver driver;
   private Passenger passenger;
-  private DateTimeSyntax dateTime;
+  private String dateTime;
   private Double totalCost;
 
   Trip () { }
 
-  public Trip(String startingPoint, String destination, DateTimeSyntax timeForSchedule,
-      String vehicle, Driver d, Passenger passenger, DateTimeSyntax dateTime,
+  public Trip(String startingPoint, String destination, String timeForSchedule,
+      String vehicle, Driver d, Passenger passenger, String dateTime,
       Double totalCost, String usNID) {
     this.startingPoint = startingPoint;
     this.destination = destination;
@@ -54,11 +54,11 @@ public class Trip {
     this.destination = destination;
   }
 
-  public DateTimeSyntax getTimeForSchedule() {
+  public String getTimeForSchedule() {
     return timeForSchedule;
   }
 
-  public void setTimeForSchedule(DateTimeSyntax timeForSchedule) {
+  public void setTimeForSchedule(String timeForSchedule) {
     this.timeForSchedule = timeForSchedule;
   }
 
@@ -80,11 +80,11 @@ public class Trip {
   }
 
 
-  public DateTimeSyntax getDateTime() {
+  public String getDateTime() {
     return dateTime;
   }
 
-  public void setDateTime(DateTimeSyntax dateTime) {
+  public void setDateTime(String dateTime) {
     this.dateTime = dateTime;
   }
 
