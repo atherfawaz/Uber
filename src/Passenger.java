@@ -16,6 +16,7 @@ public class Passenger extends Person {
   Passenger(Person passed) {
     super(passed);
     trips = new ArrayList<>();
+    //pushed
   }
   public double getExpenditure() {
     return trips.get(trips.size() - 1).getTotalCost();
