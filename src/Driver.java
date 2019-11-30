@@ -3,6 +3,7 @@ import java.util.*;
 //abc
 
 public class Driver extends Person {
+
   private Boolean isFree;
   private String startDate;
   private double totalEarning;
@@ -14,14 +15,14 @@ public class Driver extends Person {
     ;
   }
 
-  public void setIsFree(Boolean isFree_)
-  {
-      isFree = isFree_;
+  public void setIsFree(Boolean isFree_) {
+    isFree = isFree_;
   }
-  public Boolean getIsFree()
-  {
-      return isFree;
+
+  public Boolean getIsFree() {
+    return isFree;
   }
+
   public Driver(String a, String b, String c, String d, String e, Boolean f, String x,
       Account account) {
     super(a, b, c, d, e, f, account);
@@ -125,14 +126,14 @@ public class Driver extends Person {
   }
 
   public Boolean acceptRide(Trip trip) {
-      //int acceptNum = getName().length() + trip.getStartingPoint().length() - trip.getDestination()
-      //  .length(); //Jawad algorithm
-      //if (acceptNum > 0) {
-      trip.addDriver(this); // adding all the stuff specific to the driver.
-      addRide(trip);
-      System.out.println(this.getName() + " has accepted the ride requested.");
-      return true;
-    }
+    //int acceptNum = getName().length() + trip.getStartingPoint().length() - trip.getDestination()
+    //  .length(); //Jawad algorithm
+    //if (acceptNum > 0) {
+    trip.addDriver(this); // adding all the stuff specific to the driver.
+    addRide(trip);
+    System.out.println(this.getName() + " has accepted the ride requested.");
+    return true;
+  }
 
   public void displayTrips() {
     for (Trip t : trips) {
