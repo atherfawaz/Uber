@@ -18,6 +18,10 @@ public class Trip {
   private Double totalCost;
   private static int tripID = 1;
 
+  public static Riding robj = new Riding();
+  public static Input iobj = new Input();
+  public static int tripchoice = 0;
+
   Trip() {
     this.tripID = tripID;
     tripID++;
@@ -121,8 +125,23 @@ public class Trip {
         "Your ride from " + startingPoint + " to " + destination + " on a " + this.vehicle
             .getModel() + " " + this.vehicle.getManufacturer() + " " + this.vehicle.getMake()
             + " with Driver " + this.driver.getName() + " is in progress.");
-    Thread.sleep(5000);
-    System.out.println("Ride completed. Please pay the driver " + totalCost + "\n");
+
+    //Thread.sleep(5000);
+    //System.out.println("Ride completed. Please pay the driver " + totalCost + "\n");
+
+    Riding ridingobj = new Riding();  //counter
+    Input inputobj = new Input();     //input
+    ridingobj.start();
+    inputobj.start();
+    ridingobj.join();
+    //inputobj.join();
+    if (tripchoice == 1) {
+      passenger.requestAssistance();
+    } else if (tripchoice == 2) {
+      passenger.requestCancellation();
+    } else {
+      System.out.println("Ride completed. Please pay the driver " + totalCost + "\n");
+    }
   }
 
   public void calculateFare() {
