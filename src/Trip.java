@@ -129,7 +129,7 @@ public class Trip {
     double baseFair = 100;
     double tripDistance = (Math.random() * ((30 - 1) + 1)) + 1;
     double peakFactor = calculatePeakHours();
-    double totalCost = Math.round(peakFactor * (baseFair + tripDistance * 25));
+    this.totalCost = (double) Math.round(peakFactor * (baseFair + tripDistance * 25));
   }
 
   public void calculateShortestRoute()
@@ -182,26 +182,26 @@ public class Trip {
     return 1.0;
   }
 
-  public void helpDriver(List<UberStaff> staff) {
+  public void helpDriver() {
     boolean loopVar = true;
     int randIndex;
     while (loopVar) {
-      randIndex = (int) (Math.random() * ((staff.size() - 1) + 1));
-      if (staff.get(randIndex).getIsFree()) {
-        staff.get(randIndex).setIsFree(false);
-        staff.get(randIndex).helpDriver(this.getDriver().getNationalId());
+      randIndex = (int) (Math.random() * ((Automate.staff.size() - 1) + 1));
+      if (Automate.staff.get(randIndex).getIsFree()) {
+        Automate.staff.get(randIndex).setIsFree(false);
+        Automate.staff.get(randIndex).helpDriver(this.getDriver());
         loopVar = false;
       }
     }
   }
 
-  public void helpPassenger(List<UberStaff> staff) {
+  public void helpPassenger() {
     boolean loopVar = true;
     while (loopVar) {
-      int randIndex = (int) (Math.random() * ((staff.size() - 1) + 1));
-      if (staff.get(randIndex).getIsFree()) {
-        staff.get(randIndex).setIsFree(false);
-        staff.get(randIndex).helpPassenger(this.getPassenger().getNationalId());
+      int randIndex = (int) (Math.random() * ((Automate.staff.size() - 1) + 1));
+      if (Automate.staff.get(randIndex).getIsFree()) {
+        Automate.staff.get(randIndex).setIsFree(false);
+        Automate.staff.get(randIndex).helpPassenger(this.getPassenger());
         loopVar = false;
       }
     }

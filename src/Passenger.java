@@ -7,20 +7,19 @@ import java.text.*;
 
 public class Passenger extends Person {
 
-  private List<Trip> trips;
+  private List<Trip> trips = new ArrayList<>();
 
   public Passenger(String name, String nationalId, String dateOfBirth, String email, String phonenumber, Boolean isdriver, Account account) {
     super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
-    trips = new ArrayList<>();
+
   }
 
   Passenger() {
-    trips = new ArrayList<>();
+
   }
 
   Passenger(Person passed) {
     super(passed);
-    trips = new ArrayList<>();
     //pushed
   }
 
@@ -63,12 +62,20 @@ public class Passenger extends Person {
   public Boolean makePayment(Double amount, Driver d) {
     if (account.debitAccount(amount)) {
       if(Uber.paymentSystem.makePayment(amount,d)) {
-        System.out.println("You have successfully paid the driver");
+        System.out.println("You have successfully paid the driver.");
         return true;
       }
-
     }
-    System.out.println("Payment failed");
+    System.out.println("Pay via cash!");
+    try
+    {
+      Thread.sleep(1500);
+    }
+    catch(InterruptedException ex)
+    {
+      Thread.currentThread().interrupt();
+    }
+    System.out.println("You have successfully paid the driver.");
     return false;
   }
 
@@ -102,6 +109,7 @@ public class Passenger extends Person {
     Boolean validLoc = false;
     while (!(validTrip)) {
       Scanner input = new Scanner(System.in);
+      System.out.println("-------------------------------------------------\nHello " + this.getName() + "!");
       System.out.println("Enter your starting point.\n - Eden Avenue\n - Bhatta Chowk\n - DHA Phase 1\n - Model Town\n");
       String startingPoint = input.nextLine();
       System.out.println("Enter your destination. \n - Eden Avenue\n - Bhatta Chowk\n - DHA Phase 1\n - Model Town\n");
@@ -142,6 +150,12 @@ public class Passenger extends Person {
     //implement UI for passenger here
     //maybe a while(true) loop to mimic the state of the app
     //perform all operations here
+  }
+
+
+  public void removeTrip(Trip t)
+  {
+    if (trips != null) trips.remove(t);
   }
 
 }

@@ -6,7 +6,7 @@ public class Automate {
   public static List<UberStaff> staff = UberStaff.recruitStaff(20);
   public static LeaderBoard leaderBoard = LeaderBoard.getInstance();
   public static List<Driver> drivers = new ArrayList<>();
-
+  public static List<Passenger> passengers = new ArrayList();
   public static void simulateUber() {
 
     /*
@@ -18,6 +18,8 @@ public class Automate {
     create leaderboard
     create payment system
     */
+
+    ReadJSON.read();
 
     Passenger adan = new Passenger("Muhammad Adan", "35202-231231-5", "31-08-1998",
         "xenither@gmail.com",
@@ -35,7 +37,7 @@ public class Automate {
     drivers.add(ather);
     drivers.add(java);
     hamza.callARide(drivers);
-    hamza.makePayment(hamza.getCurrentRide().getTotalCost(),hamza.getCurrentRide().getDriver());
+    hamza.initiatePayment("notcashlul",hamza.getCurrentRide().getTotalCost(),hamza.getCurrentRide().getDriver());
     adan.callARide(drivers);
 
   }
