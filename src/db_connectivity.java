@@ -198,5 +198,58 @@ public class db_connectivity
         }
 		return -1;
     }
-
+    Vehicle getVehicle(String reg_num)
+    {
+        
+        try
+        {
+             ResultSet rs = stmt.executeQuery("select * from Vehicle where registrationNum="+ reg_num);
+             Vehicle v1 = new Vehicle(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
+             return v1;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+		return null;
+    }
+    int setVehicle(String registrationNum, String condition, String make, Integer model, String manufacturer)
+    {
+    	try
+        {
+    		String sql = "insert into Vehicle (?, ?, ?, ?, ?)";   	 
+    		PreparedStatement statement = con.prepareStatement(sql);
+    		statement.setString(1, registrationNum);
+    		statement.setString(2, condition);
+    		statement.setString(1, make);
+    		statement.setInt(2, model);
+    		statement.setString(1, manufacturer);
+    		int rowsUpdated = stmt.executeUpdate(sql);
+        	return rowsUpdated;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+		return -1;
+    }
+    int deleteVehicle(String registrationNum)
+    {
+    	try
+        {
+    		String sql = "DELETE FROM Vehicle WHERE registrationNum=?";
+       	 
+        	PreparedStatement statement = con.prepareStatement(sql);
+        	statement.setString(1, registrationNum);
+        	 
+        	int rowsDeleted = statement.executeUpdate();
+        	
+        	return rowsDeleted;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+		return -1;
+    }
 }
