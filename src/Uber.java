@@ -31,7 +31,7 @@ public class Uber {
     }
   }
 
-  public static void main(String[] args) throws ParseException {
+  public static void main(String[] args) throws ParseException, InterruptedException {
 
     Scanner sc = new Scanner(System.in);
 
@@ -40,7 +40,7 @@ public class Uber {
     String choice = sc.nextLine();
 
     if (choice.equalsIgnoreCase("Y")) {
-      Automate.simulateUber();
+       Automate.simulateUber();
     }
 
     clearScreen();  //ain't working apparently
