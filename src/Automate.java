@@ -1,9 +1,10 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Automate {
 
-  static void simulateUber() {
+  static void simulateUber() throws ParseException {
 
     /*
     create uberstaff
@@ -19,6 +20,7 @@ public class Automate {
     ReadJSON.fetchPassengers();
 
     System.out.println("Loaded up the drivers and passengers...");
+    Uber.passengers.get(0).passengerInterface();
     System.out.println("Reached the end of the automate function. Switching control back to Uber.Java...");
 
     /* LEGACY CODE

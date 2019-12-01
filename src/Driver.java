@@ -25,7 +25,7 @@ public class Driver extends Person {
     trips = new ArrayList<>();
     startDate = "Current system date";
     //addVehicle();
-    setVehicle();
+    //setVehicle();
   }
 
   public Driver(Person passed) {
