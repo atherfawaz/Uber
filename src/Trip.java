@@ -103,7 +103,7 @@ public class Trip {
 
   public void startRide()
   {
-    System.out.println("Your ride from " + startingPoint + " to " + destination + " on a " /* + this.vehicle.getModel() + this.vehicle.getManufacturer() + this.vehicle.getMake() */ + " with Driver " + this.driver.getName() + " is in progress.");
+    System.out.println("Your ride from " + startingPoint + " to " + destination + " on a " + this.vehicle.getModel() + " " + this.vehicle.getManufacturer() + " " + this.vehicle.getMake() + " with Driver " + this.driver.getName() + " is in progress.");
     try
     {
       Thread.sleep(5000);

@@ -42,7 +42,7 @@ public class Driver extends Person {
   }
 
 
-  public Vehicle getVehicles() {
+  public Vehicle getVehicle() {
     return this.vehicle;
   }
 

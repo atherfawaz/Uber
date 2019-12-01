@@ -7,6 +7,7 @@ import java.text.*;
 
 public class Passenger extends Person {
 
+  private Boolean isOnTrip = false;
   private List<Trip> trips = new ArrayList<>();
 
   public Passenger(String name, String nationalId, String dateOfBirth, String email, String phonenumber, Boolean isdriver, Account account) {
@@ -21,6 +22,16 @@ public class Passenger extends Person {
   Passenger(Person passed) {
     super(passed);
     //pushed
+  }
+
+  public Boolean getStatus()
+  {
+    return isOnTrip;
+  }
+
+  public void setStatus(Boolean isOnTrip)
+  {
+    this.isOnTrip = isOnTrip;
   }
 
   public double getExpenditure() {
@@ -91,7 +102,13 @@ public class Passenger extends Person {
 
   public void requestAssistance() {
     System.out.println("Requesting assistance from the Uber staff assigned.");
-    trips.get(trips.size() - 1).helpPassenger();
+    if (isOnTrip) {
+        trips.get(trips.size() - 1).helpPassenger();
+    }
+    else
+    {
+        System.out.println("You are currently not on a trip! Please request assistance while a trip is ongoing.");
+    }
   }
 
   public void addRide(Trip trip) {
@@ -117,20 +134,26 @@ public class Passenger extends Person {
   }
 
   public void displayCurrentRide(){
-    System.out.println("Trip " + (trips.size()-1) + " was conducted on " + trips.get((trips.size()-1)).getDateTime());
-    System.out.println(
-            "It began at " + trips.get((trips.size()-1)).getStartingPoint() + " and ended at " + trips.get((trips.size()-1))
-                    .getDestination() + ".");
-    System.out.println(
-            "The total money the ride cost you was " + trips.get((trips.size()-1)).getTotalCost()
-                    + "\n");
+      if (isOnTrip) {
+          System.out.println("Trip " + (trips.size() - 1) + " was conducted on " + trips.get((trips.size() - 1)).getDateTime());
+          System.out.println(
+                  "It began at " + trips.get((trips.size() - 1)).getStartingPoint() + " and ended at " + trips.get((trips.size() - 1))
+                          .getDestination() + ".");
+          System.out.println(
+                  "The total money the ride cost you was " + trips.get((trips.size() - 1)).getTotalCost()
+                          + "\n");
+      }
+      else
+      {
+          System.out.println("You are currently not on a trip!");
+      }
   }
 
   public Trip getCurrentRide() {
     return trips.get(trips.size() - 1);
   }
 
-  public void callARide(List<Driver> dList) {
+  public void callARide() {
     Boolean validTrip = false;
     Boolean validLoc = false;
     while (!(validTrip)) {
@@ -154,9 +177,9 @@ public class Passenger extends Person {
         boolean loopVar = true;
         int randIndex;
         while (loopVar) {
-          randIndex = (int) (Math.random() * ((dList.size() - 1) + 1));
-          if (dList.get(randIndex).getIsFree()) {
-            dList.get(randIndex).setIsFree(false);
+          randIndex = (int) (Math.random() * ((Uber.drivers.size() - 1) + 1));
+          if (Uber.drivers.get(randIndex).getIsFree()) {
+            Uber.drivers.get(randIndex).setIsFree(false);
             System.out.println("Searching for a ride...");
             try
             {
@@ -166,12 +189,13 @@ public class Passenger extends Person {
             {
               Thread.currentThread().interrupt();
             }
-            dList.get(randIndex).acceptRide(trip);
-            trip.addDriver(dList.get(randIndex));
-            //trip.addVehicle(dList.get(randIndex).getVehicles().get(0));
+            Uber.drivers.get(randIndex).acceptRide(trip);
+            trip.addDriver(Uber.drivers.get(randIndex));
+            trip.addVehicle(Uber.drivers.get(randIndex).getVehicle());
             addRide(trip);
             loopVar = false;
             trip.startRide();
+            this.setStatus(true);
             initiatePayment("notcash", getCurrentRide().getTotalCost(), getCurrentRide().getDriver());
           }
         }
@@ -195,7 +219,7 @@ public class Passenger extends Person {
       int choice = input.nextInt();
       if (choice == 1)
       {
-        this.callARide(Uber.drivers);
+        this.callARide();
       }
       else if (choice == 2)
       {

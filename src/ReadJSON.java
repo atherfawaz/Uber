@@ -67,19 +67,19 @@ class ReadJSON {
 
 
     String registration = (String) driverObject.get("registrationnum");
-    obj.getVehicles().setRegistrationNum(registration);
+    obj.getVehicle().setRegistrationNum(registration);
 
     String condition = (String) driverObject.get("condition");
-    obj.getVehicles().setCondition(condition);
+    obj.getVehicle().setCondition(condition);
 
     String make = (String) driverObject.get("make");
-    obj.getVehicles().setMake(make);
+    obj.getVehicle().setMake(make);
 
     String model = (String) driverObject.get("model");
-    obj.getVehicles().setModel(Integer.parseInt(model));
+    obj.getVehicle().setModel(Integer.parseInt(model));
 
     String manufacturer = (String) driverObject.get("manufacturer");
-    obj.getVehicles().setManufacturer(manufacturer);
+    obj.getVehicle().setManufacturer(manufacturer);
 
     Uber.drivers.add(obj);
   }
