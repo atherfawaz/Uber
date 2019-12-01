@@ -28,7 +28,8 @@ public class Automate {
       System.out.println("Which interface would you like to simulate? Enter the option number\n1. Passenger\n2. Driver\n3. Uberstaff\nAny other option will exit the simulator.");
       choice = input.nextInt();
       if (choice == 1) {
-        Uber.passengers.get(0).passengerInterfaceSimulate();
+        int which = Uber.myRand(0,Uber.passengers.size()-1);
+        Uber.passengers.get(which).passengerInterfaceSimulate();
       }
       else if (choice == 2) {
         Uber.drivers.get(0).driverInterfaceSimulate();

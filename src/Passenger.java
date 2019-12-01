@@ -94,7 +94,6 @@ public class Passenger extends Person {
 
   public void requestAssistance() {
     System.out.println("Requesting assistance from the Uber staff assigned.");
-    System.out.println("Requesting assistance from the Uber staff assigned.");
     if (isOnTrip) {
         trips.get(trips.size() - 1).helpPassenger();
     }
@@ -323,7 +322,7 @@ public class Passenger extends Person {
       if (choice == 1)
       {
         Uber.mySleep(2000);
-        System.out.println("You chose to search for a ride.");
+        System.out.println("You chose to search for a ride.\n");
         Uber.mySleep(2000);
         this.callARideSimulator();
         Uber.mySleep(2000);
@@ -331,7 +330,7 @@ public class Passenger extends Person {
       else if (choice == 2)
       {
         Uber.mySleep(2000);
-        System.out.println("You chose to show all trips.");
+        System.out.println("You chose to show all trips.\n");
         Uber.mySleep(2000);
         this.displayRides();
         Uber.mySleep(2000);
@@ -339,7 +338,7 @@ public class Passenger extends Person {
       else if (choice == 3)
       {
         Uber.mySleep(2000);
-        System.out.println("You chose to show current trip info.");
+        System.out.println("You chose to show current trip info.\n");
         Uber.mySleep(2000);
         this.displayCurrentRide();
         Uber.mySleep(2000);
@@ -347,7 +346,7 @@ public class Passenger extends Person {
       else if (choice == 4)
       {
         Uber.mySleep(2000);
-        System.out.println("You chose to request assistance from an uber staff member.");
+        System.out.println("You chose to request assistance from an uber staff member.\n");
         Uber.mySleep(2000);
         this.requestAssistance();
         Uber.mySleep(2000);
@@ -355,14 +354,14 @@ public class Passenger extends Person {
       else if (choice == 5)
       {
         Uber.mySleep(2000);
-        System.out.println("You chose to request cancellation.");
+        System.out.println("You chose to request cancellation.\n");
         Uber.mySleep(2000);
         this.requestCancellation();
         Uber.mySleep(2000);
       }
       else
       {
-        System.out.println("You chose to exit back to simulator screen.");
+        System.out.println("You chose to exit back to simulator screen.\n");
         Uber.mySleep(2000);
         break;
       }
