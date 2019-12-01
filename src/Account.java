@@ -8,9 +8,7 @@ public class Account
 
     public Account()
     {
-        Scanner userInput = new Scanner(System.in);
-        System.out.println("Please input your IBAN below");
-        this.accountNum = userInput.nextLine();
+        this.accountNum = "";
         this.totalCredit = 0.0;
 
     }

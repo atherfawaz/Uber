@@ -41,6 +41,7 @@ public class Person {
     email = "support@uber.com";
     phoneNum = "111-111-111";
     isDriver = false;
+    account = new Account();
   }
 
   public String getName() {
