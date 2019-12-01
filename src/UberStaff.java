@@ -4,7 +4,6 @@ import java.util.*;
 public class UberStaff extends Person {
 
   private Boolean isFree = true;
-  private List<String> pNIDList = new ArrayList<String>();
 
   public UberStaff() {
     super();
@@ -22,82 +21,101 @@ public class UberStaff extends Person {
     return isFree;
   }
 
-  public void cancelRide(Trip tripId) {
-    // TODO implement here
+  public void cancelRide(Trip tripId)
+  {
+      for (int i = 0; i < Automate.passengers.size(); i++)
+      {
+          if (tripId.getDriver().equals(Automate.passengers.get(i)))
+          {
+              Automate.passengers.get(i).removeTrip(tripId);
+          }
+      }
+
+      for (int i = 0; i < Automate.drivers.size(); i++)
+      {
+          if (tripId.getDriver().equals(Automate.drivers.get(i)))
+          {
+              Automate.drivers.get(i).removeTrip(tripId);
+          }
+      }
   }
 
-  public void helpPassenger(String riderID) {
-    // TODO implement here
+  public void helpPassenger(Passenger p)
+  {
+      System.out.println("HELPLINE FOR PASSENGERS");
+      operatorAssistance((p.getName()));
   }
 
-  public void helpDriver(String driverID) {
-    // TODO implement here
+  public void helpDriver(Driver d)
+  {
+      System.out.println("HELPLINE FOR DRIVERS");
+      operatorAssistance(d.getName());
   }
 
-  public void operatorAssistance() {
-    // TODO implement here
+  public void operatorAssistance(String ID)
+  {
+      System.out.println("Our operator " + super.getName() + " is on call with " + ID);
   }
 
-  public void refundPassenger(String passengerID, double amount) {
-    // TODO implement here
+  public void refundPassenger(Passenger passenger, double amount)
+  {
+      passenger.account.addCredit(amount);
   }
 
-  public void notifyVehicleCondition() {
-    // TODO implement here
+  public void notifyVehicleCondition(Vehicle v) {
+      System.out.println("Condition of " + v.getRegistrationNum() " is: " + v.getCondition());
   }
 
-  public Boolean verifyDriverDetails(List<String> details) {
-    // TODO implement here
-    return true;
+  public Boolean verifyDriverDetails(String details) { //this will receive the person's name
+    if (checkIdentity(details) && checkCriminalRecord(details) && checkConflictOfInterest((details)))
+        return true;
+    else
+        return false;
   }
 
-  public Boolean verifyDriverDetails(Driver passed) {
+  public Boolean verifyDriverDetails(Driver passed) { //don't understand this BY USMAN
     return true;
     //connect with db and do subsequent checking
   }
 
-  public Boolean verifyVehicleDetails(Vehicle vehicleDetails) {
-    // TODO implement here
-    return null;
+  public Boolean verifyVehicleDetails(Vehicle vehicleDetails)
+  {
+      System.out.println("Verifying that " + vehicleDetails.getRegistrationNum() + "in the national vehicle database");
+      System.out.println(vehicleDetails.getRegistrationNum() + " has not been involved in any crimes");
+      return true;
   }
 
-  public void addDriver() {
-    // TODO implement here
+  public void addDriver(Driver d) //Before calling this function, check verifyDriverDetails
+  {
+      Automate.drivers.add(d);
+
   }
 
-  public void rejectDriver() {
-    // TODO implement here
-  }
 
   public Boolean checkConflictOfInterest(String nationalID) {
-    // TODO implement here
-    return null;
-  }
-
-  public Boolean checkIdentity(String nationalID) {
-    // TODO implement here
-    return null;
-  }
-
-  public Boolean checkCriminalRecord(String nationalID) {
-    // TODO implement here
-    return null;
-  }
-
-  public Boolean checkCarDetails() {
-    // TODO implement here
-    return null;
-  }
-
-  public void addPerson(String p) {
-    pNIDList.add(p);
-  }
-
-  public static List<UberStaff> recruitStaff(int staffcount) {
-    List<UberStaff> ls = new ArrayList<>();
-    for (int i = 0; i < staffcount; i++) {
-      ls.add(new UberStaff());
+    for (int i = 0; i < Automate.drivers.size(); i++)
+    {
+        if (Automate.drivers.get(i).getName().equalsIgnoreCase((nationalID)))
+        {
+            return false;
+        }
     }
-    return ls;
+    return true;
+  }
+
+  public Boolean checkIdentity(String nationalID)
+  {
+      System.out.println("Verifying that the applicant is in the national database");
+      System.out.println("Applicant's credentials exist in NADRA");
+      return true;
+  }
+
+  public Boolean checkCriminalRecord(String nationalID)
+  {
+      System.out.println("Verifying that the applicant does not have any criminal history");
+      System.out.println("Clearance received from authorities concerned");
+      //Assuming that NADRA and authorities concerned intimate us that
+      //applicant does not have a criminal history
+      return true;
   }
 }

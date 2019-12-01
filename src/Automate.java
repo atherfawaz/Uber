@@ -6,7 +6,7 @@ public class Automate {
   public static List<UberStaff> staff = UberStaff.recruitStaff(20);
   public static LeaderBoard leaderBoard = LeaderBoard.getInstance();
   public static List<Driver> drivers = new ArrayList<>();
-
+  public static List<Passenger> passengers = new ArrayList();
   public static void simulateUber() {
 
     /*

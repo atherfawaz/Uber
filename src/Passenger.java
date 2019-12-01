@@ -153,4 +153,10 @@ public class Passenger extends Person {
     //perform all operations here
   }
 
+
+  public void removeTrip(Trip t)
+  {
+    if (trips != null) trips.remove(t);
+  }
+
 }

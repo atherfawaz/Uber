@@ -190,5 +190,9 @@ public class Driver extends Person {
     //maybe a while(true) loop to mimic the state of the app
     //perform all operations here
   }
+  public void removeTrip(Trip t)
+  {
+    if (trips != null) trips.remove(t);
+  }
 
 }
