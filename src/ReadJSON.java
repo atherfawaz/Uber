@@ -14,10 +14,10 @@ class ReadJSON {
 
     //add your paths here for easy access and changing
 
-    //path for ather: D:\College\Fall 2019\Object Oriented Analysis and Design\Project\Uber\src\Drivers.json
+    //path for ather: D:\College\Fall 2019\Object Oriented Analysis and Design\Project\Uber - New\Uber\src\Drivers.json
     //path for hamza: C:\Users\Hamza Jawad\IdeaProjects\Uber\src\Drivers.json
 
-    String path = "C:\\Users\\Hamza Jawad\\IdeaProjects\\Uber\\src\\Drivers.json";
+    String path = "D:\\College\\Fall 2019\\Object Oriented Analysis and Design\\Project\\Uber - New\\Uber\\src\\Drivers.json";
     JSONParser jsonParser = new JSONParser();
     try (FileReader reader = new FileReader(path)) {
       //Read JSON file
@@ -88,9 +88,9 @@ class ReadJSON {
 
     //add your paths here for easy access and changing
 
-    //path for ather: D:\College\Fall 2019\Object Oriented Analysis and Design\Project\Uber\src\Passengers.json
+    //path for ather: D:\College\Fall 2019\Object Oriented Analysis and Design\Project\Uber - New\Uber\src\Passengers.json
 
-    String path = "C:\\Users\\Hamza Jawad\\IdeaProjects\\Uber\\src\\Passengers.json";
+    String path = "D:\\College\\Fall 2019\\Object Oriented Analysis and Design\\Project\\Uber - New\\Uber\\src\\Passengers.json";
     JSONParser jsonParser = new JSONParser();
     try (FileReader reader = new FileReader(path)) {
       //Read JSON file
