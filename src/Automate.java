@@ -20,7 +20,7 @@ public class Automate {
     ReadJSON.fetchPassengers();
 
     System.out.println("Loaded up the drivers and passengers...");
-    Uber.passengers.get(0).passengerInterface();
+    Uber.passengers.get(0).passengerInterfaceSimulate();
     System.out.println("Reached the end of the automate function. Switching control back to Uber.Java...");
 
     /* LEGACY CODE

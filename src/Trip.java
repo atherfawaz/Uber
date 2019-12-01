@@ -15,15 +15,16 @@ public class Trip {
   private Passenger passenger;
   private String dateTime;
   private Double totalCost;
-  private int tripID;
+  private static int tripID = 1;
 
   Trip() {
-
+    this.tripID = tripID;
+    tripID++;
   }
 
   public Trip(String startingPoint, String destination, String timeForSchedule,
       Vehicle vehicle, Driver d, Passenger passenger, String dateTime,
-      Double totalCost, int tripID) {
+      Double totalCost) {
     this.startingPoint = startingPoint;
     this.destination = destination;
     this.timeForSchedule = timeForSchedule;
@@ -33,6 +34,7 @@ public class Trip {
     this.dateTime = dateTime;
     this.totalCost = totalCost;
     this.tripID = tripID;
+    tripID++;
   }
 
   public void giveRating(Integer integer) {
