@@ -61,7 +61,7 @@ public class UberStaff extends Person {
 
   public void refundPassenger(Passenger passenger, double amount)
   {
-      passenger.account.addCredit(amount);
+      passenger.creditAccount(amount);
   }
 
   public void notifyVehicleCondition(Vehicle v) {
