@@ -115,13 +115,7 @@ public class Trip {
 
   public void startRide() throws ParseException, InterruptedException {
     System.out.println("Your ride from " + startingPoint + " to " + destination + " on a " + this.vehicle.getModel() + " " + this.vehicle.getManufacturer() + " " + this.vehicle.getMake() + " with Driver " + this.driver.getName() + " is in progress.");
-    //Thread.sleep(5000);
-    Riding ridingobj = new Riding();
-    Input inputobj = new Input();
-    inputobj.startWrapper(ridingobj, passenger);
-    ridingobj.startWrapper(inputobj);
-    inputobj.join();
-    ridingobj.join();
+    Thread.sleep(5000);
     System.out.println("Ride completed. Please pay the driver " + totalCost + "\n");
   }
 

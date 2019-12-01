@@ -193,10 +193,14 @@ public class Driver extends Person {
     return null;
   }
 
-  void driverInterface() {
-    //implement UI for driver here
-    //maybe a while(true) loop to mimic the state of the app
-    //perform all operations here
+  void driverInterface()
+  {
+    ;
+  }
+
+  void driverInterfaceSimulate()
+  {
+    ;
   }
 
   public void removeTrip(Trip t) {

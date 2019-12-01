@@ -19,6 +19,12 @@ public class Uber {
     System.out.flush();
   }
 
+  public static int myRand(int min, int max)
+  {
+      int rand = (int) (Math.random() * ((max - min) + 1)) + min;
+      return rand;
+  }
+
   public static void mySleep(long milliseconds)
   {
     try

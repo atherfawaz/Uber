@@ -1,6 +1,7 @@
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Automate {
 
@@ -19,8 +20,26 @@ public class Automate {
     ReadJSON.fetchDrivers();
     ReadJSON.fetchPassengers();
 
-    System.out.println("Loaded up the drivers and passengers...");
-    Uber.passengers.get(0).passengerInterfaceSimulate();
+    Scanner input = new Scanner(System.in);
+    int choice;
+    while (true) {
+      Uber.mySleep(1000);
+      System.out.println("Loaded up the drivers and passengers...");
+      System.out.println("Which interface would you like to simulate? Enter the option number\n1. Passenger\n2. Driver\n3. Uberstaff\nAny other option will exit the simulator.");
+      choice = input.nextInt();
+      if (choice == 1) {
+        Uber.passengers.get(0).passengerInterfaceSimulate();
+      }
+      else if (choice == 2) {
+        Uber.drivers.get(0).driverInterfaceSimulate();
+      }
+      else if (choice == 3)
+      {
+        ;
+      }
+      else break;
+    }
+    Uber.mySleep(2000);
     System.out.println("Reached the end of the automate function. Switching control back to Uber.Java...");
 
     /* LEGACY CODE
