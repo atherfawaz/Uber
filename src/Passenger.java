@@ -220,22 +220,27 @@ public class Passenger extends Person {
       if (choice == 1)
       {
         this.callARide();
+        Uber.mySleep(2000);
       }
       else if (choice == 2)
       {
         this.displayRides();
+        Uber.mySleep(2000);
       }
       else if (choice == 3)
       {
         this.displayCurrentRide();
+        Uber.mySleep(2000);
       }
       else if (choice == 4)
       {
         this.requestAssistance();
+        Uber.mySleep(2000);
       }
       else if (choice == 5)
       {
         this.requestCancellation();
+        Uber.mySleep(2000);
       }
       else if (choice == 6)
       {
@@ -244,6 +249,7 @@ public class Passenger extends Person {
       else
       {
         System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.\n");
+        Uber.mySleep(2000);
       }
     }
   }
