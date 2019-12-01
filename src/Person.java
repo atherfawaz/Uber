@@ -1,6 +1,6 @@
 
 import java.util.*;
-
+//rand
 public class Person {
 
   private String name;
