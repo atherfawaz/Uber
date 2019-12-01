@@ -165,7 +165,7 @@ public class db_connectivity
              Vehicle v1 = new Vehicle(rs.getString(4),"","", 0, "");
              Driver d1 = new Driver("", rs.getString(5), "", "", "", false, a1);
              Passenger p1 = new Passenger("", rs.getString(6), "", "", "", false, a1);
-             Trip t1 = new Trip(rs.getString(1),rs.getString(2),rs.getString(3), v1, d1, p1, rs.getString(7), rs.getDouble(8), rs.getInt(9));
+             Trip t1 = new Trip(rs.getString(1),rs.getString(2),rs.getString(3), v1, d1, p1, rs.getString(7), rs.getDouble(8));
              return t1;
         }
         catch(Exception e)
