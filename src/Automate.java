@@ -1,10 +1,9 @@
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Automate {
-  public static LeaderBoard leaderBoard = LeaderBoard.getInstance();
-  public static void simulateUber() throws ParseException {
+
+  static void simulateUber() {
 
     /*
     create uberstaff
@@ -16,8 +15,13 @@ public class Automate {
     create payment system
     */
 
-    ReadJSON.read();
+    ReadJSON.fetchDrivers();
+    ReadJSON.fetchPassengers();
 
+    System.out.println("Loaded up the drivers and passengers...");
+    System.out.println("Reached the end of the automate function. Switching control back to Uber.Java...");
+
+    /* LEGACY CODE
     Passenger adan = new Passenger("Muhammad Adan", "35202-231231-5", "31-08-1998",
         "xenither@gmail.com",
         "0300-1231236", false, new Account("530018001923672", 0.0));
@@ -35,8 +39,11 @@ public class Automate {
     Uber.drivers.add(java);
     Uber.passengers.add(hamza);
     Uber.passengers.add(adan);
-    hamza.passengerInterface();
+    hamza.callARide(Uber.drivers);
+    hamza.initiatePayment("notcashlul",hamza.getCurrentRide().getTotalCost(),hamza.getCurrentRide().getDriver());
     adan.callARide(Uber.drivers);
+
+   */
 
   }
 }

@@ -12,6 +12,7 @@ public class Driver extends Person {
   private Vehicle vehicle;
 
   Driver() {
+    vehicle = new Vehicle();
     //
   }
   public Driver(String name, String nationalId, String dateOfBirth, String email,
