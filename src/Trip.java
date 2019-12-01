@@ -1,4 +1,5 @@
 
+import java.text.ParseException;
 import javax.print.attribute.DateTimeSyntax;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -112,10 +113,15 @@ public class Trip {
 	this.tripID = tripID;
   }
 
-  public void startRide()
-  {
+  public void startRide() throws ParseException, InterruptedException {
     System.out.println("Your ride from " + startingPoint + " to " + destination + " on a " + this.vehicle.getModel() + " " + this.vehicle.getManufacturer() + " " + this.vehicle.getMake() + " with Driver " + this.driver.getName() + " is in progress.");
-    Uber.mySleep(5000);
+    //Thread.sleep(5000);
+    Riding ridingobj = new Riding();
+    Input inputobj = new Input();
+    inputobj.startWrapper(ridingobj, passenger);
+    ridingobj.startWrapper(inputobj);
+    inputobj.join();
+    ridingobj.join();
     System.out.println("Ride completed. Please pay the driver " + totalCost + "\n");
   }
 

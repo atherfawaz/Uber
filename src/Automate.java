@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Automate {
 
-  static void simulateUber() throws ParseException {
+  static void simulateUber() throws ParseException, InterruptedException {
 
     /*
     create uberstaff
