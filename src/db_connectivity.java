@@ -252,4 +252,45 @@ public class db_connectivity
         }
 		return -1;
     }
+    //x means invalid details, d means driver login success
+    //u means uberstaff login success, p means passenger login success
+    String getlogin(String login_id, String password)
+    {
+        
+        try
+        {
+             ResultSet rs = stmt.executeQuery("select * from LoginData where UserID="+ login_id +" and Pass=" + password);
+             if(rs.next() == false)
+             {
+            	 return "x";
+             }
+             else
+             {
+            	 return rs.getString(3);
+             }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+		return null;
+    }
+    int setlogin(String id, String password, String usertype)
+    {
+    	try
+        {
+    		String sql = "insert into LoginData (?, ?, ?)";   	 
+    		PreparedStatement statement = con.prepareStatement(sql);
+    		statement.setString(1, id);
+    		statement.setString(2, password);
+    		statement.setString(1, usertype);
+    		int rowsUpdated = stmt.executeUpdate(sql);
+        	return rowsUpdated;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+		return -1;
+    }
 }
