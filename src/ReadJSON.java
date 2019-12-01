@@ -11,6 +11,11 @@ import org.json.simple.parser.ParseException;
 public class ReadJSON {
 
   public static void read() {
+
+    //add your paths here for easy access and changing
+
+    //path for ather: D:\College\Fall 2019\Object Oriented Analysis and Design\Project\Uber\src\Drivers.json
+
     String path = "D:\\College\\Fall 2019\\Object Oriented Analysis and Design\\Project\\Uber\\src\\Drivers.json";
     JSONParser jsonParser = new JSONParser();
     try (FileReader reader = new FileReader(path)) {
