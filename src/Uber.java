@@ -15,11 +15,6 @@ public class Uber {
   public static List<Driver> drivers = new ArrayList<Driver>();
   public static PaymentSystem paymentSystem = new PaymentSystem();
 
-  public static void clearScreen() {
-    System.out.print("\033[H\033[2J");
-    System.out.flush();
-  }
-
   public static void main(String[] args) throws ParseException {
 
     Scanner sc = new Scanner(System.in);
@@ -31,8 +26,6 @@ public class Uber {
     if (choice.equalsIgnoreCase("Y")) {
       Automate.simulateUber();
     }
-
-    clearScreen();  //ain't working apparently
 
     System.out.println("Sign up or login? (Sign Up / Login):");
     choice = sc.nextLine();
