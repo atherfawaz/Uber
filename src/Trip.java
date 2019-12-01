@@ -46,7 +46,9 @@ public class Trip {
     this.driver = d;
   }
 
-  public void addVehicle(Vehicle v) {this.vehicle = v;}
+  public void addVehicle(Vehicle v) {
+    this.vehicle = v;
+  }
 
   public String getStartingPoint() {
     return startingPoint;
@@ -105,35 +107,36 @@ public class Trip {
   public void setTotalCost(Double totalCost) {
     this.totalCost = totalCost;
   }
+
   public int getTripid() {
-	return tripID;
+    return tripID;
   }
 
   public void setTotalCost(int tripID) {
-	this.tripID = tripID;
+    this.tripID = tripID;
   }
 
   public void startRide() throws ParseException, InterruptedException {
-    System.out.println("Your ride from " + startingPoint + " to " + destination + " on a " + this.vehicle.getModel() + " " + this.vehicle.getManufacturer() + " " + this.vehicle.getMake() + " with Driver " + this.driver.getName() + " is in progress.");
+    System.out.println(
+        "Your ride from " + startingPoint + " to " + destination + " on a " + this.vehicle
+            .getModel() + " " + this.vehicle.getManufacturer() + " " + this.vehicle.getMake()
+            + " with Driver " + this.driver.getName() + " is in progress.");
     Thread.sleep(5000);
     System.out.println("Ride completed. Please pay the driver " + totalCost + "\n");
   }
 
-  public void calculateFare()
-  {
+  public void calculateFare() {
     double baseFair = 100;
     double tripDistance = (Math.random() * ((30 - 1) + 1)) + 1;
     double peakFactor = calculatePeakHours();
     this.totalCost = (double) Math.round(peakFactor * (baseFair + tripDistance * 25));
   }
 
-  public void calculateShortestRoute()
-  {
+  public void calculateShortestRoute() {
     ;
   }
 
-  public List<String> getTripInfo()
-  {
+  public List<String> getTripInfo() {
     List<String> tripInfo = new ArrayList<>();
     tripInfo.add(this.dateTime);
     tripInfo.add(this.startingPoint);
@@ -147,9 +150,12 @@ public class Trip {
 
   public Boolean checkRouteValidity(String pLoc, String dLoc) {
     if (!(pLoc.equalsIgnoreCase(dLoc))
-            &&     (startingPoint.equalsIgnoreCase("Eden Avenue") || startingPoint.equalsIgnoreCase("DHA Phase 1") || startingPoint.equalsIgnoreCase("Bhatta Chowk") || startingPoint.equalsIgnoreCase("Model Town"))
-            && (destination.equalsIgnoreCase("Eden Avenue") || destination.equalsIgnoreCase("DHA Phase 1") || destination.equalsIgnoreCase("Bhatta Chowk") || destination.equalsIgnoreCase("Model Town")))
-    {
+        && (startingPoint.equalsIgnoreCase("Eden Avenue") || startingPoint
+        .equalsIgnoreCase("DHA Phase 1") || startingPoint.equalsIgnoreCase("Bhatta Chowk")
+        || startingPoint.equalsIgnoreCase("Model Town"))
+        && (destination.equalsIgnoreCase("Eden Avenue") || destination
+        .equalsIgnoreCase("DHA Phase 1") || destination.equalsIgnoreCase("Bhatta Chowk")
+        || destination.equalsIgnoreCase("Model Town"))) {
       return true;
     }
     return false;
@@ -157,21 +163,19 @@ public class Trip {
 
   public Double calculatePeakHours() {
     double peakFactor;
-    String currTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-    if (currTime.substring(11,12)=="01" || currTime.substring(11,12)=="02" || currTime.substring(11,12)=="03")
-    {
+    String currTime = LocalDateTime.now()
+        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+    if (currTime.substring(11, 12) == "01" || currTime.substring(11, 12) == "02"
+        || currTime.substring(11, 12) == "03") {
       peakFactor = 1.2;
-    }
-    else if (currTime.substring(11,12)=="04" || currTime.substring(11,12)=="05" || currTime.substring(11,12)=="06")
-    {
+    } else if (currTime.substring(11, 12) == "04" || currTime.substring(11, 12) == "05"
+        || currTime.substring(11, 12) == "06") {
       peakFactor = 1.3;
-    }
-    else if (currTime.substring(11,12)=="07" || currTime.substring(11,12)=="08" || currTime.substring(11,12)=="09")
-    {
+    } else if (currTime.substring(11, 12) == "07" || currTime.substring(11, 12) == "08"
+        || currTime.substring(11, 12) == "09") {
       peakFactor = 1.4;
-    }
-    else if (currTime.substring(11,12)=="10" || currTime.substring(11,12)=="11" || currTime.substring(11,12)=="12")
-    {
+    } else if (currTime.substring(11, 12) == "10" || currTime.substring(11, 12) == "11"
+        || currTime.substring(11, 12) == "12") {
       peakFactor = 1.5;
     }
     return 1.0;
