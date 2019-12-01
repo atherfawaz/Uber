@@ -176,10 +176,10 @@ public class Trip {
     boolean loopVar = true;
     int randIndex;
     while (loopVar) {
-      randIndex = (int) (Math.random() * ((Automate.staff.size() - 1) + 1));
-      if (Automate.staff.get(randIndex).getIsFree()) {
-        Automate.staff.get(randIndex).setIsFree(false);
-        Automate.staff.get(randIndex).helpDriver(this.getDriver());
+      randIndex = (int) (Math.random() * ((Uber.uberstaff.size() - 1) + 1));
+      if (Uber.uberstaff.get(randIndex).getIsFree()) {
+        Uber.uberstaff.get(randIndex).setIsFree(false);
+        Uber.uberstaff.get(randIndex).helpDriver(this.getDriver());
         loopVar = false;
       }
     }
@@ -188,10 +188,10 @@ public class Trip {
   public void helpPassenger() {
     boolean loopVar = true;
     while (loopVar) {
-      int randIndex = (int) (Math.random() * ((Automate.staff.size() - 1) + 1));
-      if (Automate.staff.get(randIndex).getIsFree()) {
-        Automate.staff.get(randIndex).setIsFree(false);
-        Automate.staff.get(randIndex).helpPassenger(this.getPassenger());
+      int randIndex = (int) (Math.random() * ((Uber.uberstaff.size() - 1) + 1));
+      if (Uber.uberstaff.get(randIndex).getIsFree()) {
+        Uber.uberstaff.get(randIndex).setIsFree(false);
+        Uber.uberstaff.get(randIndex).helpPassenger(this.getPassenger());
         loopVar = false;
       }
     }

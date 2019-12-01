@@ -2,11 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Automate {
-
-  public static List<UberStaff> staff = UberStaff.recruitStaff(20);
   public static LeaderBoard leaderBoard = LeaderBoard.getInstance();
-  public static List<Driver> drivers = new ArrayList<>();
-  public static List<Passenger> passengers = new ArrayList();
   public static void simulateUber() {
 
     /*
@@ -34,11 +30,13 @@ public class Automate {
     Driver java = new Driver("Java", "21233-123124-5", "14-12-1098", "java@gmail.com",
         "0900-6663321", true, new Account("530018001243662", 100.0));
 
-    drivers.add(ather);
-    drivers.add(java);
-    hamza.callARide(drivers);
+    Uber.drivers.add(ather);
+    Uber.drivers.add(java);
+    Uber.passengers.add(hamza);
+    Uber.passengers.add(adan);
+    hamza.callARide(Uber.drivers);
     hamza.initiatePayment("notcashlul",hamza.getCurrentRide().getTotalCost(),hamza.getCurrentRide().getDriver());
-    adan.callARide(drivers);
+    adan.callARide(Uber.drivers);
 
   }
 }

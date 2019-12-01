@@ -152,7 +152,7 @@ public class Person {
     if (choice == 1) {
       Driver newDriver;
       newDriver = new Driver(passed);
-      Boolean result = Automate.staff.get(0).verifyDriverDetails(newDriver);
+      Boolean result = Uber.uberstaff.get(0).verifyDriverDetails(newDriver);
       if (result) {
         return newDriver;
       } else {

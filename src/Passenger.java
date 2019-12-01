@@ -81,7 +81,7 @@ public class Passenger extends Person {
 
   public void requestAssistance() {
     System.out.println("Requesting assistance from the Uber staff assigned.");
-    trips.get(trips.size() - 1).helpPassenger(Automate.staff);
+    trips.get(trips.size() - 1).helpPassenger();
   }
 
   public void addRide(Trip trip) {

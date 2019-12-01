@@ -86,16 +86,16 @@ public class Driver extends Person {
       System.out.println("Enter your car type. (Sedan, Small, Luxury):");
       choicestring = userInput.nextLine();
       newCar.setType(choicestring);
-      System.out.println("Enter your car's registration number");
+      System.out.println("Enter your car's registration number:");
       choicestring = userInput.nextLine();
       newCar.setRegistrationNum(choicestring);
-      System.out.println("Enter your car's condition (new/minimal wear/old)");
+      System.out.println("Enter your car's condition (new/minimal wear/old):");
       choicestring = userInput.nextLine();
       newCar.setCondition(choicestring);
-      System.out.println("Enter your car's make");
+      System.out.println("Enter your car's make:");
       choicestring = userInput.nextLine();
       newCar.setMake(choicestring);
-      System.out.println("Enter your car's model");
+      System.out.println("Enter your car's model:");
       choiceint = userInput.nextInt();
       newCar.setModel(choiceint);
       vehicle = newCar;
@@ -104,20 +104,20 @@ public class Driver extends Person {
     } else if (choicestring.equalsIgnoreCase("Rickshaw")) {
 
       Rickshaw newRickshaw = new Rickshaw();
-      System.out.println("Enter your rickhsaw's registration number");
+      System.out.println("Enter your rickshaw's registration number");
       choicestring = userInput.nextLine();
       newRickshaw.setRegistrationNum(choicestring);
-      System.out.println("Enter your rickhsaw's condition (new/minimal wear/old)");
+      System.out.println("Enter your rickshaw's condition (new/minimal wear/old)");
       choicestring = userInput.nextLine();
       newRickshaw.setCondition(choicestring);
-      System.out.println("Enter your rickhsaw's make");
+      System.out.println("Enter your rickshaw's make");
       choicestring = userInput.nextLine();
       newRickshaw.setMake(choicestring);
-      System.out.println("Enter your rickhsaw's model");
+      System.out.println("Enter your rickshaw's model");
       choiceint = userInput.nextInt();
       newRickshaw.setModel(choiceint);
       vehicle = newRickshaw;
-      //personalCars.add(newRickshaw);
+     // personalCars.add(newRickshaw);
 
     } else if (choicestring.equalsIgnoreCase("Motorcycle")) {
 
@@ -162,7 +162,7 @@ public class Driver extends Person {
   public void requestAssistance() //unsure about implementation
   {
     System.out.println("Requesting assistance from the uber staff assigned.");
-    trips.get(trips.size() - 1).helpDriver(Automate.staff);
+    trips.get(trips.size() - 1).helpDriver();
   }
 
   public void addRide(Trip trip) {

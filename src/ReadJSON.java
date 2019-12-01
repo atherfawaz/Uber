@@ -16,7 +16,7 @@ public class ReadJSON {
 
     //path for ather: D:\College\Fall 2019\Object Oriented Analysis and Design\Project\Uber\src\Drivers.json
 
-    String path = "D:\\College\\Fall 2019\\Object Oriented Analysis and Design\\Project\\Uber\\src\\Drivers.json";
+    String path = "C:\\Users\\Hamza Jawad\\IdeaProjects\\Uber\\src\\Drivers.json";
     JSONParser jsonParser = new JSONParser();
     try (FileReader reader = new FileReader(path)) {
       //Read JSON file
@@ -68,6 +68,6 @@ public class ReadJSON {
     Double balance = (Double) driverObject.get("balance");
     obj.account.setTotalCredit(balance);
 
-    Automate.drivers.add(obj);
+    Uber.drivers.add(obj);
   }
 }
