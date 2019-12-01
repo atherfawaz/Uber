@@ -1,13 +1,10 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Automate {
 
-  public static List<UberStaff> staff = UberStaff.recruitStaff(20);
-  public static LeaderBoard leaderBoard = LeaderBoard.getInstance();
-  public static List<Driver> drivers = new ArrayList<>();
-  public static List<Passenger> passengers = new ArrayList();
-  public static void simulateUber() {
+  static void simulateUber() throws ParseException {
 
     /*
     create uberstaff
@@ -19,8 +16,14 @@ public class Automate {
     create payment system
     */
 
-    ReadJSON.read();
+    ReadJSON.fetchDrivers();
+    ReadJSON.fetchPassengers();
 
+    System.out.println("Loaded up the drivers and passengers...");
+    Uber.passengers.get(0).passengerInterface();
+    System.out.println("Reached the end of the automate function. Switching control back to Uber.Java...");
+
+    /* LEGACY CODE
     Passenger adan = new Passenger("Muhammad Adan", "35202-231231-5", "31-08-1998",
         "xenither@gmail.com",
         "0300-1231236", false, new Account("530018001923672", 0.0));
@@ -34,11 +37,15 @@ public class Automate {
     Driver java = new Driver("Java", "21233-123124-5", "14-12-1098", "java@gmail.com",
         "0900-6663321", true, new Account("530018001243662", 100.0));
 
-    drivers.add(ather);
-    drivers.add(java);
-    hamza.callARide(drivers);
+    Uber.drivers.add(ather);
+    Uber.drivers.add(java);
+    Uber.passengers.add(hamza);
+    Uber.passengers.add(adan);
+    hamza.callARide(Uber.drivers);
     hamza.initiatePayment("notcashlul",hamza.getCurrentRide().getTotalCost(),hamza.getCurrentRide().getDriver());
-    adan.callARide(drivers);
+    adan.callARide(Uber.drivers);
+
+   */
 
   }
 }

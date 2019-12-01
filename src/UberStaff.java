@@ -23,19 +23,19 @@ public class UberStaff extends Person {
 
   public void cancelRide(Trip tripId)
   {
-      for (int i = 0; i < Automate.passengers.size(); i++)
+      for (int i = 0; i < Uber.passengers.size(); i++)
       {
-          if (tripId.getDriver().equals(Automate.passengers.get(i)))
+          if (tripId.getDriver().equals(Uber.passengers.get(i)))
           {
-              Automate.passengers.get(i).removeTrip(tripId);
+              Uber.passengers.get(i).removeTrip(tripId);
           }
       }
 
-      for (int i = 0; i < Automate.drivers.size(); i++)
+      for (int i = 0; i < Uber.drivers.size(); i++)
       {
-          if (tripId.getDriver().equals(Automate.drivers.get(i)))
+          if (tripId.getDriver().equals(Uber.drivers.get(i)))
           {
-              Automate.drivers.get(i).removeTrip(tripId);
+              Uber.drivers.get(i).removeTrip(tripId);
           }
       }
   }
@@ -87,15 +87,15 @@ public class UberStaff extends Person {
 
   public void addDriver(Driver d) //Before calling this function, check verifyDriverDetails
   {
-      Automate.drivers.add(d);
+      Uber.drivers.add(d);
 
   }
 
 
   public Boolean checkConflictOfInterest(String nationalID) {
-    for (int i = 0; i < Automate.drivers.size(); i++)
+    for (int i = 0; i < Uber.drivers.size(); i++)
     {
-        if (Automate.drivers.get(i).getName().equalsIgnoreCase((nationalID)))
+        if (Uber.drivers.get(i).getName().equalsIgnoreCase((nationalID)))
         {
             return false;
         }

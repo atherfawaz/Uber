@@ -7,6 +7,7 @@ import java.text.*;
 
 public class Passenger extends Person {
 
+  private Boolean isOnTrip = false;
   private List<Trip> trips = new ArrayList<>();
 
   public Passenger(String name, String nationalId, String dateOfBirth, String email, String phonenumber, Boolean isdriver, Account account) {
@@ -23,6 +24,16 @@ public class Passenger extends Person {
     //pushed
   }
 
+  public Boolean getStatus()
+  {
+    return isOnTrip;
+  }
+
+  public void setStatus(Boolean isOnTrip)
+  {
+    this.isOnTrip = isOnTrip;
+  }
+
   public double getExpenditure() {
     return trips.get(trips.size() - 1).getTotalCost();
   }
@@ -35,9 +46,19 @@ public class Passenger extends Person {
   public void initiatePayment(String pType, Double amount, Driver d) {
     if (pType.equalsIgnoreCase("cash")) {
       System.out.println("You have successfully paid the driver.");
-      return;
     }
-    makePayment(amount, d);
+    else {
+      makePayment(amount, d);
+    }
+    try
+    {
+      Thread.sleep(2000);
+    }
+    catch(InterruptedException ex)
+    {
+      Thread.currentThread().interrupt();
+    }
+    return;
   }
 
   public Boolean rateDriver(Integer r) {
@@ -81,7 +102,13 @@ public class Passenger extends Person {
 
   public void requestAssistance() {
     System.out.println("Requesting assistance from the Uber staff assigned.");
-    trips.get(trips.size() - 1).helpPassenger(Automate.staff);
+    if (isOnTrip) {
+        trips.get(trips.size() - 1).helpPassenger();
+    }
+    else
+    {
+        System.out.println("You are currently not on a trip! Please request assistance while a trip is ongoing.");
+    }
   }
 
   public void addRide(Trip trip) {
@@ -89,27 +116,49 @@ public class Passenger extends Person {
   }
 
   public void displayRides() {
-    for (int t = trips.size(); t >= 0; t--) {
-      System.out.println("Trip " + t + 1 + " was conducted on " + trips.get(t).getDateTime());
-      System.out.println(
-          "It began at " + trips.get(t).getStartingPoint() + " and ended at " + trips.get(t)
-              .getDestination() + ".");
-      System.out.println(
-          "The total money you the ride cost the passenger was " + trips.get(t).getTotalCost()
-              + "\n");
+    if (!(trips.isEmpty())) {
+      for (int t = trips.size() - 1; t >= 0; t--) {
+        System.out.println("Trip " + t + 1 + " was conducted on " + trips.get(t).getDateTime());
+        System.out.println(
+                "It began at " + trips.get(t).getStartingPoint() + " and ended at " + trips.get(t)
+                        .getDestination() + ".");
+        System.out.println(
+                "The total money the ride you passenger was " + trips.get(t).getTotalCost()
+                        + "\n");
+      }
     }
+    else
+    {
+      System.out.println("You have not made any trips with Uber yet.");
+    }
+  }
+
+  public void displayCurrentRide(){
+      if (isOnTrip) {
+          System.out.println("Trip " + (trips.size() - 1) + " was conducted on " + trips.get((trips.size() - 1)).getDateTime());
+          System.out.println(
+                  "It began at " + trips.get((trips.size() - 1)).getStartingPoint() + " and ended at " + trips.get((trips.size() - 1))
+                          .getDestination() + ".");
+          System.out.println(
+                  "The total money the ride cost you was " + trips.get((trips.size() - 1)).getTotalCost()
+                          + "\n");
+      }
+      else
+      {
+          System.out.println("You are currently not on a trip!");
+      }
   }
 
   public Trip getCurrentRide() {
     return trips.get(trips.size() - 1);
   }
 
-  public void callARide(List<Driver> dList) {
+  public void callARide() {
     Boolean validTrip = false;
     Boolean validLoc = false;
     while (!(validTrip)) {
+      Uber.clearScreen();
       Scanner input = new Scanner(System.in);
-      System.out.println("-------------------------------------------------\nHello " + this.getName() + "!");
       System.out.println("Enter your starting point.\n - Eden Avenue\n - Bhatta Chowk\n - DHA Phase 1\n - Model Town\n");
       String startingPoint = input.nextLine();
       System.out.println("Enter your destination. \n - Eden Avenue\n - Bhatta Chowk\n - DHA Phase 1\n - Model Town\n");
@@ -128,15 +177,26 @@ public class Passenger extends Person {
         boolean loopVar = true;
         int randIndex;
         while (loopVar) {
-          randIndex = (int) (Math.random() * ((dList.size() - 1) + 1));
-          if (dList.get(randIndex).getIsFree()) {
-            dList.get(randIndex).setIsFree(false);
-            dList.get(randIndex).acceptRide(trip);
-            trip.addDriver(dList.get(randIndex));
-            //trip.addVehicle(dList.get(randIndex).getVehicles().get(0));
+          randIndex = (int) (Math.random() * ((Uber.drivers.size() - 1) + 1));
+          if (Uber.drivers.get(randIndex).getIsFree()) {
+            Uber.drivers.get(randIndex).setIsFree(false);
+            System.out.println("Searching for a ride...");
+            try
+            {
+              Thread.sleep(3000);
+            }
+            catch(InterruptedException ex)
+            {
+              Thread.currentThread().interrupt();
+            }
+            Uber.drivers.get(randIndex).acceptRide(trip);
+            trip.addDriver(Uber.drivers.get(randIndex));
+            trip.addVehicle(Uber.drivers.get(randIndex).getVehicle());
             addRide(trip);
             loopVar = false;
             trip.startRide();
+            this.setStatus(true);
+            initiatePayment("notcash", getCurrentRide().getTotalCost(), getCurrentRide().getDriver());
           }
         }
       }
@@ -146,10 +206,42 @@ public class Passenger extends Person {
     }
   }
 
-  void passengerInterface() {
+  void passengerInterface() throws ParseException {
     //implement UI for passenger here
     //maybe a while(true) loop to mimic the state of the app
     //perform all operations here
+    while (true)
+    {
+      Uber.clearScreen();
+      System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nPlease enter the number of one of the options below to begin your journey with Uber.");
+      System.out.println("1. Search for a ride\n2. Show all trips\n3. Show current trip info\n4. Request assistance\n5. Exit");
+      Scanner input = new Scanner(System.in);
+      int choice = input.nextInt();
+      if (choice == 1)
+      {
+        this.callARide();
+      }
+      else if (choice == 2)
+      {
+        this.displayRides();
+      }
+      else if (choice == 3)
+      {
+        this.displayCurrentRide();
+      }
+      else if (choice == 4)
+      {
+        this.requestAssistance();
+      }
+      else if (choice == 5)
+      {
+        break;
+      }
+      else
+      {
+        System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.\n");
+      }
+    }
   }
 
 
