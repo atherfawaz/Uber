@@ -4,6 +4,8 @@ import java.util.*;
 public class UberStaff extends Person {
 
   private Boolean isFree = true;
+  List<Complaint> cList = new ArrayList<>();
+
 
   public UberStaff() {
     super();
@@ -59,7 +61,7 @@ public class UberStaff extends Person {
 
   public void refundPassenger(Passenger passenger, double amount)
   {
-      passenger.account.addCredit(amount);
+      passenger.creditAccount(amount);
   }
 
   public void notifyVehicleCondition(Vehicle v) {
@@ -125,5 +127,19 @@ public class UberStaff extends Person {
       list.add(new UberStaff());
     }
     return list;
+  }
+
+  public void addComplaint(String complaintDescription, Driver driver, Passenger passenger)
+  {
+      Complaint c = new Complaint(complaintDescription, driver, passenger);
+      cList.add(c);
+  }
+  public void viewComplaints()
+  {
+      System.out.println("Staff assigned: " + this.getName());
+      for (int i = 0; i < cList.size(); i++)
+      {
+          cList.get(i).viewComplaint();
+      }
   }
 }

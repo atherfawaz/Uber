@@ -67,15 +67,21 @@ public class Passenger extends Person {
   }
 
   public Boolean requestCancellation() throws ParseException {
-    Trip lastTrip = trips.get(trips.size() - 1);
-    String scheduleTime = lastTrip.getTimeForSchedule();
-    SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-    Date start = format.parse(scheduleTime);
-    Date end = format.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
-
-    if (end.getTime() - start.getTime() < 20 * 10000) {
-      return true;
-    } else {
+    if (isOnTrip) {
+      Trip lastTrip = trips.get(trips.size() - 1);
+      String scheduleTime = lastTrip.getTimeForSchedule();
+      SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+      Date start = format.parse(scheduleTime);
+      Date end = format.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+      if (end.getTime() - start.getTime() < 20 * 10000) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    else
+    {
+      System.out.println("Sorry, a trip has not been initialized by you! You can only request cancellation when a trip has been initialized.");
       return false;
     }
   }
@@ -101,6 +107,7 @@ public class Passenger extends Person {
   }
 
   public void requestAssistance() {
+    System.out.println("Requesting assistance from the Uber staff assigned.");
     System.out.println("Requesting assistance from the Uber staff assigned.");
     if (isOnTrip) {
         trips.get(trips.size() - 1).helpPassenger();
@@ -214,7 +221,7 @@ public class Passenger extends Person {
     {
       Uber.clearScreen();
       System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nPlease enter the number of one of the options below to begin your journey with Uber.");
-      System.out.println("1. Search for a ride\n2. Show all trips\n3. Show current trip info\n4. Request assistance\n5. Exit");
+      System.out.println("1. Search for a ride\n2. Show all trips\n3. Show current trip info\n4. Request assistance\n5. Request cancellation\n6. Exit");
       Scanner input = new Scanner(System.in);
       int choice = input.nextInt();
       if (choice == 1)
@@ -234,6 +241,51 @@ public class Passenger extends Person {
         this.requestAssistance();
       }
       else if (choice == 5)
+      {
+        this.requestCancellation();
+      }
+      else if (choice == 6)
+      {
+        break;
+      }
+      else
+      {
+        System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.\n");
+      }
+    }
+  }
+
+  void passengerInterfaceSimulate() throws ParseException {
+    //implement UI for passenger here
+    //maybe a while(true) loop to mimic the state of the app
+    //perform all operations here
+    while (true)
+    {
+      Uber.clearScreen();
+      System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nPlease enter the number of one of the options below to begin your journey with Uber.");
+      System.out.println("1. Search for a ride\n2. Show all trips\n3. Show current trip info\n4. Request assistance\n5. Request cancellation\n6. Exit");
+      int choice = 1;
+      if (choice == 1)
+      {
+        this.callARide();
+      }
+      else if (choice == 2)
+      {
+        this.displayRides();
+      }
+      else if (choice == 3)
+      {
+        this.displayCurrentRide();
+      }
+      else if (choice == 4)
+      {
+        this.requestAssistance();
+      }
+      else if (choice == 5)
+      {
+        this.requestCancellation();
+      }
+      else if (choice == 6)
       {
         break;
       }

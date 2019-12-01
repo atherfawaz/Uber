@@ -15,3 +15,7 @@
 /UberStaff.class
 /Vehicle.class
 /db_connectivity.class
+/Account.class
+/LeaderBoard$sortByBonus.class
+/Credit.class
+/ReadJSON.class
