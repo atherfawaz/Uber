@@ -62,7 +62,8 @@ public class Driver extends Person {
 
   public void recalibrateRating(Integer r) {
     System.out.println(this.getName() + "'s rating before this trip ended was " + rating);
-    rating = ((rating * trips.size() - 1) + r) / trips.size();
+    if (trips.size()!=1) rating = ((rating * trips.size() - 1) + r) / trips.size();
+    else rating = r;
     System.out.println(this.getName() + "'s new rating is " + rating);
   }
 

@@ -50,14 +50,7 @@ public class Passenger extends Person {
     else {
       makePayment(amount, d);
     }
-    try
-    {
-      Thread.sleep(2000);
-    }
-    catch(InterruptedException ex)
-    {
-      Thread.currentThread().interrupt();
-    }
+    Uber.mySleep(2000);
     return;
   }
 
@@ -94,14 +87,7 @@ public class Passenger extends Person {
       }
     }
     System.out.println("Pay via cash!");
-    try
-    {
-      Thread.sleep(1500);
-    }
-    catch(InterruptedException ex)
-    {
-      Thread.currentThread().interrupt();
-    }
+    Uber.mySleep(2000);
     System.out.println("You have successfully paid the driver.");
     return false;
   }
@@ -170,32 +156,22 @@ public class Passenger extends Person {
       String startingPoint = input.nextLine();
       System.out.println("Enter your destination. \n - Eden Avenue\n - Bhatta Chowk\n - DHA Phase 1\n - Model Town\n");
       String destination = input.nextLine();
-      String currTime = LocalDateTime.now()
-              .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+      String currTime = LocalDateTime.now() .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
       Trip trip = new Trip(startingPoint, destination, null, null, null, this, currTime, null);
       if (trip.checkRouteValidity(startingPoint, destination)) {
         validTrip = true;
         trip.calculateShortestRoute();
         trip.calculateFare();
-       /* gen random index
-        If (person.get(randomIndex).getName().starts with 'u' && person.isFree)
-        request assistance from him
-        break; */
         boolean loopVar = true;
         int randIndex;
+        int rating_;
+        Boolean ratingCheck = false;
         while (loopVar) {
           randIndex = (int) (Math.random() * ((Uber.drivers.size() - 1) + 1));
           if (Uber.drivers.get(randIndex).getIsFree()) {
             Uber.drivers.get(randIndex).setIsFree(false);
             System.out.println("Searching for a ride...");
-            try
-            {
-              Thread.sleep(3000);
-            }
-            catch(InterruptedException ex)
-            {
-              Thread.currentThread().interrupt();
-            }
+            Uber.mySleep(3000);
             Uber.drivers.get(randIndex).acceptRide(trip);
             trip.addDriver(Uber.drivers.get(randIndex));
             trip.addVehicle(Uber.drivers.get(randIndex).getVehicle());
@@ -204,6 +180,16 @@ public class Passenger extends Person {
             trip.startRide();
             this.setStatus(true);
             initiatePayment("notcash", getCurrentRide().getTotalCost(), getCurrentRide().getDriver());
+            while (ratingCheck == false) {
+              System.out.println("Now that the trip is complete, what rating would you like to give the driver, " + trip.getDriver().getName() + ", for this trip?\nRate on a scale of 1 (very unsatisfactory) to 5 (highly satisfactory).");
+              rating_ = input.nextInt();
+              if (rating_ >= 1 && rating_ <= 5) {
+                ratingCheck = true;
+                rateDriver(rating_);
+              }
+              else System.out.println("Sorry, you can only rate between 1 and 5. Kindly enter rating again.");
+            }
+            this.setStatus(false);
           }
         }
       }
@@ -214,9 +200,6 @@ public class Passenger extends Person {
   }
 
   void passengerInterface() throws ParseException {
-    //implement UI for passenger here
-    //maybe a while(true) loop to mimic the state of the app
-    //perform all operations here
     while (true)
     {
       Uber.clearScreen();
@@ -255,10 +238,56 @@ public class Passenger extends Person {
     }
   }
 
+  public void callARideSimulator() {
+    Boolean validTrip = false;
+    Boolean validLoc = false;
+    while (!(validTrip)) {
+      Uber.clearScreen();
+      System.out.println("Enter your starting point.\n - Eden Avenue\n - Bhatta Chowk\n - DHA Phase 1\n - Model Town\n");
+      Uber.mySleep(3000);
+      String startingPoint = "Eden Avenue";
+      System.out.println("Selected starting point is " + startingPoint);
+      System.out.println("Enter your destination. \n - Eden Avenue\n - Bhatta Chowk\n - DHA Phase 1\n - Model Town\n");
+      String destination = "Bhatta Chowk";
+      System.out.println("Selected destination is "+ destination);
+      String currTime = LocalDateTime.now() .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+      Trip trip = new Trip(startingPoint, destination, null, null, null, this, currTime, null);
+      if (trip.checkRouteValidity(startingPoint, destination)) {
+        validTrip = true;
+        trip.calculateShortestRoute();
+        trip.calculateFare();
+        boolean loopVar = true;
+        int randIndex;
+        int rating_;
+        Boolean ratingCheck = false;
+        while (loopVar) {
+          randIndex = (int) (Math.random() * ((Uber.drivers.size() - 1) + 1));
+          if (Uber.drivers.get(randIndex).getIsFree()) {
+            Uber.drivers.get(randIndex).setIsFree(false);
+            System.out.println("Searching for a ride...");
+            Uber.mySleep(3000);
+            Uber.drivers.get(randIndex).acceptRide(trip);
+            trip.addDriver(Uber.drivers.get(randIndex));
+            trip.addVehicle(Uber.drivers.get(randIndex).getVehicle());
+            addRide(trip);
+            loopVar = false;
+            trip.startRide();
+            this.setStatus(true);
+            initiatePayment("notcash", getCurrentRide().getTotalCost(), getCurrentRide().getDriver());
+            System.out.println("Now that the trip is complete, what rating would you like to give the driver, " + trip.getDriver().getName() + ", for this trip?\nRate on a scale of 1 (very unsatisfactory) to 5 (highly satisfactory).");
+            rating_ = 3;
+            System.out.println("You have given the driver a rating of 3.");
+            this.setStatus(false);
+          }
+        }
+      }
+      else {
+        System.out.println("Sorry, you've input the same starting point as the destination, or chosen an unavailable location! Please re-enter your choices.\n");
+      }
+    }
+  }
+
   void passengerInterfaceSimulate() throws ParseException {
-    //implement UI for passenger here
-    //maybe a while(true) loop to mimic the state of the app
-    //perform all operations here
     while (true)
     {
       Uber.clearScreen();
@@ -267,7 +296,7 @@ public class Passenger extends Person {
       int choice = 1;
       if (choice == 1)
       {
-        this.callARide();
+        this.callARideSimulator();
       }
       else if (choice == 2)
       {

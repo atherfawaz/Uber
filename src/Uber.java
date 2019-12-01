@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class Uber {
 
-
   //initial setup
   public static LeaderBoard leaderBoard = LeaderBoard.getInstance();
   public static List<UberStaff> uberstaff = UberStaff.recruitStaff(5);
@@ -18,6 +17,18 @@ public class Uber {
   public static void clearScreen() {
     System.out.print("\033[H\033[2J");
     System.out.flush();
+  }
+
+  public static void mySleep(long milliseconds)
+  {
+    try
+    {
+      Thread.sleep(milliseconds);
+    }
+    catch(InterruptedException ex)
+    {
+      Thread.currentThread().interrupt();
+    }
   }
 
   public static void main(String[] args) throws ParseException {
