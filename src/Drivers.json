@@ -8,7 +8,12 @@
             "phonenumber": "0300-1231234",
             "isdriver": true,
             "iban": "1234567898765432",
-            "balance": 123.14 
+            "balance": 123.14,
+            "registrationnum": "LEA-7030",
+            "condition": "new",
+            "make": "Corolla",
+            "model": "2019",
+            "manufacturer": "Toyota" 
         }
     },
     {
@@ -20,7 +25,12 @@
             "phonenumber": "0323-1231234",
             "isdriver": true,
             "iban": "12345678924765432",
-            "balance": 29910.24
+            "balance": 29910.24,
+            "registrationnum": "LEB-7030",
+            "condition": "new",
+            "make": "City",
+            "model": "2019",
+            "manufacturer": "Honda" 
         }
     },
     {
@@ -32,7 +42,12 @@
             "phonenumber": "0123-1231234",
             "isdriver": true,
             "iban": "12309278924765432",
-            "balance": 2992.24 
+            "balance": 2992.24,
+            "registrationnum": "LED-1230",
+            "condition": "old",
+            "make": "Formula 1",
+            "model": "2019",
+            "manufacturer": "Mercedes Benz" 
         }
     },
     {
@@ -44,7 +59,12 @@
             "phonenumber": "0323-1238934",
             "isdriver": true,
             "iban": "12345678924765263",
-            "balance": 12445.24 
+            "balance": 12445.24,
+            "registrationnum": "LEA-9090",
+            "condition": "new",
+            "make": "SF90",
+            "model": "2019",
+            "manufacturer": "Ferrari" 
         }
     },
     {
@@ -56,7 +76,12 @@
             "phonenumber": "0323-1239134",
             "isdriver": true,
             "iban": "12345678921005432",
-            "balance": 20010.24 
+            "balance": 20010.24,
+            "registrationnum": "LEA-9930",
+            "condition": "new",
+            "make": "Corolla",
+            "model": "2008",
+            "manufacturer": "Toyota"  
         }
     }
 ]

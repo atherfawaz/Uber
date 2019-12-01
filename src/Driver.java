@@ -12,6 +12,7 @@ public class Driver extends Person {
   private Vehicle vehicle;
 
   Driver() {
+    vehicle = new Vehicle();
     //
   }
 

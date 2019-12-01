@@ -10,6 +10,7 @@ public class Vehicle
     private String manufacturer;
 
     Vehicle() {
+        //
     }
     Vehicle(String registrationNum, String condition, String make, Integer mode, String manufacturer)
     {
