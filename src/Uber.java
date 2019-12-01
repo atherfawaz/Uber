@@ -2,7 +2,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;g
+import java.util.Scanner;
 
 public class Uber {
 
@@ -20,7 +20,7 @@ public class Uber {
   }
 
   public static void main(String[] args) {
-    ReadJSON.read();
+
     Scanner sc = new Scanner(System.in);
 
     System.out.println("Welcome to Uber");

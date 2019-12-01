@@ -9,7 +9,7 @@ public class Driver extends Person {
   private double totalEarning;
   private float rating;
   private List<Trip> trips = new ArrayList<>();
-  private List<Vehicle> personalCars = new ArrayList<>();
+  private Vehicle vehicle;
 
   Driver() {
     //
@@ -24,7 +24,7 @@ public class Driver extends Person {
   }
 
   public Driver(String name, String nationalId, String dateOfBirth, String email,
-                String phonenumber, Boolean isdriver, Account account) {
+      String phonenumber, Boolean isdriver, Account account) {
     super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
     super.setDriver(true);
     isFree = true;
@@ -40,8 +40,8 @@ public class Driver extends Person {
     addVehicle();
   }
 
-  public List<Vehicle> getVehicles() {
-    return this.personalCars;
+  public Vehicle getVehicles() {
+    return this.vehicle;
   }
 
   ;
@@ -70,14 +70,13 @@ public class Driver extends Person {
     System.out.println(amount + "has been added to your total earnings.");
   }
 
-  public void addVehicle()
-  {
+  public void addVehicle() {
     Scanner userInput = new Scanner(System.in);
     String choicestring;
     int choiceint;
 
     System.out.println(
-            "Enter the type of vehicle you want to enter into the system. (Car, Rickshaw, Motorcycle):");
+        "Enter the type of vehicle you want to enter into the system. (Car, Rickshaw, Motorcycle):");
     choicestring = userInput.nextLine();
 
     if (choicestring.equalsIgnoreCase("Car")) {
@@ -99,7 +98,8 @@ public class Driver extends Person {
       System.out.println("Enter your car's model");
       choiceint = userInput.nextInt();
       newCar.setModel(choiceint);
-      personalCars.add(newCar);
+      vehicle = newCar;
+      //personalCars.add(newCar);
 
     } else if (choicestring.equalsIgnoreCase("Rickshaw")) {
 
@@ -116,8 +116,8 @@ public class Driver extends Person {
       System.out.println("Enter your rickhsaw's model");
       choiceint = userInput.nextInt();
       newRickshaw.setModel(choiceint);
-
-      personalCars.add(newRickshaw);
+      vehicle = newRickshaw;
+      //personalCars.add(newRickshaw);
 
     } else if (choicestring.equalsIgnoreCase("Motorcycle")) {
 
@@ -134,8 +134,8 @@ public class Driver extends Person {
       System.out.println("Enter your motorcycle's model");
       choiceint = userInput.nextInt();
       newMotorCycle.setModel(choiceint);
-
-      personalCars.add(newMotorCycle);
+      vehicle = newMotorCycle;
+      //personalCars.add(newMotorCycle);
     }
   }
 
@@ -153,9 +153,9 @@ public class Driver extends Person {
     for (Trip t : trips) {
       System.out.println("Trip " + t + 1 + " was conducted on " + t.getDateTime());
       System.out.println(
-              "It began at " + t.getStartingPoint() + " and ended at " + t.getDestination() + ".");
+          "It began at " + t.getStartingPoint() + " and ended at " + t.getDestination() + ".");
       System.out.println(
-              "The total money you the ride cost the passenger was " + t.getTotalCost() + "\n");
+          "The total money you the ride cost the passenger was " + t.getTotalCost() + "\n");
     }
   }
 
@@ -190,9 +190,11 @@ public class Driver extends Person {
     //maybe a while(true) loop to mimic the state of the app
     //perform all operations here
   }
-  public void removeTrip(Trip t)
-  {
-    if (trips != null) trips.remove(t);
+
+  public void removeTrip(Trip t) {
+    if (trips != null) {
+      trips.remove(t);
+    }
   }
 
 }

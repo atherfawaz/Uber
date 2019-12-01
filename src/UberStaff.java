@@ -63,7 +63,7 @@ public class UberStaff extends Person {
   }
 
   public void notifyVehicleCondition(Vehicle v) {
-      System.out.println("Condition of " + v.getRegistrationNum() " is: " + v.getCondition());
+      System.out.println("Condition of " + v.getRegistrationNum() + " is: " + v.getCondition());
   }
 
   public Boolean verifyDriverDetails(String details) { //this will receive the person's name
@@ -117,5 +117,13 @@ public class UberStaff extends Person {
       //Assuming that NADRA and authorities concerned intimate us that
       //applicant does not have a criminal history
       return true;
+  }
+
+  public static List<UberStaff> recruitStaff(int staffcount) {
+    List<UberStaff> list = new ArrayList<>();
+    for (int i = 0; i < staffcount; ++i) {
+      list.add(new UberStaff());
+    }
+    return list;
   }
 }

@@ -19,6 +19,8 @@ public class Automate {
     create payment system
     */
 
+    ReadJSON.read();
+
     Passenger adan = new Passenger("Muhammad Adan", "35202-231231-5", "31-08-1998",
         "xenither@gmail.com",
         "0300-1231236", false, new Account("530018001923672", 0.0));

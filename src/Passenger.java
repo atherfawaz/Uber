@@ -7,20 +7,19 @@ import java.text.*;
 
 public class Passenger extends Person {
 
-  private List<Trip> trips;
+  private List<Trip> trips = new ArrayList<>();
 
   public Passenger(String name, String nationalId, String dateOfBirth, String email, String phonenumber, Boolean isdriver, Account account) {
     super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
-    trips = new ArrayList<>();
+
   }
 
   Passenger() {
-    trips = new ArrayList<>();
+
   }
 
   Passenger(Person passed) {
     super(passed);
-    trips = new ArrayList<>();
     //pushed
   }
 

@@ -68,6 +68,6 @@ public class ReadJSON {
     Double balance = (Double) driverObject.get("balance");
     obj.account.setTotalCredit(balance);
 
-    Uber.drivers.add(obj);
+    Automate.drivers.add(obj);
   }
 }
