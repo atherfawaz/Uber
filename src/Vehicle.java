@@ -11,12 +11,12 @@ public class Vehicle
 
     Vehicle() {
     }
-    Vehicle(String registrationNum, String condition, String make, Integer mode, String manufacturer)
+    Vehicle(String registrationNum, String condition, String make, Integer model, String manufacturer)
     {
         this.registrationNum = registrationNum;
         this.condition = condition;
         this.make = make;
-        this.model = mode;
+        this.model = model;
         this.manufacturer = manufacturer;
     }
     public String getRegistrationNum()
@@ -32,7 +32,7 @@ public class Vehicle
         return make;
     }
 
-    public Integer getMode() {
+    public Integer getModel() {
         return model;
     }
 

@@ -1,9 +1,10 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Automate {
   public static LeaderBoard leaderBoard = LeaderBoard.getInstance();
-  public static void simulateUber() {
+  public static void simulateUber() throws ParseException {
 
     /*
     create uberstaff
@@ -34,8 +35,7 @@ public class Automate {
     Uber.drivers.add(java);
     Uber.passengers.add(hamza);
     Uber.passengers.add(adan);
-    hamza.callARide(Uber.drivers);
-    hamza.initiatePayment("notcashlul",hamza.getCurrentRide().getTotalCost(),hamza.getCurrentRide().getDriver());
+    hamza.passengerInterface();
     adan.callARide(Uber.drivers);
 
   }

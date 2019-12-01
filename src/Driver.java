@@ -14,15 +14,6 @@ public class Driver extends Person {
   Driver() {
     //
   }
-
-  public void setIsFree(Boolean isFree_) {
-    isFree = isFree_;
-  }
-
-  public Boolean getIsFree() {
-    return isFree;
-  }
-
   public Driver(String name, String nationalId, String dateOfBirth, String email,
       String phonenumber, Boolean isdriver, Account account) {
     super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
@@ -32,13 +23,23 @@ public class Driver extends Person {
     rating = 0;
     trips = new ArrayList<>();
     startDate = "Current system date";
-    addVehicle();
+    //addVehicle();
+    setVehicle();
   }
 
   public Driver(Person passed) {
     super(passed);
     addVehicle();
   }
+
+  public void setIsFree(Boolean isFree_) {
+    isFree = isFree_;
+  }
+
+  public Boolean getIsFree() {
+    return isFree;
+  }
+
 
   public Vehicle getVehicles() {
     return this.vehicle;
@@ -147,6 +148,11 @@ public class Driver extends Person {
     addRide(trip);
     System.out.println(this.getName() + " has accepted the ride requested.");
     return true;
+  }
+
+  public void setVehicle()
+  {
+    vehicle = new Car("219861293","new","Camry",2009,"Toyota","sedan");
   }
 
   public void displayTrips() {
