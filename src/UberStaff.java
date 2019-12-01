@@ -1,4 +1,5 @@
 
+import java.text.ParseException;
 import java.util.*;
 
 public class UberStaff extends Person {
@@ -142,4 +143,50 @@ public class UberStaff extends Person {
           cList.get(i).viewComplaint();
       }
   }
+
+    void uberStaffInterface() throws ParseException {
+        //implement UI for uber staff here
+        //maybe a while(true) loop to mimic the state of the app
+        //perform all operations here
+        while (true)
+        {
+            Uber.clearScreen();
+            System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nPlease enter the number of one of the options below.");
+            System.out.println("1. Help passenger\n2. Help driver\n3. Cancel a ride\n4. Refund a passenger\n5. Verify an applicant (for driver)\n6. Verify vehicle details\n8. Exit");
+            //Adding a new complaint cannot be invoked from here, it should proceed after the ride ends and user enters a 1 star rating
+            Scanner input = new Scanner(System.in);
+            int choice = input.nextInt();
+            if (choice == 1)
+            {
+                this.helpPassenger(Uber.passengers.get(0));
+            }
+            else if (choice == 2)
+            {
+                this.helpDriver(Uber.drivers.get(0));
+            }
+            else if (choice == 3)
+            {
+                //this.cancelRide();
+            }
+            else if (choice == 4)
+            {
+                Double val = 5.1; //temp
+                this.refundPassenger(Uber.passengers.get(0), val);
+            }
+            else if (choice == 5)
+            {
+                String appName = new String("Khan");
+                this.verifyDriverDetails(appName);
+            }
+            else if (choice == 6)
+            {
+                Vehicle v = new Vehicle("LE-123","Excellent","Honda",2017, "DK");
+                this.verifyVehicleDetails(v);
+            }
+            else
+            {
+                System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.\n");
+            }
+        }
+    }
 }
