@@ -63,7 +63,7 @@ public class UberStaff extends Person {
   }
 
   public void notifyVehicleCondition(Vehicle v) {
-      System.out.println("Condition of " + v.getRegistrationNum() " is: " + v.getCondition());
+      System.out.println("Condition of " + v.getRegistrationNum() + " is: " + v.getCondition());
   }
 
   public Boolean verifyDriverDetails(String details) { //this will receive the person's name
