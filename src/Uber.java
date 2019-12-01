@@ -41,6 +41,13 @@ public class Uber {
 
     if (choice.equalsIgnoreCase("Y")) {
        Automate.simulateUber();
+     try {
+       Automate.simulateUber();
+     }
+     catch (Exception e) {
+       System.out.println(e);
+     }
+
     }
 
     clearScreen();  //ain't working apparently
@@ -61,8 +68,12 @@ public class Uber {
           Passenger newUser = new Passenger(tempUser);
           passengers.add(newUser);
           //transfer control. will run all functions as a passenger from this function within the class
-          newUser.passengerInterface();
-
+          try {
+            newUser.passengerInterface();
+          }
+          catch (Exception e) {
+            System.out.println(e);
+          }
         } else if (choice.equalsIgnoreCase("Driver")) {
           Person tempDriver = Person.makePerson();
           Driver newDriver = new Driver(tempDriver);
