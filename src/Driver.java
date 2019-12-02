@@ -14,9 +14,9 @@ public class Driver extends Person {
   private Vehicle vehicle;
   private Boolean isOnTrip = false;
 
-  Driver() {
+  Driver()
+  {
     vehicle = new Vehicle();
-    //
   }
   public Driver(String name, String nationalId, String dateOfBirth, String email,
       String phonenumber, Boolean isdriver, Account account) {
@@ -270,7 +270,7 @@ public class Driver extends Person {
       }
       else
       {
-        System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.\n");
+        System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.");
       }
     }
   }
