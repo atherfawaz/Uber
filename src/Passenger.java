@@ -89,6 +89,10 @@ public class Passenger extends Person {
     return false;
   }
 
+  public void setTrips(List<Trip> trips) {
+    this.trips = trips;
+  }
+
   public void requestAssistance() {
     System.out.println("Passenger " + this.getName() + " is requesting assistance from the Uber staff assigned.");
     if (isOnTrip) {

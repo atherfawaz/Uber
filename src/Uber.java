@@ -96,6 +96,7 @@ public class Uber {
         System.out.println("Log in as a passenger or a driver? (Passenger / Driver):");
         choice = sc.nextLine();
         if (choice.equalsIgnoreCase("Passenger")) {
+
           //fetch the required passenger object from db and do a subsequent call to <object>.passengerInterface
           System.out.println("Enter your username: ");
           String username = sc.nextLine();
@@ -106,11 +107,11 @@ public class Uber {
             System.out.println("Invalid login");
           } else if (retval.equalsIgnoreCase("p")) {
             //MAKE FUNCTIONS IN DB_CONNECTIVITY TO MAKE DRIVER AND PASSENGER OBJECTS AND RETURN THEM
-            //Passenger newPassenger = new Passenger(db.getPassenger(username));
+            Passenger newPassenger = db.getPassenger(username);
             //newPassenger.getInterface();
           } else if (retval.equalsIgnoreCase("d")) {
             //MAKE FUNCTIONS IN DB_CONNECTIVITY TO MAKE DRIVER AND PASSENGER OBJECTS AND RETURN THEM
-            //Driver newDriver = new Driver(db.getDriver(username));
+            Driver newDriver = db.getDriver(username);
             //newDriver.driverInterface();
           }
 
@@ -125,11 +126,11 @@ public class Uber {
             System.out.println("Invalid login");
           } else if (retval.equalsIgnoreCase("p")) {
             //MAKE FUNCTIONS IN DB_CONNECTIVITY TO MAKE DRIVER AND PASSENGER OBJECTS AND RETURN THEM
-            //Passenger newPassenger = new Passenger(db.getPassenger(username));
+            Passenger newPassenger = db.getPassenger(username);
             //newPassenger.getInterface();
           } else if (retval.equalsIgnoreCase("d")) {
             //MAKE FUNCTIONS IN DB_CONNECTIVITY TO MAKE DRIVER AND PASSENGER OBJECTS AND RETURN THEM
-            //Driver newDriver = new Driver(db.getDriver(username));
+            Driver newDriver = db.getDriver(username);
             //newDriver.driverInterface();
           }
         } else {
