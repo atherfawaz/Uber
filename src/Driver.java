@@ -1,4 +1,5 @@
 
+import java.text.ParseException;
 import java.util.*;
 //abc
 
@@ -241,5 +242,30 @@ public class Driver extends Person {
       trips.remove(t);
     }
   }
+
+  public void driverInterface() {
+    //implement UI for uber staff here
+    //maybe a while(true) loop to mimic the state of the app
+    //perform all operations here
+    while (true)
+    {
+      System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nDo you want to \n1.See a list of trips\n2.View your earnings");
+      Scanner input = new Scanner(System.in);
+      int choice = input.nextInt();
+      if (choice == 1)
+      {
+        //Display trips for a driver
+      }
+      else if (choice == 2)
+      {
+        System.out.println("You have earned a total of RS " + getTotalEarning());
+      }
+      else
+      {
+        System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.\n");
+      }
+    }
+  }
+
 
 }
