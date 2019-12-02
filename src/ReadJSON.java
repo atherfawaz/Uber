@@ -151,7 +151,6 @@ class ReadJSON {
 
       //Iterate over employee array
       tripList.forEach(trip -> parseTripObject((JSONObject) trip));
-      
 
     } catch (IOException | ParseException e) {
       e.printStackTrace();

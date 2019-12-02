@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Uber {
 
-  //initial setup
+  //useful for automating functions
   public static LeaderBoard leaderBoard = LeaderBoard.getInstance();
   public static List<UberStaff> uberstaff = UberStaff.recruitStaff(5);
   public static List<Passenger> passengers = new ArrayList<Passenger>();

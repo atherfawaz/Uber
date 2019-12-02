@@ -37,7 +37,7 @@ public class Automate {
         Uber.passengers.get(which).passengerInterfaceSimulate();
       } else if (choice == 2) {
         which = Uber.myRand(0, Uber.drivers.size() - 1);
-        Uber.drivers.get(which).driverInterfaceSimulate();
+        Uber.drivers.get(which).driverInterface();
       } else if (choice == 3) {
 
         which = Uber.myRand(0, Uber.uberstaff.size() - 1);
