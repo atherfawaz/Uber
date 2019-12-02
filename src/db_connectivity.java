@@ -7,7 +7,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 
-public class db_connectivity {
+public class
+db_connectivity {
 
   Connection con;
   Statement stmt;
@@ -38,6 +39,26 @@ public class db_connectivity {
       System.out.println(e);
     }
     return null;
+  }
+
+  int setPerson(Person passed) {
+    try {
+      String sql = "insert into Person (?, ?, ?, ?, ?,\r\n" +
+              "    	      ?, ?)";
+      PreparedStatement statement = con.prepareStatement(sql);
+      statement.setString(1, passed.getName());
+      statement.setString(2, passed.getNationalId());
+      statement.setString(3, passed.getDateOfBirth());
+      statement.setString(4, passed.getEmail());
+      statement.setString(5, passed.getPhoneNum());
+      statement.setBoolean(6, passed.getIsDriver());
+      statement.setString(7, passed.getAccount().getAccountNum());
+      int rowsUpdated = stmt.executeUpdate(sql);
+      return rowsUpdated;
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+    return -1;
   }
 
   int setPerson(String name, String nationalId, String dateOfBirth, String email, String phoneNum,

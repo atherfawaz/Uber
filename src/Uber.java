@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.Reader;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -19,20 +20,15 @@ public class Uber {
     System.out.flush();
   }
 
-  public static int myRand(int min, int max)
-  {
-      int rand = (int) (Math.random() * ((max - min) + 1)) + min;
-      return rand;
+  public static int myRand(int min, int max) {
+    int rand = (int) (Math.random() * ((max - min) + 1)) + min;
+    return rand;
   }
 
-  public static void mySleep(long milliseconds)
-  {
-    try
-    {
+  public static void mySleep(long milliseconds) {
+    try {
       Thread.sleep(milliseconds);
-    }
-    catch(InterruptedException ex)
-    {
+    } catch (InterruptedException ex) {
       Thread.currentThread().interrupt();
     }
   }
@@ -46,19 +42,20 @@ public class Uber {
     String choice = sc.nextLine();
 
     if (choice.equalsIgnoreCase("Y")) {
-       Automate.simulateUber();
-     try {
-       Automate.simulateUber();
-     }
-     catch (Exception e) {
-       System.out.println(e);
-     }
+      Automate.simulateUber();
+      try {
+        Automate.simulateUber();
+      } catch (Exception e) {
+        System.out.println(e);
+      }
 
     }
 
     clearScreen();  //ain't working apparently
 
     System.out.println("Sign up or login? (Sign Up / Login):");
+    db_connectivity db = new db_connectivity();
+
     choice = sc.nextLine();
 
     Boolean fine = false;
@@ -67,7 +64,14 @@ public class Uber {
       if (choice.equalsIgnoreCase("sign up")) {
         fine = true;
         System.out.println("Sign up as a passenger or a driver? (Passenger / Driver):");
-        choice = sc.nextLine();
+        String type = sc.nextLine();
+        System.out.println("Enter your username: ");
+        String username = sc.nextLine();
+        System.out.println("Enter your password");
+        String pass = sc.nextLine();
+
+        int retval = db.setlogin(username, pass, type);
+        int retval2 = db.setPerson(Person.makePerson());
 
         if (choice.equalsIgnoreCase("Passenger")) {
           Person tempUser = Person.makePerson();
@@ -76,8 +80,7 @@ public class Uber {
           //transfer control. will run all functions as a passenger from this function within the class
           try {
             newUser.passengerInterface();
-          }
-          catch (Exception e) {
+          } catch (Exception e) {
             System.out.println(e);
           }
         } else if (choice.equalsIgnoreCase("Driver")) {
@@ -94,15 +97,47 @@ public class Uber {
         choice = sc.nextLine();
         if (choice.equalsIgnoreCase("Passenger")) {
           //fetch the required passenger object from db and do a subsequent call to <object>.passengerInterface
+          System.out.println("Enter your username: ");
+          String username = sc.nextLine();
+          System.out.println("Enter your password");
+          String pass = sc.nextLine();
+          String retval = db.getlogin(username, pass);
+          if (retval.equalsIgnoreCase("x")) {
+            System.out.println("Invalid login");
+          } else if (retval.equalsIgnoreCase("p")) {
+            //MAKE FUNCTIONS IN DB_CONNECTIVITY TO MAKE DRIVER AND PASSENGER OBJECTS AND RETURN THEM
+            //Passenger newPassenger = new Passenger(db.getPassenger(username));
+            //newPassenger.getInterface();
+          } else if (retval.equalsIgnoreCase("d")) {
+            //MAKE FUNCTIONS IN DB_CONNECTIVITY TO MAKE DRIVER AND PASSENGER OBJECTS AND RETURN THEM
+            //Driver newDriver = new Driver(db.getDriver(username));
+            //newDriver.driverInterface();
+          }
+
         } else if (choice.equalsIgnoreCase("Driver")) {
           //fetch the required driver object from db and do a subsequent call to <object>.driverInterface
+          System.out.println("Enter your username: ");
+          String username = sc.nextLine();
+          System.out.println("Enter your password");
+          String pass = sc.nextLine();
+          String retval = db.getlogin(username, pass);
+          if (retval.equalsIgnoreCase("x")) {
+            System.out.println("Invalid login");
+          } else if (retval.equalsIgnoreCase("p")) {
+            //MAKE FUNCTIONS IN DB_CONNECTIVITY TO MAKE DRIVER AND PASSENGER OBJECTS AND RETURN THEM
+            //Passenger newPassenger = new Passenger(db.getPassenger(username));
+            //newPassenger.getInterface();
+          } else if (retval.equalsIgnoreCase("d")) {
+            //MAKE FUNCTIONS IN DB_CONNECTIVITY TO MAKE DRIVER AND PASSENGER OBJECTS AND RETURN THEM
+            //Driver newDriver = new Driver(db.getDriver(username));
+            //newDriver.driverInterface();
+          }
+        } else {
+          System.out.println("Incorrect choice. Re-enter your option: ");
+          choice = sc.nextLine();
         }
-      } else {
-        System.out.println("Incorrect choice. Re-enter your option: ");
-        choice = sc.nextLine();
       }
+
     }
-
   }
-
 }
