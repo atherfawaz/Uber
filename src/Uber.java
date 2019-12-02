@@ -16,6 +16,7 @@ public class Uber {
   public static List<Passenger> passengers = new ArrayList<Passenger>();
   public static List<Driver> drivers = new ArrayList<Driver>();
   public static PaymentSystem paymentSystem = new PaymentSystem();
+  public static List<Trip> trips = new ArrayList<>();
 
   public static void clearScreen() {
     System.out.print("\033[H\033[2J");

@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Automate {
 
   public static Complaints c = new Complaints();
+
   static void simulateUber() throws ParseException, InterruptedException {
 
     /*
