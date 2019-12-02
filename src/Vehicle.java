@@ -12,6 +12,14 @@ public class Vehicle
     Vehicle() {
         //
     }
+    Vehicle(Vehicle veh)
+    {
+        this.registrationNum = veh.registrationNum;
+        this.condition = veh.condition;
+        this.make = veh.make;
+        this.model = veh.model;
+        this.manufacturer = veh.manufacturer;
+    }
     Vehicle(String registrationNum, String condition, String make, Integer model, String manufacturer)
     {
         this.registrationNum = registrationNum;

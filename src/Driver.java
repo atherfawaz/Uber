@@ -18,8 +18,25 @@ public class Driver extends Person {
   {
     vehicle = new Vehicle();
   }
+
+  public void setStartDate(String startDate) {
+    this.startDate = startDate;
+  }
+
+  public void setTrips(List<Trip> trips) {
+    this.trips = trips;
+  }
+
+  public void setTotalEarning(double totalEarning) {
+    this.totalEarning = totalEarning;
+  }
+
+  public void setRating(float rating) {
+    this.rating = rating;
+  }
+
   public Driver(String name, String nationalId, String dateOfBirth, String email,
-      String phonenumber, Boolean isdriver, Account account) {
+                String phonenumber, Boolean isdriver, Account account) {
     super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
     super.setDriver(true);
     isFree = true;
@@ -34,6 +51,11 @@ public class Driver extends Person {
   public Driver(Person passed) {
     super(passed);
     addVehicle();
+  }
+  public Driver(Person passed, Vehicle veh)
+  {
+    super(passed);
+    vehicle = new Vehicle(veh);
   }
 
   public void setIsFree(Boolean isFree_) {
