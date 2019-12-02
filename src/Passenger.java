@@ -60,7 +60,7 @@ public class Passenger extends Person {
   public Boolean requestCancellation() throws ParseException {
     if (isOnTrip) {
       Trip lastTrip = trips.get(trips.size() - 1);
-      String scheduleTime = lastTrip.getTimeForSchedule();
+      String scheduleTime = lastTrip.getTimeForSchedule().substring(11,18);
       SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
       Date start = format.parse(scheduleTime);
       Date end = format.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
@@ -297,7 +297,7 @@ public class Passenger extends Person {
       Uber.mySleep(2000);
       String currTime = LocalDateTime.now()
           .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-      Trip trip = new Trip(startingPoint, destination, null, null, null, this, currTime, null);
+      Trip trip = new Trip(startingPoint, destination,currTime, null, null, this, currTime, null);
       if (trip.checkRouteValidity(startingPoint, destination)) {
         validTrip = true;
         trip.calculateShortestRoute();
