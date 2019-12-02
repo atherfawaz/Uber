@@ -69,7 +69,7 @@ public class Driver extends Person {
     {
       return true;
     }
-    return false;
+    return true;
   }
 
   public float getRating() {

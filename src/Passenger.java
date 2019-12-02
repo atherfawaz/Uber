@@ -219,7 +219,7 @@ public class Passenger extends Person {
             loopVar = false;
             this.setStatus(true);
             trip.startRide();
-            if (Trip.tripchoice != 1 && Trip.tripchoice != 2) {
+            if (Trip.tripchoice != 5) {
               initiatePayment("notcash", getCurrentRide().getTotalCost(),
                   getCurrentRide().getDriver());
               while (ratingCheck == false) {
@@ -238,7 +238,7 @@ public class Passenger extends Person {
               }
               this.setStatus(false);
             } else {
-              System.out.println("Your trip has ended prematurely");
+              System.out.println("Trip ended prematurely.");
               this.setStatus(false);
             }
           }
@@ -329,13 +329,22 @@ public class Passenger extends Person {
         validTrip = true;
         trip.calculateShortestRoute();
         trip.calculateFare();
+        System.out.println("The estimated fair for your ride is "+ trip.getTotalCost() + ". Would you still like to search for a ride? Enter Yes to continue, no to exit.");
+        Uber.mySleep(2000);
+        System.out.println("You chose to continue searching.");
+        Uber.mySleep(2000);
         boolean loopVar = true;
         int randIndex;
         int rating_;
         Boolean ratingCheck = false;
         while (loopVar) {
           randIndex = Uber.myRand(0, Uber.drivers.size() - 1);
-          if (Uber.drivers.get(randIndex).getIsFree()) {
+          System.out.println("Enter the vehicle type you would like to travel on:\n- Car\n- Motorcycle\n- Rickshaw");
+          String vType = "Car";
+          Uber.mySleep(2000);
+          System.out.println("You chose " + vType + " as the preferred vehicle type.");
+          Uber.mySleep(2000);
+          if (Uber.drivers.get(randIndex).getIsFree() && Uber.drivers.get(randIndex).hasVehicleType(vType)) {
             Uber.drivers.get(randIndex).setIsFree(false);
             System.out.println("Searching for a ride...");
             Uber.mySleep(3000);
