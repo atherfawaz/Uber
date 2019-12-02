@@ -9,5 +9,6 @@ public class Riding extends Thread {
     }
     System.out.println("Ending ride...");
     Trip.iobj.interrupt();
+
   }
 }
