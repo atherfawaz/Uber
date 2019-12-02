@@ -258,16 +258,19 @@ public class Driver extends Person {
         System.out.println("Here's the list of trips available:\n");
         if (!Uber.trips.isEmpty()) {
           //print trips
+          int counter = 1;
           for (Trip obj : Uber.trips) {
-            System.out.println(
+            System.out.println(counter + ". " +
                 obj.getPassenger().getName() + " wants to be picked from " + obj.getStartingPoint()
-                    + " and dropped at " + obj.getDestination() + ". Reach their place by " + obj
-                    .getDateTime());
+                + " and dropped at " + obj.getDestination() + ". Reach their place by " + obj
+                .getDateTime());
+            counter++;
           }
           System.out.println(
               "Enter the number of the ride you want to accept. (Enter -1 to go back):");
           int userInput = input.nextInt();
           if (userInput == -1) {
+            ;//empty
           } else if (userInput <= Uber.trips.size()
               && userInput >= 1) {
             //connect the passengers with the rides
