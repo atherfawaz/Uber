@@ -2,6 +2,7 @@
 import java.util.*;
 //abc
 
+
 public class Driver extends Person {
 
   private Boolean isFree = true;
@@ -10,6 +11,7 @@ public class Driver extends Person {
   private float rating;
   private List<Trip> trips = new ArrayList<>();
   private Vehicle vehicle;
+  private Boolean isOnTrip = false;
 
   Driver() {
     vehicle = new Vehicle();
@@ -70,7 +72,7 @@ public class Driver extends Person {
   public void addToEarnings(double amount) {
     this.totalEarning += amount;
     account.addCredit(amount);
-    System.out.println(amount + "has been added to your total earnings.");
+    System.out.println("Driver " + this.getName() + ": " + amount + " has been added to your total earnings.");
   }
 
   public void addVehicle() {
@@ -149,6 +151,7 @@ public class Driver extends Person {
     trip.addDriver(this); // adding all the stuff specific to the driver.
     addRide(trip);
     System.out.println(this.getName() + " has accepted the ride requested.");
+    isOnTrip = true;
     return true;
   }
 
@@ -158,19 +161,49 @@ public class Driver extends Person {
   }
 
   public void displayTrips() {
-    for (Trip t : trips) {
-      System.out.println("Trip " + t + 1 + " was conducted on " + t.getDateTime());
+    if (!(trips.isEmpty())) {
+      for (int t = trips.size() - 1; t >= 0; t--) {
+        System.out.println("Trip " + t + 1 + " was conducted on " + trips.get(t).getDateTime());
+        System.out.println(
+                "It began at " + trips.get(t).getStartingPoint() + " and ended at " + trips.get(t).getDestination() + ".");
+        System.out.println(
+                "The total money the ride  " + trips.get(t).getTotalCost() + "\n");
+      }
+    }
+    else
+    {
+      System.out.println("You have not made any trips with Uber yet.");
+    }
+  }
+
+  public void displayCurrentRide() {
+    if (isOnTrip) {
       System.out.println(
-          "It began at " + t.getStartingPoint() + " and ended at " + t.getDestination() + ".");
+              "Trip " + (trips.size() - 1) + " was conducted on " + trips.get((trips.size() - 1))
+                      .getDateTime());
       System.out.println(
-          "The total money you the ride cost the passenger was " + t.getTotalCost() + "\n");
+              "It began at " + trips.get((trips.size() - 1)).getStartingPoint() + " and ended at "
+                      + trips.get((trips.size() - 1))
+                      .getDestination() + ".");
+      System.out.println(
+              "The total money you will earn from this trip is " + trips.get((trips.size() - 1)).getTotalCost()
+                      + "\n");
+    } else {
+      System.out.println("You are currently not on a trip!");
     }
   }
 
   public void requestAssistance() //unsure about implementation
   {
-    System.out.println("Requesting assistance from the uber staff assigned.");
-    trips.get(trips.size() - 1).helpDriver();
+    if (isOnTrip) {
+      System.out.println("Driver " + this.getName() + " is requesting assistance from the uber staff assigned.");
+      trips.get(trips.size() - 1).helpDriver();
+    }
+    else
+    {
+      System.out.println(
+              "You are currently not on a trip! Please request assistance while a trip is ongoing.");
+    }
   }
 
   public void addRide(Trip trip) {

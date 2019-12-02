@@ -90,7 +90,7 @@ public class Passenger extends Person {
   }
 
   public void requestAssistance() {
-    System.out.println("Requesting assistance from the Uber staff assigned.");
+    System.out.println("Passenger " + this.getName() + " is requesting assistance from the Uber staff assigned.");
     if (isOnTrip) {
       trips.get(trips.size() - 1).helpPassenger();
     } else {
@@ -319,7 +319,7 @@ public class Passenger extends Person {
             loopVar = false;
             this.setStatus(true);
             trip.startRide();
-            if (Trip.tripchoice != 2) {
+            if (Trip.tripchoice != 5) {
               initiatePayment("notcash", getCurrentRide().getTotalCost(),
                   getCurrentRide().getDriver());
               System.out.println(

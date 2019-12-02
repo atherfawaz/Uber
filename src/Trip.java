@@ -126,7 +126,7 @@ public class Trip {
             .getModel() + " " + this.vehicle.getManufacturer() + " " + this.vehicle.getMake()
             + " with Driver " + this.driver.getName() + " is in progress.");
 
-    //Thread.sleep(5000);
+    Uber.mySleep(2000);
     //System.out.println("Ride completed. Please pay the driver " + totalCost + "\n");
 
     Riding ridingobj = new Riding();  //counter
@@ -136,10 +136,28 @@ public class Trip {
     ridingobj.join();
     //inputobj.join();
     if (tripchoice == 1) {
+      System.out.println("You are currently on a ride and cannot search for another ride. Wait for the trip to end.");
+    }
+    else if (tripchoice == 2)
+    {
+      passenger.displayRides();
+    }
+    else if (tripchoice == 3)
+    {
+      passenger.displayCurrentRide();
+    }
+    else if (tripchoice == 4)
+    {
       passenger.requestAssistance();
-    } else if (tripchoice == 2) {
+    }
+    else if (tripchoice == 5) {
       passenger.requestCancellation();
-    } else {
+    }
+    else if (tripchoice == 6)
+    {
+      driver.requestAssistance();
+    }
+    else {
       System.out.println("Ride completed. Please pay the driver " + totalCost + "\n");
     }
   }
