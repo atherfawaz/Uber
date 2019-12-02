@@ -31,8 +31,8 @@ db_connectivity {
   Person getPerson(String nID) {
 
     try {
-      ResultSet rs = stmt.executeQuery("select * from Person where nationalId=" + nID);
-      ResultSet rs2 = stmt.executeQuery("select * from Account where = accountNum=" + rs.getString(7));
+      ResultSet rs = stmt.executeQuery("select * from Person where nationalId= '" + nID +"'");
+      ResultSet rs2 = stmt.executeQuery("select * from Account where = accountNum= '" + rs.getString(7) +"'");
       Account a1 = new Account(rs2.getString(1), rs2.getFloat(2));
       Person p1 = new Person(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
           rs.getString(5), rs.getBoolean(6), a1);
@@ -51,7 +51,7 @@ db_connectivity {
       Vehicle v = getDriverVehicle(nID);
 
       Driver  d = new Driver(p,v);
-      ResultSet rs = stmt.executeQuery("select * from DriverDetails where DriverNID=" + nID);
+      ResultSet rs = stmt.executeQuery("select * from DriverDetails where DriverNID= '" + nID +"'");
       d.setRating(rs.getFloat(4));
       d.setStartDate(rs.getString(2));
       d.setTotalEarning(rs.getFloat(3));
@@ -72,7 +72,7 @@ db_connectivity {
       List<Trip> trips = new ArrayList<Trip>();
       Person p = getPerson(nID);
       Passenger passenger = new Passenger(p);
-      ResultSet rs = stmt.executeQuery("select * from Person where nationalID=" + nID);
+      ResultSet rs = stmt.executeQuery("select * from Person where nationalID= '" + nID  +"'");
       passenger.setTrips(getPassengerTrips(nID));
 
       return passenger;
@@ -144,7 +144,7 @@ db_connectivity {
   Account getAccount(String accID) {
 
     try {
-      ResultSet rs = stmt.executeQuery("select * from Account where accountNum=" + accID);
+      ResultSet rs = stmt.executeQuery("select * from Account where accountNum= '" + accID +"'");
       Account a1 = new Account(rs.getString(1), rs.getFloat(2));
       return a1;
     } catch (Exception e) {
@@ -200,7 +200,7 @@ db_connectivity {
   Trip getTrip(int trip_id) {
 
     try {
-      ResultSet rs = stmt.executeQuery("select * from Trip where tripID=" + trip_id);
+      ResultSet rs = stmt.executeQuery("select * from Trip where tripID= '" + trip_id +"'");
       Account a1 = new Account();
       Vehicle v1 = new Vehicle(rs.getString(4), "", "", 0, "");
       Driver d1 = new Driver("", rs.getString(5), "", "", "", false, a1);
@@ -217,14 +217,14 @@ db_connectivity {
   {
     List<Trip> trips = new ArrayList<Trip>();
     try {
-      ResultSet rs = stmt.executeQuery("select * from Trip where driver_cnic=" + driverID);
+      ResultSet rs = stmt.executeQuery("select * from Trip where driver_cnic= '" + driverID +"'");
       while(rs.next()) {
         Account a1 = new Account();
-        ResultSet rs2 = stmt.executeQuery("select * from Vehicle where registrationNum=" + rs.getString(2));
+        ResultSet rs2 = stmt.executeQuery("select * from Vehicle where registrationNum= '" + rs.getString(2) +"'");
         Vehicle v1 = new Vehicle(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getInt(4), rs2.getString(5));
-        ResultSet rs3 = stmt.executeQuery("select * from Person where nationalId=" + driverID);
+        ResultSet rs3 = stmt.executeQuery("select * from Person where nationalId= '" + driverID +"'");
         Driver d1 = new Driver(rs3.getString(1), rs.getString(5), "", "", "", false, a1);
-        ResultSet rs4 = stmt.executeQuery("select * from Person where nationalId=" + rs.getString(1));
+        ResultSet rs4 = stmt.executeQuery("select * from Person where nationalId= '" + rs.getString(1) +"'");
         Passenger p1 = new Passenger(rs4.getString(1), rs.getString(6), "", "", "", false, a1);
         Trip t1 = new Trip(rs.getString(1), rs.getString(2), rs.getString(3), v1, d1, p1,
                 rs.getString(7), rs.getDouble(8));
@@ -240,14 +240,14 @@ db_connectivity {
   {
     List<Trip> trips = new ArrayList<Trip>();
     try {
-      ResultSet rs = stmt.executeQuery("select * from Trip where passenger_cnic=" + nID);
+      ResultSet rs = stmt.executeQuery("select * from Trip where passenger_cnic= '" + nID +"'");
       while(rs.next()) {
         Account a1 = new Account();
-        ResultSet rs2 = stmt.executeQuery("select * from Vehicle where registrationNum=" + rs.getString(2));
+        ResultSet rs2 = stmt.executeQuery("select * from Vehicle where registrationNum= '" + rs.getString(2) +"'");
         Vehicle v1 = new Vehicle(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getInt(4), rs2.getString(5));
-        ResultSet rs3 = stmt.executeQuery("select * from Person where nationalId=" + rs.getString(5));
+        ResultSet rs3 = stmt.executeQuery("select * from Person where nationalId= '" + rs.getString(5) + "'");
         Driver d1 = new Driver(rs3.getString(1), rs.getString(5), "", "", "", false, a1);
-        ResultSet rs4 = stmt.executeQuery("select * from Person where nationalId=" + nID);
+        ResultSet rs4 = stmt.executeQuery("select * from Person where nationalId= '" + nID +"'");
         Passenger p1 = new Passenger(rs4.getString(1), rs.getString(6), "", "", "", false, a1);
         Trip t1 = new Trip(rs.getString(1), rs.getString(2), rs.getString(3), v1, d1, p1,
                 rs.getString(7), rs.getDouble(8));
@@ -285,7 +285,7 @@ db_connectivity {
   Vehicle getDriverVehicle(String driverNID)
   {
     try {
-      ResultSet rs = stmt.executeQuery("select * from Vehicle where Owner_NID=" + driverNID);
+      ResultSet rs = stmt.executeQuery("select * from Vehicle where Owner_NID= '" + driverNID + "'");
       Vehicle v1;
       if(rs.getInt(6) == 1) {
         v1 = new Motorcycle(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4),
@@ -311,7 +311,7 @@ db_connectivity {
   Vehicle getVehicle(String reg_num) {
 
     try {
-      ResultSet rs = stmt.executeQuery("select * from Vehicle where registrationNum=" + reg_num);
+      ResultSet rs = stmt.executeQuery("select * from Vehicle where registrationNum= '" + reg_num + "'");
       Vehicle v1;
       if(rs.getInt(6) == 1) {
         v1 = new Motorcycle(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4),
@@ -373,7 +373,7 @@ db_connectivity {
   String getlogin(String login_id, String password) {
 
     try {
-      ResultSet rs = stmt.executeQuery("select * from LoginData where UserID=" + login_id + " and Pass=" + password);
+      ResultSet rs = stmt.executeQuery("select * from LoginData where UserID= '" + login_id + "'" + "AND Pass= '" + password + "'");
       if (rs.next() == false) {
         return "x";
       } else {
