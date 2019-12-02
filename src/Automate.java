@@ -20,6 +20,7 @@ public class Automate {
 
     ReadJSON.fetchDrivers();
     ReadJSON.fetchPassengers();
+    ReadJSON.fetchTrips();
 
     Scanner input = new Scanner(System.in);
     int choice;
