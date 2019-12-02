@@ -227,10 +227,6 @@ public class Driver extends Person {
     return null;
   }
 
-  void driverInterface()
-  {
-    ;
-  }
 
   void driverInterfaceSimulate()
   {
@@ -254,7 +250,19 @@ public class Driver extends Person {
       int choice = input.nextInt();
       if (choice == 1)
       {
-        //Display trips for a driver
+        System.out.println("Displaying all trips for " + this.getName());
+        if (trips.size() == 0)
+        {
+          System.out.println("No trip information available.");
+        }
+        else
+        {
+          for (int i = 0; i < trips.size(); i++)
+          {
+            System.out.println(i+1 + ". ");
+            trips.get(i).displayTrip();
+          }
+        }
       }
       else if (choice == 2)
       {

@@ -22,6 +22,15 @@ public class Trip {
   public static Input iobj = new Input();
   public static int tripchoice = 0;
 
+  public void displayTrip()
+  {
+    System.out.println("Trip was conducted on " + this.timeForSchedule);
+    System.out.println("Starting point " + this.startingPoint);
+    System.out.println("Ending point " + this.destination);
+    System.out.println("Driver earned " + this.totalCost);
+  }
+
+
   Trip() {
     this.tripID = tripID;
     tripID++;
