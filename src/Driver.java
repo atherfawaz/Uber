@@ -55,7 +55,22 @@ public class Driver extends Person {
     return this.vehicle;
   }
 
-  ;
+  public Boolean hasVehicleType(String vType)
+  {
+    if (vType.equalsIgnoreCase("car") && this.vehicle instanceof Car)
+    {
+      return true;
+    }
+    else if (vType.equalsIgnoreCase("motorcycle") && this.vehicle instanceof Motorcycle)
+    {
+      return true;
+    }
+    else if (vType.equalsIgnoreCase("rickshaw") && this.vehicle instanceof Rickshaw)
+    {
+      return true;
+    }
+    return false;
+  }
 
   public float getRating() {
     return this.rating;
@@ -249,10 +264,11 @@ public class Driver extends Person {
     //implement UI for uber staff here
     //maybe a while(true) loop to mimic the state of the app
     //perform all operations here
+    double amount;
     while (true)
     {
       System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nPlease enter the number of one of the options below: " +
-              "\n1.See a list of all trips you've taken.\n2.View your earnings\n3.View the amount of money in your account\n4. View driver leaderboard");
+              "\n1.See a list of all trips you've taken.\n2.View your earnings\n3.View the amount of money in your account\n4. Withdraw money from account\n5. View driver leaderboard");
       Scanner input = new Scanner(System.in);
       int choice = input.nextInt();
       if (choice == 1)
@@ -277,11 +293,20 @@ public class Driver extends Person {
       }
       else if (choice == 3)
       {
-        //view amount in bank
+        System.out.println("You have a total amount of RS " + this.account.getBalance() + " in your account.");
       }
       else if (choice == 4)
       {
-        //view leaderboard ----additional options??
+        System.out.println("You have a total amount of RS " + this.account.getBalance() + " in your account.");
+        System.out.println("How much would you like to withdraw?");
+        {
+          amount = input.nextDouble();
+          this.account.cashout(amount);
+        }
+      }
+      else if (choice == 4)
+      {
+        //LeaderBoard.sortByRating;
       }
       else
       {

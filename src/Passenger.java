@@ -145,6 +145,7 @@ public class Passenger extends Person {
     Boolean validLoc = false;
     String destination;
     String startingPoint;
+    String vType="";
     int num;
     while (!(validTrip)) {
       Uber.clearScreen();
@@ -173,6 +174,7 @@ public class Passenger extends Person {
       } else {
         destination = "Model Town";
       }
+
       String currTime = LocalDateTime.now()
           .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
       Trip trip = new Trip(startingPoint, destination, null, null, null, this, currTime, null);
@@ -180,16 +182,36 @@ public class Passenger extends Person {
         validTrip = true;
         trip.calculateShortestRoute();
         trip.calculateFare();
+        System.out.println("The estimated fair for your ride is "+ trip.getTotalCost() + ". Would you still like to search for a ride? Enter Yes to continue, no to exit.");
+        input.nextLine();
+        if (input.nextLine().equalsIgnoreCase("No"))
+        {
+          break;
+        }
         boolean loopVar = true;
+        boolean wrongVType = true;
         int randIndex;
         int rating_;
         Boolean ratingCheck = false;
         while (loopVar) {
           randIndex = Uber.myRand(0, Uber.drivers.size() - 1);
-          if (Uber.drivers.get(randIndex).getIsFree()) {
+          while (wrongVType)
+          {
+            System.out.println("Enter the vehicle type you would like to travel on:\n- Car\n- Motorcycle\n- Rickshaw");
+            vType = input.nextLine();
+            if (vType.equalsIgnoreCase("Car") || vType.equalsIgnoreCase("Motorcycle") || vType.equalsIgnoreCase("Rickshaw"))
+            {
+              wrongVType = false;
+            }
+            else
+            {
+              System.out.println("You have entered a wrong vehicle type. Kindly enter a correct option.");
+            }
+          }
+          System.out.println("Searching for a ride...");
+          Uber.mySleep(3000);
+          if (Uber.drivers.get(randIndex).getIsFree() && Uber.drivers.get(randIndex).hasVehicleType(vType)) {
             Uber.drivers.get(randIndex).setIsFree(false);
-            System.out.println("Searching for a ride...");
-            Uber.mySleep(3000);
             Uber.drivers.get(randIndex).acceptRide(trip);
             trip.addDriver(Uber.drivers.get(randIndex));
             trip.addVehicle(Uber.drivers.get(randIndex).getVehicle());
@@ -219,6 +241,11 @@ public class Passenger extends Person {
               System.out.println("Your trip has ended prematurely");
               this.setStatus(false);
             }
+          }
+          else
+          {
+            System.out.println("Ride not found. Searching again.");
+            Uber.mySleep(1000);
           }
         }
       } else {
