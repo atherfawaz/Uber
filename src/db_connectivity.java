@@ -73,7 +73,7 @@ db_connectivity {
       Person p = getPerson(nID);
       Passenger passenger = new Passenger(p);
       ResultSet rs = stmt.executeQuery("select * from Person where nationalID=" + nID);
-      passenger.setTrips(getTrips(nID));
+      passenger.setTrips(getPassengerTrips(nID));
 
       return passenger;
     }
