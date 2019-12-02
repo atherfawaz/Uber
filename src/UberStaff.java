@@ -5,7 +5,6 @@ import java.util.*;
 public class UberStaff extends Person {
 
   private Boolean isFree = true;
-  List<Complaint> cList = new ArrayList<>();
 
 
   public UberStaff() {
@@ -130,26 +129,25 @@ public class UberStaff extends Person {
     return list;
   }
 
-  public void addComplaint(String complaintDescription, Driver driver, Passenger passenger)
-  {
-      Complaint c = new Complaint(complaintDescription, driver, passenger);
-      cList.add(c);
-  }
-  public void viewComplaints()
-  {
-      System.out.println("Staff assigned: " + this.getName());
-      for (int i = 0; i < cList.size(); i++)
-      {
-          cList.get(i).viewComplaint();
-      }
-  }
+
     void uberStaffInterface() throws ParseException {
         //implement UI for uber staff here
         //maybe a while(true) loop to mimic the state of the app
         //perform all operations here
         while (true)
         {
-            Uber.clearScreen();
+            System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nDo you want to view all registered complaints? ");
+            Scanner input = new Scanner(System.in);
+            int choice = input.nextInt();
+            if (choice == 1)
+            {
+                Automate.c.viewComplaints(); //Later change to Uber
+            }
+            else
+            {
+                System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.\n");
+            }
+           /* Uber.clearScreen();
             System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nPlease enter the number of one of the options below.");
             System.out.println("1. Help passenger\n2. Help driver\n3. Cancel a ride\n4. Refund a passenger\n5. Verify an applicant (for driver)\n6. Verify vehicle details\n8. Exit");
             //Adding a new complaint cannot be invoked from here, it should proceed after the ride ends and user enters a 1 star rating
@@ -185,7 +183,7 @@ public class UberStaff extends Person {
             else
             {
                 System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.\n");
-            }
+            }*/
         }
     }
 
