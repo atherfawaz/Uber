@@ -245,7 +245,8 @@ public class Driver extends Person {
     //perform all operations here
     while (true)
     {
-      System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nDo you want to \n1.See a list of trips\n2.View your earnings");
+      System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nPlease enter the number of one of the options below: " +
+              "\n1.See a list of all trips you've taken.\n2.View your earnings\n3.View the amount of money in your account\n4. View driver leaderboard");
       Scanner input = new Scanner(System.in);
       int choice = input.nextInt();
       if (choice == 1)
@@ -267,6 +268,14 @@ public class Driver extends Person {
       else if (choice == 2)
       {
         System.out.println("You have earned a total of RS " + getTotalEarning());
+      }
+      else if (choice == 3)
+      {
+        //view amount in bank
+      }
+      else if (choice == 4)
+      {
+        //view leaderboard ----additional options??
       }
       else
       {
