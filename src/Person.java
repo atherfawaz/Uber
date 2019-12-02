@@ -48,6 +48,8 @@ public class Person {
     return name;
   }
 
+  public Account getAccount() {return  this.account;}
+
   public String getNationalId() {
     return nationalId;
   }
@@ -198,6 +200,13 @@ public class Person {
     temp2.setTotalCredit(val);
 
     temp.setAccount(temp2);
+    System.out.println("Do you want to sign up as a driver? (Y/N): ");
+    choice = sc.nextLine();
+    if (choice.equalsIgnoreCase("Y")) {
+      temp.setDriver(true);
+    } else {
+      temp.setDriver(false);
+    }
     return temp;
   }
 }
