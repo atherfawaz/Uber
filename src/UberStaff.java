@@ -136,10 +136,10 @@ public class UberStaff extends Person {
         //perform all operations here
         while (true)
         {
-            System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nDo you want to view all registered complaints? ");
+            System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nDo you want to view all registered complaints? Press y/n ");
             Scanner input = new Scanner(System.in);
-            int choice = input.nextInt();
-            if (choice == 1)
+            String choice = input.nextLine();
+            if (choice.equalsIgnoreCase("y"))
             {
                 Automate.c.viewComplaints(); //Later change to Uber
             }
