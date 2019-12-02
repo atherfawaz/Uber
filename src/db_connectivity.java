@@ -373,8 +373,7 @@ db_connectivity {
   String getlogin(String login_id, String password) {
 
     try {
-      ResultSet rs = stmt.executeQuery(
-          "select * from LoginData where UserID=" + login_id + " and Pass=" + password);
+      ResultSet rs = stmt.executeQuery("select * from LoginData where UserID=" + login_id + " and Pass=" + password);
       if (rs.next() == false) {
         return "x";
       } else {
