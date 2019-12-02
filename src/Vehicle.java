@@ -9,6 +9,15 @@ public class Vehicle
     private Integer model;
     private String manufacturer;
 
+    Vehicle(Vehicle veh)
+    {
+        this.registrationNum = veh.registrationNum;
+        this.condition = veh.condition;
+        this.make = veh.make;
+        this.model = veh.model;
+        this.manufacturer = veh.manufacturer;
+    }
+
     Vehicle() {
         //
     }

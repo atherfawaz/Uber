@@ -36,6 +36,12 @@ public class Driver extends Person {
     addVehicle();
   }
 
+  public Driver(Person passed, Vehicle veh)
+  {
+    super(passed);
+    vehicle = new Vehicle(veh);
+  }
+
   public void setIsFree(Boolean isFree_) {
     isFree = isFree_;
   }
