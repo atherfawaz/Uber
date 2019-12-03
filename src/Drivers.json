@@ -13,6 +13,7 @@
             "condition": "new",
             "make": "Corolla",
             "model": "2019",
+            "rating": 4.1,
             "manufacturer": "Toyota" 
         }
     },
@@ -30,6 +31,7 @@
             "condition": "new",
             "make": "City",
             "model": "2019",
+            "rating": 2.5,
             "manufacturer": "Honda" 
         }
     },
@@ -47,6 +49,7 @@
             "condition": "old",
             "make": "Formula 1",
             "model": "2019",
+            "rating": 3.4,
             "manufacturer": "Mercedes Benz" 
         }
     },
@@ -64,6 +67,7 @@
             "condition": "new",
             "make": "SF90",
             "model": "2019",
+            "rating": 1.4,
             "manufacturer": "Ferrari" 
         }
     },
@@ -81,6 +85,7 @@
             "condition": "new",
             "make": "Corolla",
             "model": "2008",
+            "rating": 1.5,
             "manufacturer": "Toyota"  
         }
     }

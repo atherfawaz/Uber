@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class LeaderBoard {
 
@@ -26,8 +25,7 @@ public class LeaderBoard {
   class sortByRating implements Comparator<Driver> {
     @Override
     public int compare(Driver a, Driver b) {
-
-      return (int) (a.getRating() - b.getRating());
+      return (int) (b.getRating() - a.getRating());
     }
   }
 
@@ -35,10 +33,10 @@ public class LeaderBoard {
     @Override
     public int compare(Driver a, Driver b)
     {
-        float bonus1 = a.getPreviousRides().size() * a.getRating();
-        float bonus2 = b.getPreviousRides().size() * b.getRating();
+        double bonus1 = a.getPreviousRides().size() * a.getRating();
+        double bonus2 = b.getPreviousRides().size() * b.getRating();
 
-        return Math.round(bonus1-bonus2);
+        return (int) Math.round(bonus1-bonus2);
 
     }
 
@@ -82,12 +80,12 @@ public class LeaderBoard {
     }
   }
 
-  public List<Driver> showHighestRated() {
+  public List<Driver> showHighestRated(List<Driver> drivers) {
     //change HIGHESTRATED attribute up in the variables to change maximum highest rated drivers allowed
-    drivers.sort(new sortByRating());
+    Uber.drivers.sort(new sortByRating());
     List<Driver> hrated = new ArrayList<>();
-    for (int i = drivers.size() - 1; i < drivers.size() && i < HIGHESTRATED + drivers.size(); i++) {
-      hrated.add(drivers.get(i));
+    for (int i = 0; i < Uber.drivers.size() - 1 && i < HIGHESTRATED + Uber.drivers.size(); i++) {
+      hrated.add(Uber.drivers.get(i));
     }
     return hrated;
   }
@@ -96,8 +94,8 @@ public class LeaderBoard {
     //change HIGHESTRATED attribute up in the variables to change maximum highest rated drivers allowed
     drivers.sort(new sortByTime());
     List<Driver> oldest = new ArrayList<>();
-    for (int i = drivers.size() - 1; i < drivers.size() && i < HIGHESTRATED + drivers.size(); i++) {
-      oldest.add(drivers.get(i));
+    for (int i = 0; i < Uber.drivers.size() - 1 && i < HIGHESTRATED + Uber.drivers.size(); i++) {
+      oldest.add(Uber.drivers.get(i));
     }
     return oldest;
   }
@@ -113,17 +111,17 @@ public class LeaderBoard {
   }
 
   public List<Driver> showBonusEarners() {
-    List<Driver> hrated = showHighestRated();
+    List<Driver> hrated = showHighestRated(Uber.drivers);
     hrated.sort(new sortByBonus());
 
     return hrated;
   }
 
   public void computeBonus() {
-    List<Driver> hrated = showHighestRated();
+    List<Driver> hrated = showHighestRated(Uber.drivers);
     for(Driver d: hrated)
     {
-      float bonus = d.getPreviousRides().size() * d.getRating();
+      double bonus = d.getPreviousRides().size() * d.getRating();
       d.addToEarnings(bonus);
     }
   }

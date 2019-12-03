@@ -11,7 +11,7 @@ public class Driver extends Person {
   private Boolean isFree = true;
   private String startDate;
   private double totalEarning;
-  private float rating;
+  private Double rating;
   private List<Trip> trips = new ArrayList<>();
   private Vehicle vehicle;
   private Boolean isOnTrip = false;
@@ -34,7 +34,7 @@ public class Driver extends Person {
     this.totalEarning = totalEarning;
   }
 
-  public void setRating(float rating) {
+  public void setRating(Double rating) {
     this.rating = rating;
   }
 
@@ -45,7 +45,7 @@ public class Driver extends Person {
     super.setDriver(true);
     isFree = true;
     totalEarning = 0;
-    rating = 0;
+    rating = 0.0;
     trips = new ArrayList<>();
     startDate = "Current system date";
     //addVehicle();
@@ -93,7 +93,7 @@ public class Driver extends Person {
     return true;
   }
 
-  public float getRating() {
+  public double getRating() {
     return this.rating;
   }
 
@@ -110,7 +110,8 @@ public class Driver extends Person {
     if (trips.size() != 1) {
       rating = ((rating * trips.size() - 1) + r) / trips.size();
     } else {
-      rating = r;
+      String x = r.toString();
+      rating = Double.parseDouble(x);
     }
     System.out.println(this.getName() + "'s new rating is " + rating);
   }
@@ -352,7 +353,12 @@ public class Driver extends Person {
       }
       else if (choice == 6)
       {
-        //Uber.leaderBoard.showHighestRated(Uber.drivers);
+        List<Driver> drivers = Uber.leaderBoard.showHighestRated(Uber.drivers);
+        int counter = 1;
+        for (Driver X : drivers) {
+          System.out.println(counter + ". " + X.getName() + " with rating: " + X.getRating());
+          counter++;
+        }
       }
       else
       {

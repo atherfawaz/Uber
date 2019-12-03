@@ -33,7 +33,7 @@ db_connectivity {
     try {
       ResultSet rs = stmt.executeQuery("select * from Person where nationalId= '" + nID +"'");
       ResultSet rs2 = stmt.executeQuery("select * from Account where = accountNum= '" + rs.getString(7) +"'");
-      Account a1 = new Account(rs2.getString(1), rs2.getFloat(2));
+      Account a1 = new Account(rs2.getString(1), rs2.getDouble(2));
       Person p1 = new Person(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
           rs.getString(5), rs.getBoolean(6), a1);
       return p1;
@@ -52,9 +52,9 @@ db_connectivity {
 
       Driver  d = new Driver(p,v);
       ResultSet rs = stmt.executeQuery("select * from DriverDetails where DriverNID= '" + nID +"'");
-      d.setRating(rs.getFloat(4));
+      d.setRating(rs.getDouble(4));
       d.setStartDate(rs.getString(2));
-      d.setTotalEarning(rs.getFloat(3));
+      d.setTotalEarning(rs.getDouble(3));
       d.setTrips(getTrips(nID));
 
       return d;
@@ -145,7 +145,7 @@ db_connectivity {
 
     try {
       ResultSet rs = stmt.executeQuery("select * from Account where accountNum= '" + accID +"'");
-      Account a1 = new Account(rs.getString(1), rs.getFloat(2));
+      Account a1 = new Account(rs.getString(1), rs.getDouble(2));
       return a1;
     } catch (Exception e) {
       System.out.println(e);
