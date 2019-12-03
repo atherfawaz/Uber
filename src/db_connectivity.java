@@ -20,7 +20,7 @@ db_connectivity {
   {
     try {
       String s = "jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=UberDb";
-      con = DriverManager.getConnection(s, "adan", "123");
+      con = DriverManager.getConnection(s, "new_user1", "123");
       stmt = con.createStatement();
 
     } catch (Exception e) {
@@ -31,11 +31,11 @@ db_connectivity {
   Person getPerson(String nID) {
 
     try {
-      ResultSet rs = stmt.executeQuery("select * from Person where nationalId= '" + nID +"'");
-      ResultSet rs2 = stmt.executeQuery("select * from Account where = accountNum= '" + rs.getString(7) +"'");
-      Account a1 = new Account(rs2.getString(1), rs2.getDouble(2));
-      Person p1 = new Person(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-          rs.getString(5), rs.getBoolean(6), a1);
+      ResultSet rs = stmt.executeQuery("select * from Person join Account on Person.AccountNum = Account.accountNum where nationalId = '" + nID +"'");
+      rs.next();
+      Account a1 = new Account(rs.getString("AccountNum"), rs.getDouble("totalCredit"));
+      Person p1 = new Person(rs.getString("name"), rs.getString("nationalId"), rs.getString("dateOfBirth"), rs.getString("email"),
+          rs.getString("phoneNum"), rs.getBoolean("isDriver"), a1);
       return p1;
     } catch (Exception e) {
       System.out.println(e);
@@ -70,10 +70,15 @@ db_connectivity {
 
     try{
       List<Trip> trips = new ArrayList<Trip>();
+      
+      ResultSet rs = stmt.executeQuery("Select * from Trip where Trip.passenger_cnic = " + nID + "'");
+      while(rs.next())
+      {
+    	  trips.add(getTrip(rs.getInt("trip_ID")));
+      }
       Person p = getPerson(nID);
       Passenger passenger = new Passenger(p);
-      ResultSet rs = stmt.executeQuery("select * from Person where nationalID= '" + nID  +"'");
-      passenger.setTrips(getPassengerTrips(nID));
+      passenger.setTrips(getTrips(nID));
 
       return passenger;
     }
@@ -198,67 +203,56 @@ db_connectivity {
   }
 
   Trip getTrip(int trip_id) {
-
-    try {
-      ResultSet rs = stmt.executeQuery("select * from Trip where tripID= '" + trip_id +"'");
-      Account a1 = new Account();
-      Vehicle v1 = new Vehicle(rs.getString(4), "", "", 0, "");
-      Driver d1 = new Driver("", rs.getString(5), "", "", "", false, a1);
-      Passenger p1 = new Passenger("", rs.getString(6), "", "", "", false, a1);
-      Trip t1 = new Trip(rs.getString(1), rs.getString(2), rs.getString(3), v1, d1, p1,
-          rs.getString(7), rs.getDouble(8));
-      return t1;
-    } catch (Exception e) {
-      System.out.println(e);
-    }
-    return null;
-  }
+	    try {
+	      ResultSet rs = stmt.executeQuery("select * from Trip where tripID= '" + trip_id +"'");
+	      rs.next();
+	      Account a1 = new Account();
+	      Vehicle v1 = new Vehicle(rs.getString(4), "", "", 0, "");
+	      Driver d1 = new Driver("", rs.getString(5), "", "", "", false, a1);
+	      Passenger p1 = new Passenger("", rs.getString(6), "", "", "", false, a1);
+	      Trip t1 = new Trip(rs.getString(1), rs.getString(2), rs.getString(3), v1, d1, p1,
+	          rs.getString(7), rs.getDouble(8));
+	      return t1;
+	    } catch (Exception e) {
+	      System.out.println(e);
+	    }
+	    return null;
+	  }
   List<Trip> getTrips(String driverID)
   {
     List<Trip> trips = new ArrayList<Trip>();
     try {
       ResultSet rs = stmt.executeQuery("select * from Trip where driver_cnic= '" + driverID +"'");
       while(rs.next()) {
-        Account a1 = new Account();
-        ResultSet rs2 = stmt.executeQuery("select * from Vehicle where registrationNum= '" + rs.getString(2) +"'");
-        Vehicle v1 = new Vehicle(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getInt(4), rs2.getString(5));
-        ResultSet rs3 = stmt.executeQuery("select * from Person where nationalId= '" + driverID +"'");
-        Driver d1 = new Driver(rs3.getString(1), rs.getString(5), "", "", "", false, a1);
-        ResultSet rs4 = stmt.executeQuery("select * from Person where nationalId= '" + rs.getString(1) +"'");
-        Passenger p1 = new Passenger(rs4.getString(1), rs.getString(6), "", "", "", false, a1);
-        Trip t1 = new Trip(rs.getString(1), rs.getString(2), rs.getString(3), v1, d1, p1,
-                rs.getString(7), rs.getDouble(8));
-        trips.add(t1);
+        trips.add(getTrip(rs.getInt("tripID")));
       }
       return trips;
     } catch (Exception e) {
-      System.out.println(e);
+    	//donothing
     }
     return null;
   }
-  List<Trip> getPassengerTrips(String nID)
-  {
-    List<Trip> trips = new ArrayList<Trip>();
-    try {
-      ResultSet rs = stmt.executeQuery("select * from Trip where passenger_cnic= '" + nID +"'");
-      while(rs.next()) {
-        Account a1 = new Account();
-        ResultSet rs2 = stmt.executeQuery("select * from Vehicle where registrationNum= '" + rs.getString(2) +"'");
-        Vehicle v1 = new Vehicle(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getInt(4), rs2.getString(5));
-        ResultSet rs3 = stmt.executeQuery("select * from Person where nationalId= '" + rs.getString(5) + "'");
-        Driver d1 = new Driver(rs3.getString(1), rs.getString(5), "", "", "", false, a1);
-        ResultSet rs4 = stmt.executeQuery("select * from Person where nationalId= '" + nID +"'");
-        Passenger p1 = new Passenger(rs4.getString(1), rs.getString(6), "", "", "", false, a1);
-        Trip t1 = new Trip(rs.getString(1), rs.getString(2), rs.getString(3), v1, d1, p1,
-                rs.getString(7), rs.getDouble(8));
-        trips.add(t1);
-      }
-      return trips;
-    } catch (Exception e) {
-      System.out.println(e);
-    }
-    return null;
-  }
+//  List<Trip> getPassengerTrips(String nID)
+//  {
+//    List<Trip> trips = new ArrayList<Trip>();
+//    try {
+//      ResultSet rs = stmt.executeQuery("Select * from ((Trip join Vehicle on Trip.vehicle_r_num = Vehicle.registrationNum) join Person on Trip.passenger_cnic = Person.nationalId) join Account on Account.accountNum = Person.AccountNum where nationalId = '"+ nID + "'");
+//
+//      while(rs.next()) {
+//    	Account passenger_account = new Account(rs.getString());
+//        Passenger p1 = new Passenger(rs4.getString(1), rs.getString(6), "", "", "", false, a1);
+//        Account driver_account = new Account();
+//    	rs2 = stmt.executeQuery("select * from Vehicle where registrationNum= '" + rs.getString(2) +"'");
+//        Trip t1 = new Trip(rs.getString(1), rs.getString(2), rs.getString(3), v1, d1, p1,
+//                rs.getString(7), rs.getDouble(8));
+//        trips.add(t1);
+//      }
+//      return trips;
+//    } catch (Exception e) {
+//      System.out.println(e);
+//    }
+//    return null;
+//  }
 
   int setTrip(String startingPoint, String destination, String timeForSchedule, Vehicle veh,
               Driver _driv, Passenger _pass, String datetime, Double cost, int tripID) {
@@ -398,5 +392,16 @@ db_connectivity {
       System.out.println(e);
     }
     return -1;
+  }
+  public static void main(String[] args)
+  {
+	  db_connectivity d1 = new db_connectivity();
+	  Person p1 = d1.getPerson("3520201234344");
+	  System.out.println(p1.getName());
+	  System.out.println(p1.getEmail());
+	  System.out.println(p1.getAccount().getAccountNum());
+	  List<Trip> t1 = new ArrayList<>();
+	  t1 = d1.getTrips("3520201234343");
+	  System.out.println(p1.getAccount().getTotalCredit());
   }
 }
