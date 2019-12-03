@@ -16,7 +16,7 @@ class ReadJSON {
     //path for ather: C:\Users\ather\Desktop\Uber - Simulataneous\Uber\src\Drivers.json
 
 // simultaneous
-    String path = "C:\\Users\\ather\\Desktop\\Uber - Simulataneous\\Uber\\src\\Drivers.json";
+    String path = "C:\\Users\\Lodhi\\IdeaProjects\\Uber\\src\\Drivers.json";
     //path for ather: C:\Users\ather\Desktop\Uber - Multithreading\Uber\src\Drivers.json
     //path for hamza: C:\Users\Hamza Jawad\IdeaProjects\Uber\src\Drivers.json
 
@@ -92,7 +92,7 @@ class ReadJSON {
     //path for ather: C:\Users\ather\Desktop\Uber - Simulataneous\Uber\src\Passengers.json
 
 //<<<<<<< simultaneous
-    String path = "C:\\Users\\ather\\Desktop\\Uber - Simulataneous\\Uber\\src\\Passengers.json";
+    String path = "C:\\Users\\Lodhi\\IdeaProjects\\Uber\\src\\Passengers.json";
 //=======
     //String path = "C:\\Users\\AY\\IdeaProjects\\Uber\\src\\Passengers.json";
 //>>>>>>> multithreading
@@ -150,7 +150,7 @@ class ReadJSON {
 
     //path for ather: C:\Users\ather\Desktop\Uber - Simulataneous\Uber\src\Trips.json
 
-    String path = "C:\\Users\\ather\\Desktop\\Uber - Simulataneous\\Uber\\src\\Trips.json";
+    String path = "C:\\Users\\Lodhi\\IdeaProjects\\Uber\\src\\Trips.json";
     JSONParser jsonParser = new JSONParser();
     try (FileReader reader = new FileReader(path)) {
       //Read JSON file

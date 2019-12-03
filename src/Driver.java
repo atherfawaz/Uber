@@ -1,5 +1,7 @@
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 //abc
 
@@ -54,15 +56,11 @@ public class Driver extends Person {
     super(passed);
     addVehicle();
   }
-  public Driver(Person passed, Vehicle veh)
-  {
-    super(passed);
-    vehicle = new Vehicle(veh);
-  }
 
   public Driver(Person passed, Vehicle veh) {
     super(passed);
     vehicle = new Vehicle(veh);
+
   }
 
   public void setIsFree(Boolean isFree_) {
@@ -282,7 +280,7 @@ public class Driver extends Person {
     }
   }
 
-  public void driverInterface() {
+  public void driverInterface() throws ParseException, InterruptedException {
     //implement UI for uber staff here
     //maybe a while(true) loop to mimic the state of the app
     //perform all operations here
@@ -315,6 +313,14 @@ public class Driver extends Person {
             ;//empty
           } else if (userInput <= Uber.trips.size()
               && userInput >= 1) {
+
+              Uber.trips.get(userInput - 1).setVehicle(this.vehicle);
+              Uber.trips.get(userInput - 1).setDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+              Uber.trips.get(userInput - 1).getPassenger().addRide(Uber.trips.get(userInput -1));
+              Uber.trips.get(userInput -1).addDriver(this);
+              Uber.trips.get(userInput - 1).startRide();
+
+
             //connect the passengers with the rides
           }
         }
@@ -346,7 +352,7 @@ public class Driver extends Person {
       }
       else if (choice == 6)
       {
-        //LeaderBoard.sortByRating;
+        //Uber.leaderBoard.showHighestRated(Uber.drivers);
       }
       else
       {
