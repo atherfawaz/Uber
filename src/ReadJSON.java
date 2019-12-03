@@ -11,11 +11,11 @@ import org.json.simple.parser.ParseException;
 
 class ReadJSON {
 
-  static void fetchDrivers() {
-
-    String path = "C:\\Users\\Hamza Jawad\\IdeaProjects\\Uber\\src\\Drivers.json";
+  static void fetchDrivers(String arg) {
+    arg = arg + "Drivers.json";
+    //String path = "C:\\Users\\Hamza Jawad\\IdeaProjects\\Uber\\src\\Drivers.json";
     JSONParser jsonParser = new JSONParser();
-    try (FileReader reader = new FileReader(path)) {
+    try (FileReader reader = new FileReader(arg)) {
       //Read JSON file
       Object obj = jsonParser.parse(reader);
 
@@ -82,11 +82,10 @@ class ReadJSON {
     Uber.drivers.add(obj);
   }
 
-  static void fetchPassengers() {
-
-    String path = "C:\\Users\\Hamza Jawad\\IdeaProjects\\Uber\\src\\Passengers.json";
+  static void fetchPassengers(String arg) {
+    arg = arg + "Passengers.json";
     JSONParser jsonParser = new JSONParser();
-    try (FileReader reader = new FileReader(path)) {
+    try (FileReader reader = new FileReader(arg)) {
       //Read JSON file
       Object obj = jsonParser.parse(reader);
 
@@ -135,11 +134,10 @@ class ReadJSON {
     Uber.passengers.add(obj);
   }
 
-  static void fetchTrips() {
-
-    String path = "C:\\Users\\Hamza Jawad\\IdeaProjects\\Uber\\src\\Trips.json";
+  static void fetchTrips(String arg) {
+    arg = arg + "Trips.json";
     JSONParser jsonParser = new JSONParser();
-    try (FileReader reader = new FileReader(path)) {
+    try (FileReader reader = new FileReader(arg)) {
       //Read JSON file
       Object obj = jsonParser.parse(reader);
 

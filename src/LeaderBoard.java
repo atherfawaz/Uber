@@ -23,10 +23,14 @@ public class LeaderBoard {
   }
 
   class sortByRating implements Comparator<Driver> {
+
     @Override
     public int compare(Driver a, Driver b) {
-      if(a.getRating() < b.getRating()) return 1;
-      else if (a.getRating() > b.getRating()) return -1;
+      if (a.getRating() < b.getRating()) {
+        return 1;
+      } else if (a.getRating() > b.getRating()) {
+        return -1;
+      }
       return 0;
     }
   }
@@ -104,7 +108,7 @@ public class LeaderBoard {
     //change LOWESTRATED attribute up in the variables to change maximum highest rated drivers allowed
     Uber.drivers.sort(new sortByRating());
     List<Driver> lrated = new ArrayList<>();
-    for (int i = Uber.drivers.size() - 1; i >=0; i--) {
+    for (int i = Uber.drivers.size() - 1; i >= 0; i--) {
       lrated.add(Uber.drivers.get(i));
     }
     return lrated;
@@ -122,6 +126,6 @@ public class LeaderBoard {
       double bonus = d.getPreviousRides().size() * d.getRating();
       d.addToEarnings(bonus);
     }
-  return hrated;
+    return hrated;
   }
 }

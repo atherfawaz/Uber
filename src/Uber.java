@@ -45,9 +45,9 @@ public class Uber {
     String choice = sc.nextLine();
 
     if (choice.equalsIgnoreCase("Y")) {
-      Automate.simulateUber();
+      Automate.simulateUber(args[0]);
       try {
-        Automate.simulateUber();
+        Automate.simulateUber(args[0]);
       } catch (Exception e) {
         System.out.println(e);
       }
