@@ -54,6 +54,16 @@ public class Passenger extends Person {
 
   public Boolean rateDriver(Integer r) {
     trips.get(trips.size() - 1).giveRating(r);
+    if (r == 1)
+    {
+      String complaintText = new String ();
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("Enter report text: ");
+      complaintText = scanner.nextLine();
+      complaintText = scanner.nextLine();
+      Complaint complaint = new Complaint(complaintText,trips.get(trips.size() - 1).getDriver(),this);
+      Automate.c.cList.add(complaint);
+    }
     return true;
   }
 
@@ -432,6 +442,7 @@ public class Passenger extends Person {
             this.setStatus(true);
             trip.getDriver().setStatus(true);
             trip.startRide();
+            Trip.iobj = null;
             if (Trip.tripchoice != 5) {
               initiatePayment("notcash", getCurrentRide().getTotalCost(),
                   getCurrentRide().getDriver());
@@ -440,8 +451,9 @@ public class Passenger extends Person {
                       + trip.getDriver().getName()
                       + ", for this trip?\nRate on a scale of 1 (very unsatisfactory) to 5 (highly satisfactory).");
               Uber.mySleep(2000);
-              rating_ = Uber.myRand(1, 5);
-              System.out.println("You have given the driver a rating of 3.");
+              rating_ = 1;//Uber.myRand(1, 5);
+              rateDriver(rating_);
+              System.out.println("You have given the driver a rating of " + rating_);
               this.setStatus(false);
               trip.getDriver().setStatus(false);
             } else {

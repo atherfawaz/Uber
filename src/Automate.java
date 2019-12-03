@@ -38,17 +38,16 @@ public class Automate {
       } else if (choice == 2) {
         which = Uber.myRand(0, Uber.drivers.size() - 1);
         Uber.drivers.get(which).driverInterfaceSimulate();
-      } /*else if (choice == 3) {
+      } else if (choice == 3) {
 
         which = Uber.myRand(0, Uber.uberstaff.size() - 1);
         Uber.uberstaff.get(which).uberStaffInterface();
-      } */else {
+      } else {
         break;
       }
     }
     Uber.mySleep(2000);
     System.out.println(
         "Reached the end of the automate function. Switching control back to Uber.Java...");
-
   }
 }
