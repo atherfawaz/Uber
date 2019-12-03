@@ -13,7 +13,7 @@ class ReadJSON {
 
   static void fetchDrivers() {
 
-    String path = "C:\\Users\\ather\\Desktop\\Uber - Simulataneous\\Uber\\src\\Drivers.json";
+    String path = "C:\\Users\\Hamza Jawad\\IdeaProjects\\Uber\\src\\Drivers.json";
     JSONParser jsonParser = new JSONParser();
     try (FileReader reader = new FileReader(path)) {
       //Read JSON file
@@ -84,7 +84,7 @@ class ReadJSON {
 
   static void fetchPassengers() {
 
-    String path = "C:\\Users\\ather\\Desktop\\Uber - Simulataneous\\Uber\\src\\Passengers.json";
+    String path = "C:\\Users\\Hamza Jawad\\IdeaProjects\\Uber\\src\\Passengers.json";
     JSONParser jsonParser = new JSONParser();
     try (FileReader reader = new FileReader(path)) {
       //Read JSON file
@@ -137,7 +137,7 @@ class ReadJSON {
 
   static void fetchTrips() {
 
-    String path = "C:\\Users\\ather\\Desktop\\Uber - Simulataneous\\Uber\\src\\Trips.json";
+    String path = "C:\\Users\\Hamza Jawad\\IdeaProjects\\Uber\\src\\Trips.json";
     JSONParser jsonParser = new JSONParser();
     try (FileReader reader = new FileReader(path)) {
       //Read JSON file

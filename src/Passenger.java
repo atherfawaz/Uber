@@ -334,7 +334,7 @@ public class Passenger extends Person {
           "-------------------------------------------------\nHello " + this.getName()
               + "!\nPlease enter the number of one of the options below to begin your journey with Uber.");
       System.out.println(
-          "1. Search for a ride\n2. Show all trips\n3. Show current trip info\n4. Request assistance\n5. Request cancellation\n6. Schedule ride\n6. Exit");
+          "1. Search for a ride\n2. Show all trips\n3. Show current trip info\n4. Request assistance\n5. Request cancellation\n6. Schedule ride\n7. Exit");
       Scanner input = new Scanner(System.in);
       int choice = input.nextInt();
       if (choice == 1) {
@@ -430,6 +430,7 @@ public class Passenger extends Person {
             addRide(trip);
             loopVar = false;
             this.setStatus(true);
+            trip.getDriver().setStatus(true);
             trip.startRide();
             if (Trip.tripchoice != 5) {
               initiatePayment("notcash", getCurrentRide().getTotalCost(),
@@ -442,8 +443,10 @@ public class Passenger extends Person {
               rating_ = Uber.myRand(1, 5);
               System.out.println("You have given the driver a rating of 3.");
               this.setStatus(false);
+              trip.getDriver().setStatus(false);
             } else {
               System.out.println("Trip ended prematurely");
+              trip.getDriver().setStatus(false);
               this.setStatus(false);
             }
           }

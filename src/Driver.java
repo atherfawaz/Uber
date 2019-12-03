@@ -63,6 +63,14 @@ public class Driver extends Person {
 
   }
 
+  public void setStatus(Boolean status)
+  {
+    isOnTrip = status;
+  }
+  public Boolean getStatus()
+  {
+    return isOnTrip;
+  }
   public void setIsFree(Boolean isFree_) {
     isFree = isFree_;
   }
@@ -271,10 +279,6 @@ public class Driver extends Person {
     return null;
   }
 
-  void driverInterfaceSimulate() {
-    ;
-  }
-
   public void removeTrip(Trip t) {
     if (trips != null) {
       trips.remove(t);
@@ -289,10 +293,10 @@ public class Driver extends Person {
 
     while (true) {
       System.out.println(
-          "-------------------------------------------------\nHello " + this.getName()
-              + "!\nPlease enter the number of one of the options below: " +
-              "\n1. Check all trips available\n2. See a list of all trips you've taken.\n3. View your earnings\n4. View the amount of money in your account\n5. Withdraw amount\n6. View driver leaderboard");
-      
+              "-------------------------------------------------\nHello " + this.getName()
+                      + "!\nPlease enter the number of one of the options below: " +
+                      "\n1. Check all trips available\n2. See a list of all trips you've taken.\n3. View your earnings\n4. View the amount of money in your account\n5. Withdraw amount\n6. View driver leaderboard\n7. Exit");
+
       Scanner input = new Scanner(System.in);
       int choice = input.nextInt();
       if (choice == 1) {
@@ -302,29 +306,50 @@ public class Driver extends Person {
           int counter = 1;
           for (Trip obj : Uber.trips) {
             System.out.println(counter + ". " +
-                obj.getPassenger().getName() + " wants to be picked from " + obj.getStartingPoint()
-                + " and dropped at " + obj.getDestination() + ". Reach their place by " + obj
-                .getDateTime());
+                    obj.getPassenger().getName() + " wants to be picked from " + obj.getStartingPoint()
+                    + " and dropped at " + obj.getDestination() + ". Reach their place by " + obj
+                    .getDateTime());
             counter++;
           }
           System.out.println(
-              "Enter the number of the ride you want to accept. (Enter -1 to go back):");
+                  "Enter the number of the ride you want to accept. (Enter -1 to go back):");
           int userInput = input.nextInt();
           if (userInput == -1) {
             ;//empty
           } else if (userInput <= Uber.trips.size()
-              && userInput >= 1) {
+                  && userInput >= 1) {
 
-              Uber.trips.get(userInput - 1).setVehicle(this.vehicle);
-              Uber.trips.get(userInput - 1).setDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
-              Uber.trips.get(userInput - 1).getPassenger().addRide(Uber.trips.get(userInput -1));
-              Uber.trips.get(userInput -1).addDriver(this);
-              Uber.trips.get(userInput - 1).startRide();
-
+            Uber.trips.get(userInput - 1).setVehicle(this.vehicle);
+            Uber.trips.get(userInput - 1).setDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+            Uber.trips.get(userInput - 1).getPassenger().addRide(Uber.trips.get(userInput -1));
+            Uber.trips.get(userInput -1).addDriver(this);
+            Uber.trips.get(userInput - 1).startRide();
+            this.setStatus(true);
+            addRide(Uber.trips.get(userInput-1));
+            Uber.trips.get(userInput - 1).startRide();
+            if (Trip.tripchoice != 5) {
+              Uber.trips.get(userInput-1).getPassenger().initiatePayment("notcash", getCurrentRide().getTotalCost(),
+                      getCurrentRide().getDriver());
+              System.out.println(
+                      "Now that the trip is complete, what rating would you like to give the driver, "
+                              + Uber.trips.get(userInput-1).getDriver().getName()
+                              + ", for this trip?\nRate on a scale of 1 (very unsatisfactory) to 5 (highly satisfactory).");
+              Uber.mySleep(2000);
+              double rating_ = Uber.myRand(1, 5);
+              System.out.println("You have given the driver a rating of 3.");
+              Uber.trips.get(userInput-1).getPassenger().setStatus(false);
+              this.setStatus(false);
+            } else {
+              System.out.println("Trip ended prematurely");
+              Uber.trips.get(userInput-1).getPassenger().setStatus(false);
+              this.setStatus(false);
+            }
 
             //connect the passengers with the rides
           }
-        }
+
+            //connect the passengers with the rides
+          }
       } else if (choice == 2) {
         System.out.println("Displaying all trips for " + this.getName());
         if (trips.size() == 0) {
@@ -353,47 +378,191 @@ public class Driver extends Person {
       }
       else if (choice == 6)
       {
-        //print highestrated
-        highestDriversWrapper();
-        //print lowest rated
-        lowestDriversWrapper();
-        //show bonus earners
-        bonusDriversWrappers();
+          //print highestrated
+          highestDriversWrapper();
+          //print lowest rated
+          lowestDriversWrapper();
+          //show bonus earners
+          bonusDriversWrappers();
+
+      }
+      else if (choice == 7)
+      {
+        break;
       }
       else
       {
         System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.");
+//>>>>>>> multithreading
       }
     }
   }
 
-  private void bonusDriversWrappers() {
-    System.out.println("\n----BONUS EARNERS----");
-    List<Driver> drivers = Uber.leaderBoard.computeBonus();
-    int counter = 1;
-    for (Driver X : drivers) {
-      System.out.println(counter + ". " + X.getName() + " with rating: " + X.getRating());
-      counter++;
+    private void bonusDriversWrappers() {
+        System.out.println("\n----BONUS EARNERS----");
+        List<Driver> drivers = Uber.leaderBoard.computeBonus();
+        int counter = 1;
+        for (Driver X : drivers) {
+            System.out.println(counter + ". " + X.getName() + " with rating: " + X.getRating());
+            counter++;
+        }
     }
-  }
 
-  private void lowestDriversWrapper() {
-    System.out.println("\n----LOWEST RATED----");
-    List<Driver> drivers = Uber.leaderBoard.showLowestRated();
-    int counter = 1;
-    for (Driver X : drivers) {
-      System.out.println(counter + ". " + X.getName() + " with rating: " + X.getRating());
-      counter++;
+    private void lowestDriversWrapper() {
+        System.out.println("\n----LOWEST RATED----");
+        List<Driver> drivers = Uber.leaderBoard.showLowestRated();
+        int counter = 1;
+        for (Driver X : drivers) {
+            System.out.println(counter + ". " + X.getName() + " with rating: " + X.getRating());
+            counter++;
+        }
     }
-  }
 
-  private void highestDriversWrapper() {
-    System.out.println("\n----HIGHEST RATED----");
-    List<Driver> drivers = Uber.leaderBoard.showHighestRated();
-    int counter = 1;
-    for (Driver X : drivers) {
-      System.out.println(counter + ". " + X.getName() + " with rating: " + X.getRating());
-      counter++;
+    private void highestDriversWrapper() {
+        System.out.println("\n----HIGHEST RATED----");
+        List<Driver> drivers = Uber.leaderBoard.showHighestRated();
+        int counter = 1;
+        for (Driver X : drivers) {
+            System.out.println(counter + ". " + X.getName() + " with rating: " + X.getRating());
+            counter++;
+        }
+    }
+
+  public void driverInterfaceSimulate() throws ParseException, InterruptedException {
+    //implement UI for uber staff here
+    //maybe a while(true) loop to mimic the state of the app
+    //perform all operations here
+    double amount;
+    int choice=1;
+    while (true) {
+      System.out.println(
+              "-------------------------------------------------\nHello " + this.getName()
+                      + "!\nPlease enter the number of one of the options below: " +
+                      "\n1. Check all trips available\n2. See a list of all trips you've taken.\n3. View your earnings\n4. View the amount of money in your account\n5. Withdraw amount\n6. View driver leaderboard");
+
+
+      if (choice == 1) {
+        Uber.mySleep(2000);
+        System.out.println("You chose to check all trips available.");
+        Uber.mySleep(2000);
+        System.out.println("Here's the list of trips available:\n");
+        if (!Uber.trips.isEmpty()) {
+          int counter = 1;
+          for (Trip obj : Uber.trips) {
+            System.out.println(counter + ". " +
+                    obj.getPassenger().getName() + " wants to be picked from " + obj.getStartingPoint()
+                    + " and dropped at " + obj.getDestination() + ". Reach their place by " + obj
+                    .getDateTime());
+            counter++;
+          }
+          System.out.println(
+                  "Enter the number of the ride you want to accept. (Enter -1 to go back):");
+          Uber.mySleep(2000);
+          int userInput = 1;
+          System.out.println("You chose to accept Ride 1.");
+          Uber.mySleep(2000);
+          if (userInput == -1) {
+            ;//empty
+          } else if (userInput <= Uber.trips.size()
+                  && userInput >= 1) {
+
+            Uber.trips.get(userInput - 1).setVehicle(this.vehicle);
+            Uber.trips.get(userInput - 1).setDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+            Uber.trips.get(userInput - 1).getPassenger().addRide(Uber.trips.get(userInput -1));
+            Uber.trips.get(userInput -1).addDriver(this);
+            this.setStatus(true);
+            addRide(Uber.trips.get(userInput-1));
+            Uber.trips.get(userInput - 1).startRide();
+            if (Trip.tripchoice != 5) {
+              Uber.trips.get(userInput-1).getPassenger().initiatePayment("notcash", getCurrentRide().getTotalCost(),
+                      getCurrentRide().getDriver());
+              System.out.println(
+                      "Now that the trip is complete, what rating would you like to give the driver, "
+                              + Uber.trips.get(userInput-1).getDriver().getName()
+                              + ", for this trip?\nRate on a scale of 1 (very unsatisfactory) to 5 (highly satisfactory).");
+              Uber.mySleep(2000);
+              double rating_ = Uber.myRand(1, 5);
+              System.out.println("You have given the driver a rating of 3.");
+              Uber.trips.get(userInput-1).getPassenger().setStatus(false);
+              this.setStatus(false);
+            } else {
+              System.out.println("Trip ended prematurely");
+              Uber.trips.get(userInput-1).getPassenger().setStatus(false);
+              this.setStatus(false);
+            }
+
+            //connect the passengers with the rides
+          }
+          Uber.mySleep(2000);
+        }
+      } else if (choice == 2) {
+        Uber.mySleep(2000);
+        System.out.println("You chose to display all your trips.");
+        Uber.mySleep(2000);
+        System.out.println("Displaying all trips for " + this.getName());
+        if (trips.size() == 0) {
+          System.out.println("No trip information available.");
+        } else {
+          for (int i = 0; i < trips.size(); i++) {
+            System.out.println(i + 1 + ". ");
+            trips.get(i).displayTrip();
+          }
+        }
+        Uber.mySleep(2000);
+      }
+      else if (choice == 3) {
+        Uber.mySleep(2000);
+        System.out.println("You chose to display your total earnings.");
+        Uber.mySleep(2000);
+        System.out.println("You have earned a total of RS " + getTotalEarning());
+        Uber.mySleep(2000);
+      }
+      else if (choice == 4)
+      {
+        Uber.mySleep(2000);
+        System.out.println("You chose to display your account balance.");
+        Uber.mySleep(2000);
+        System.out.println("You have a total amount of RS " + this.account.getBalance() + " in your account.");
+        Uber.mySleep(2000);
+      }
+      else if (choice == 5)
+      {
+        Uber.mySleep(2000);
+        System.out.println("You chose to withdraw money from your bank account.");
+        Uber.mySleep(2000);
+        System.out.println("You have a total amount of RS " + this.account.getBalance() + " in your account.");
+        System.out.println("How much would you like to withdraw?");
+        {
+          amount = Uber.myRand(0,(int) this.account.getBalance());
+          this.account.cashout(amount);
+        }
+        Uber.mySleep(2000);
+      }
+      else if (choice == 6)
+      {
+        Uber.mySleep(2000);
+        System.out.println("You chose to display the driver leaderboard.");
+        Uber.mySleep(2000);
+          //print highestrated
+          highestDriversWrapper();
+          //print lowest rated
+          lowestDriversWrapper();
+          //show bonus earners
+          bonusDriversWrappers();
+        Uber.mySleep(2000);
+      }
+      else if (choice == 7)
+      {
+        break;
+      }
+      else
+      {
+        Uber.mySleep(2000);
+        System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.");
+        Uber.mySleep(2000);
+//>>>>>>> multithreading
+      }
+      choice++;
     }
   }
 
