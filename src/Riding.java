@@ -7,7 +7,6 @@ public class Riding extends Thread {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    System.out.println("Ending ride...");
     Trip.iobj.interrupt();
 
   }

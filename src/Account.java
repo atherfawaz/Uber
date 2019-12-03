@@ -44,7 +44,7 @@ public class Account {
   public Boolean debitAccount(Double amount) {
     if (amount > totalCredit) {
       System.out.println(
-          "Sorry, you do not have enough credit to pay " + amount + " through your account.");
+          "Sorry, you do not have enough credit to pay " + amount + " through your account. Transaction failed.");
       return false;
     }
     totalCredit -= amount;
@@ -56,6 +56,11 @@ public class Account {
           return true;
       }
     return false;
+  }
+
+  public double getBalance ()
+  {
+    return totalCredit;
   }
 
   public boolean cashout(Double amount) {

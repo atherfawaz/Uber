@@ -18,8 +18,27 @@ public class Driver extends Person {
     vehicle = new Vehicle();
   }
 
+//<<<<<<< simultaneous
+//=======
+  public void setStartDate(String startDate) {
+    this.startDate = startDate;
+  }
+
+  public void setTrips(List<Trip> trips) {
+    this.trips = trips;
+  }
+
+  public void setTotalEarning(double totalEarning) {
+    this.totalEarning = totalEarning;
+  }
+
+  public void setRating(float rating) {
+    this.rating = rating;
+  }
+
+//>>>>>>> multithreading
   public Driver(String name, String nationalId, String dateOfBirth, String email,
-      String phonenumber, Boolean isdriver, Account account) {
+                String phonenumber, Boolean isdriver, Account account) {
     super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
     super.setDriver(true);
     isFree = true;
@@ -34,6 +53,11 @@ public class Driver extends Person {
   public Driver(Person passed) {
     super(passed);
     addVehicle();
+  }
+  public Driver(Person passed, Vehicle veh)
+  {
+    super(passed);
+    vehicle = new Vehicle(veh);
   }
 
   public Driver(Person passed, Vehicle veh) {
@@ -54,7 +78,22 @@ public class Driver extends Person {
     return this.vehicle;
   }
 
-  ;
+  public Boolean hasVehicleType(String vType)
+  {
+    if (vType.equalsIgnoreCase("car") && this.vehicle instanceof Car)
+    {
+      return true;
+    }
+    else if (vType.equalsIgnoreCase("motorcycle") && this.vehicle instanceof Motorcycle)
+    {
+      return true;
+    }
+    else if (vType.equalsIgnoreCase("rickshaw") && this.vehicle instanceof Rickshaw)
+    {
+      return true;
+    }
+    return true;
+  }
 
   public float getRating() {
     return this.rating;
@@ -247,11 +286,14 @@ public class Driver extends Person {
     //implement UI for uber staff here
     //maybe a while(true) loop to mimic the state of the app
     //perform all operations here
+    double amount;
+
     while (true) {
       System.out.println(
           "-------------------------------------------------\nHello " + this.getName()
               + "!\nPlease enter the number of one of the options below: " +
-              "\n1. Check all trips available\n2. See a list of all trips you've taken.\n3. View your earnings\n4. View the amount of money in your account\n5. View driver leaderboard");
+              "\n1. Check all trips available\n2. See a list of all trips you've taken.\n3. View your earnings\n4. View the amount of money in your account\n5. Withdraw amount\n6. View driver leaderboard");
+      
       Scanner input = new Scanner(System.in);
       int choice = input.nextInt();
       if (choice == 1) {
@@ -288,12 +330,28 @@ public class Driver extends Person {
         }
       } else if (choice == 3) {
         System.out.println("You have earned a total of RS " + getTotalEarning());
-      } else if (choice == 4) {
-        //view amount in bank
-      } else if (choice == 5) {
-        //view leaderboard ----additional options??
-      } else {
-
+      }
+      else if (choice == 4)
+      {
+        System.out.println("You have a total amount of RS " + this.account.getBalance() + " in your account.");
+      }
+      else if (choice == 5)
+      {
+        System.out.println("You have a total amount of RS " + this.account.getBalance() + " in your account.");
+        System.out.println("How much would you like to withdraw?");
+        {
+          amount = input.nextDouble();
+          this.account.cashout(amount);
+        }
+      }
+      else if (choice == 6)
+      {
+        //LeaderBoard.sortByRating;
+      }
+      else
+      {
+        System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.");
+//>>>>>>> multithreading
       }
     }
   }

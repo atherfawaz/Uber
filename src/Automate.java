@@ -34,7 +34,7 @@ public class Automate {
       choice = input.nextInt();
       if (choice == 1) {
         which = Uber.myRand(0, Uber.passengers.size() - 1);
-        Uber.passengers.get(which).passengerInterfaceSimulate();
+        Uber.passengers.get(which).passengerInterface();
       } else if (choice == 2) {
         which = Uber.myRand(0, Uber.drivers.size() - 1);
         Uber.drivers.get(which).driverInterface();
