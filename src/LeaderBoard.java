@@ -122,9 +122,12 @@ public class LeaderBoard {
 
   public List<Driver> computeBonus() {
     List<Driver> hrated = showHighestRated();
+    double bonus = 0.00;
     for (Driver d : hrated) {
-      double bonus = d.getPreviousRides().size() * d.getRating();
+      if(d.getPreviousRides() != null)
+        bonus = d.getPreviousRides().size() * d.getRating();
       d.addToEarnings(bonus);
+      bonus = 0.00;
     }
     return hrated;
   }
