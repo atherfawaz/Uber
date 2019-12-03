@@ -353,18 +353,47 @@ public class Driver extends Person {
       }
       else if (choice == 6)
       {
-        List<Driver> drivers = Uber.leaderBoard.showHighestRated(Uber.drivers);
-        int counter = 1;
-        for (Driver X : drivers) {
-          System.out.println(counter + ". " + X.getName() + " with rating: " + X.getRating());
-          counter++;
-        }
+        //print highestrated
+        highestDriversWrapper();
+        //print lowest rated
+        lowestDriversWrapper();
+        //show bonus earners
+        bonusDriversWrappers();
       }
       else
       {
         System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.");
-//>>>>>>> multithreading
       }
+    }
+  }
+
+  private void bonusDriversWrappers() {
+    System.out.println("\n----BONUS EARNERS----");
+    List<Driver> drivers = Uber.leaderBoard.computeBonus();
+    int counter = 1;
+    for (Driver X : drivers) {
+      System.out.println(counter + ". " + X.getName() + " with rating: " + X.getRating());
+      counter++;
+    }
+  }
+
+  private void lowestDriversWrapper() {
+    System.out.println("\n----LOWEST RATED----");
+    List<Driver> drivers = Uber.leaderBoard.showLowestRated();
+    int counter = 1;
+    for (Driver X : drivers) {
+      System.out.println(counter + ". " + X.getName() + " with rating: " + X.getRating());
+      counter++;
+    }
+  }
+
+  private void highestDriversWrapper() {
+    System.out.println("\n----HIGHEST RATED----");
+    List<Driver> drivers = Uber.leaderBoard.showHighestRated();
+    int counter = 1;
+    for (Driver X : drivers) {
+      System.out.println(counter + ". " + X.getName() + " with rating: " + X.getRating());
+      counter++;
     }
   }
 
