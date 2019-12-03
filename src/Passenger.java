@@ -54,6 +54,16 @@ public class Passenger extends Person {
 
   public Boolean rateDriver(Integer r) {
     trips.get(trips.size() - 1).giveRating(r);
+    if (r == 1)
+    {
+      String complaintText = new String ();
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("Enter report text: ");
+      complaintText = scanner.nextLine();
+      complaintText = scanner.nextLine();
+      Complaint complaint = new Complaint(complaintText,trips.get(trips.size() - 1).getDriver(),this);
+      Automate.c.cList.add(complaint);
+    }
     return true;
   }
 
@@ -189,8 +199,7 @@ public class Passenger extends Person {
         System.out.println("The estimated fair for your ride is "+ trip.getTotalCost() + ".");
         Uber.mySleep(1500);
         Boolean wrongVType = true;
-        while (wrongVType)
-          {
+        while (wrongVType) {
             System.out.println("Enter the vehicle type you would like to travel on:\n- Car\n- Motorcycle\n- Rickshaw");
             vType = input.nextLine();
             if (vType.equalsIgnoreCase("Car") || vType.equalsIgnoreCase("Motorcycle") || vType.equalsIgnoreCase("Rickshaw"))
@@ -202,15 +211,31 @@ public class Passenger extends Person {
               System.out.println("You have entered a wrong vehicle type. Kindly enter a correct option.");
             }
           }
+        //
+        //
+        //
+        //
+        //DO THE SCHEDULING HERE
         System.out.println("Your ride has successfully been scheduled. A driver will automatically reach " + trip.getStartingPoint() + " at " + schedTime);
-        Uber.mySleep(1500);
-        }
-        else {
+        Waiting obj = new Waiting();
+        Scheduling scheduleobj = new Scheduling(obj, schedTime);
+        ScheduleStarter starterobj = new ScheduleStarter(obj, trip);
+        Thread ttimer = new Thread(scheduleobj, "Timer");
+        Thread tstarter = new Thread(starterobj, "Do other things");
+        ttimer.start();
+        tstarter.start();
+        //
+        //
+        //
+        //
+        //Uber.mySleep(1500);
+
+      } else {
         System.out.println(
                 "Sorry, you've input the same starting point as the destination, or chosen an unavailable location! Please re-enter your choices.\n");
+        }
       }
     }
-  }
 
   public void callARide() throws ParseException, InterruptedException {
     Boolean validTrip = false;
@@ -432,6 +457,7 @@ public class Passenger extends Person {
             this.setStatus(true);
             trip.getDriver().setStatus(true);
             trip.startRide();
+            Trip.iobj = null;
             if (Trip.tripchoice != 5) {
               initiatePayment("notcash", getCurrentRide().getTotalCost(),
                   getCurrentRide().getDriver());
@@ -440,8 +466,9 @@ public class Passenger extends Person {
                       + trip.getDriver().getName()
                       + ", for this trip?\nRate on a scale of 1 (very unsatisfactory) to 5 (highly satisfactory).");
               Uber.mySleep(2000);
-              rating_ = Uber.myRand(1, 5);
-              System.out.println("You have given the driver a rating of 3.");
+              rating_ = 1;//Uber.myRand(1, 5);
+              rateDriver(rating_);
+              System.out.println("You have given the driver a rating of " + rating_);
               this.setStatus(false);
               trip.getDriver().setStatus(false);
             } else {
