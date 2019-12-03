@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.io.Console;
+import java.io.IOException;
 import java.io.Reader;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -8,12 +10,13 @@ import java.util.Scanner;
 
 public class Uber {
 
-  //initial setup
+  //useful for automating functions
   public static LeaderBoard leaderBoard = LeaderBoard.getInstance();
   public static List<UberStaff> uberstaff = UberStaff.recruitStaff(5);
   public static List<Passenger> passengers = new ArrayList<Passenger>();
   public static List<Driver> drivers = new ArrayList<Driver>();
   public static PaymentSystem paymentSystem = new PaymentSystem();
+  public static List<Trip> trips = new ArrayList<>();
 
   public static void clearScreen() {
     System.out.print("\033[H\033[2J");
@@ -33,7 +36,7 @@ public class Uber {
     }
   }
 
-  public static void main(String[] args) throws ParseException, InterruptedException {
+  public static void main(String[] args) throws ParseException, InterruptedException, IOException {
 
     Scanner sc = new Scanner(System.in);
 
@@ -51,7 +54,17 @@ public class Uber {
 
     }
 
-    clearScreen();  //ain't working apparently
+    /*
+    Console console = System.console();
+    if(console == null && !GraphicsEnvironment.isHeadless()){
+      String filename = Uber.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
+      Runtime.getRuntime().exec(new String[]{"cmd","/c","start","cmd","/k","java -jar \"" + filename + "\""});
+    }else{
+      System.out.println("Ather");
+      Test.main(new String[0]);
+      System.out.println("Program has ended, please type 'exit' to close the console");
+    }
+    */
 
     System.out.println("Sign up or login? (Sign Up / Login):");
     db_connectivity db = new db_connectivity();

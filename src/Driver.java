@@ -14,11 +14,12 @@ public class Driver extends Person {
   private Vehicle vehicle;
   private Boolean isOnTrip = false;
 
-  Driver()
-  {
+  Driver() {
     vehicle = new Vehicle();
   }
 
+//<<<<<<< simultaneous
+//=======
   public void setStartDate(String startDate) {
     this.startDate = startDate;
   }
@@ -35,6 +36,7 @@ public class Driver extends Person {
     this.rating = rating;
   }
 
+//>>>>>>> multithreading
   public Driver(String name, String nationalId, String dateOfBirth, String email,
                 String phonenumber, Boolean isdriver, Account account) {
     super(name, nationalId, dateOfBirth, email, phonenumber, isdriver, account);
@@ -58,8 +60,7 @@ public class Driver extends Person {
     vehicle = new Vehicle(veh);
   }
 
-  public Driver(Person passed, Vehicle veh)
-  {
+  public Driver(Person passed, Vehicle veh) {
     super(passed);
     vehicle = new Vehicle(veh);
   }
@@ -108,15 +109,19 @@ public class Driver extends Person {
 
   public void recalibrateRating(Integer r) {
     System.out.println(this.getName() + "'s rating before this trip ended was " + rating);
-    if (trips.size()!=1) rating = ((rating * trips.size() - 1) + r) / trips.size();
-    else rating = r;
+    if (trips.size() != 1) {
+      rating = ((rating * trips.size() - 1) + r) / trips.size();
+    } else {
+      rating = r;
+    }
     System.out.println(this.getName() + "'s new rating is " + rating);
   }
 
   public void addToEarnings(double amount) {
     this.totalEarning += amount;
     account.addCredit(amount);
-    System.out.println("Driver " + this.getName() + ": " + amount + " has been added to your total earnings.");
+    System.out.println(
+        "Driver " + this.getName() + ": " + amount + " has been added to your total earnings.");
   }
 
   public void addVehicle() {
@@ -166,7 +171,7 @@ public class Driver extends Person {
       choiceint = userInput.nextInt();
       newRickshaw.setModel(choiceint);
       vehicle = newRickshaw;
-     // personalCars.add(newRickshaw);
+      // personalCars.add(newRickshaw);
 
     } else if (choicestring.equalsIgnoreCase("Motorcycle")) {
 
@@ -199,9 +204,8 @@ public class Driver extends Person {
     return true;
   }
 
-  public void setVehicle()
-  {
-    vehicle = new Car("219861293","new","Camry",2009,"Toyota","sedan");
+  public void setVehicle() {
+    vehicle = new Car("219861293", "new", "Camry", 2009, "Toyota", "sedan");
   }
 
   public void displayTrips() {
@@ -209,13 +213,12 @@ public class Driver extends Person {
       for (int t = trips.size() - 1; t >= 0; t--) {
         System.out.println("Trip " + t + 1 + " was conducted on " + trips.get(t).getDateTime());
         System.out.println(
-                "It began at " + trips.get(t).getStartingPoint() + " and ended at " + trips.get(t).getDestination() + ".");
+            "It began at " + trips.get(t).getStartingPoint() + " and ended at " + trips.get(t)
+                .getDestination() + ".");
         System.out.println(
-                "The total money the ride  " + trips.get(t).getTotalCost() + "\n");
+            "The total money the ride  " + trips.get(t).getTotalCost() + "\n");
       }
-    }
-    else
-    {
+    } else {
       System.out.println("You have not made any trips with Uber yet.");
     }
   }
@@ -223,30 +226,29 @@ public class Driver extends Person {
   public void displayCurrentRide() {
     if (isOnTrip) {
       System.out.println(
-              "Trip " + (trips.size() - 1) + " was conducted on " + trips.get((trips.size() - 1))
-                      .getDateTime());
+          "Trip " + (trips.size() - 1) + " was conducted on " + trips.get((trips.size() - 1))
+              .getDateTime());
       System.out.println(
-              "It began at " + trips.get((trips.size() - 1)).getStartingPoint() + " and ended at "
-                      + trips.get((trips.size() - 1))
-                      .getDestination() + ".");
+          "It began at " + trips.get((trips.size() - 1)).getStartingPoint() + " and ended at "
+              + trips.get((trips.size() - 1))
+              .getDestination() + ".");
       System.out.println(
-              "The total money you will earn from this trip is " + trips.get((trips.size() - 1)).getTotalCost()
-                      + "\n");
+          "The total money you will earn from this trip is " + trips.get((trips.size() - 1))
+              .getTotalCost()
+              + "\n");
     } else {
       System.out.println("You are currently not on a trip!");
     }
   }
 
-  public void requestAssistance() //unsure about implementation
-  {
+  public void requestAssistance() {
     if (isOnTrip) {
-      System.out.println("Driver " + this.getName() + " is requesting assistance from the uber staff assigned.");
-      trips.get(trips.size() - 1).helpDriver();
-    }
-    else
-    {
       System.out.println(
-              "You are currently not on a trip! Please request assistance while a trip is ongoing.");
+          "Driver " + this.getName() + " is requesting assistance from the uber staff assigned.");
+      trips.get(trips.size() - 1).helpDriver();
+    } else {
+      System.out.println(
+          "You are currently not on a trip! Please request assistance while a trip is ongoing.");
     }
   }
 
@@ -270,9 +272,7 @@ public class Driver extends Person {
     return null;
   }
 
-
-  void driverInterfaceSimulate()
-  {
+  void driverInterfaceSimulate() {
     ;
   }
 
@@ -287,37 +287,55 @@ public class Driver extends Person {
     //maybe a while(true) loop to mimic the state of the app
     //perform all operations here
     double amount;
-    while (true)
-    {
-      System.out.println("-------------------------------------------------\nHello " + this.getName() + "!\nPlease enter the number of one of the options below: " +
-              "\n1.See a list of all trips you've taken.\n2.View your earnings\n3.View the amount of money in your account\n4. Withdraw money from account\n5. View driver leaderboard");
+
+    while (true) {
+      System.out.println(
+          "-------------------------------------------------\nHello " + this.getName()
+              + "!\nPlease enter the number of one of the options below: " +
+              "\n1. Check all trips available\n2. See a list of all trips you've taken.\n3. View your earnings\n4. View the amount of money in your account\n5. Withdraw amount\n6. View driver leaderboard");
+      
       Scanner input = new Scanner(System.in);
       int choice = input.nextInt();
-      if (choice == 1)
-      {
-        System.out.println("Displaying all trips for " + this.getName());
-        if (trips.size() == 0)
-        {
-          System.out.println("No trip information available.");
+      if (choice == 1) {
+        System.out.println("Here's the list of trips available:\n");
+        if (!Uber.trips.isEmpty()) {
+          //print trips
+          int counter = 1;
+          for (Trip obj : Uber.trips) {
+            System.out.println(counter + ". " +
+                obj.getPassenger().getName() + " wants to be picked from " + obj.getStartingPoint()
+                + " and dropped at " + obj.getDestination() + ". Reach their place by " + obj
+                .getDateTime());
+            counter++;
+          }
+          System.out.println(
+              "Enter the number of the ride you want to accept. (Enter -1 to go back):");
+          int userInput = input.nextInt();
+          if (userInput == -1) {
+            ;//empty
+          } else if (userInput <= Uber.trips.size()
+              && userInput >= 1) {
+            //connect the passengers with the rides
+          }
         }
-        else
-        {
-          for (int i = 0; i < trips.size(); i++)
-          {
-            System.out.println(i+1 + ". ");
+      } else if (choice == 2) {
+        System.out.println("Displaying all trips for " + this.getName());
+        if (trips.size() == 0) {
+          System.out.println("No trip information available.");
+        } else {
+          for (int i = 0; i < trips.size(); i++) {
+            System.out.println(i + 1 + ". ");
             trips.get(i).displayTrip();
           }
         }
-      }
-      else if (choice == 2)
-      {
+      } else if (choice == 3) {
         System.out.println("You have earned a total of RS " + getTotalEarning());
       }
-      else if (choice == 3)
+      else if (choice == 4)
       {
         System.out.println("You have a total amount of RS " + this.account.getBalance() + " in your account.");
       }
-      else if (choice == 4)
+      else if (choice == 5)
       {
         System.out.println("You have a total amount of RS " + this.account.getBalance() + " in your account.");
         System.out.println("How much would you like to withdraw?");
@@ -326,16 +344,16 @@ public class Driver extends Person {
           this.account.cashout(amount);
         }
       }
-      else if (choice == 4)
+      else if (choice == 6)
       {
         //LeaderBoard.sortByRating;
       }
       else
       {
         System.out.println("Sorry, you did not enter any of the mentioned options. Please enter a correct option.");
+//>>>>>>> multithreading
       }
     }
   }
-
 
 }

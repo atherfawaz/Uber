@@ -22,8 +22,7 @@ public class Trip {
   public static Input iobj = new Input();
   public static int tripchoice = 0;
 
-  public void displayTrip()
-  {
+  public void displayTrip() {
     System.out.println("Trip was conducted on " + this.timeForSchedule);
     System.out.println("Starting point " + this.startingPoint);
     System.out.println("Ending point " + this.destination);
@@ -99,6 +98,9 @@ public class Trip {
     return driver;
   }
 
+  public void addPassenger(Passenger passed) {
+    this.passenger = passed;
+  }
 
   public Passenger getPassenger() {
     return passenger;
@@ -145,28 +147,19 @@ public class Trip {
     ridingobj.join();
     //inputobj.join();
     if (tripchoice == 1) {
-      System.out.println("You are currently on a ride and cannot search for another ride. Wait for the trip to end.");
-    }
-    else if (tripchoice == 2)
-    {
+      System.out.println(
+          "You are currently on a ride and cannot search for another ride. Wait for the trip to end.");
+    } else if (tripchoice == 2) {
       passenger.displayRides();
-    }
-    else if (tripchoice == 3)
-    {
+    } else if (tripchoice == 3) {
       passenger.displayCurrentRide();
-    }
-    else if (tripchoice == 4)
-    {
+    } else if (tripchoice == 4) {
       passenger.requestAssistance();
-    }
-    else if (tripchoice == 5) {
+    } else if (tripchoice == 5) {
       passenger.requestCancellation();
-    }
-    else if (tripchoice == 6)
-    {
+    } else if (tripchoice == 6) {
       driver.requestAssistance();
-    }
-    else {
+    } else {
       System.out.println("Ride completed. Please pay the driver " + totalCost + "\n");
     }
   }

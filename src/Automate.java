@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Automate {
 
   public static Complaints c = new Complaints();
+
   static void simulateUber() throws ParseException, InterruptedException {
 
     /*
@@ -20,6 +21,7 @@ public class Automate {
 
     ReadJSON.fetchDrivers();
     ReadJSON.fetchPassengers();
+    ReadJSON.fetchTrips();
 
     Scanner input = new Scanner(System.in);
     int choice;
@@ -35,7 +37,7 @@ public class Automate {
         Uber.passengers.get(which).passengerInterface();
       } else if (choice == 2) {
         which = Uber.myRand(0, Uber.drivers.size() - 1);
-        Uber.drivers.get(which).driverInterfaceSimulate();
+        Uber.drivers.get(which).driverInterface();
       } else if (choice == 3) {
 
         which = Uber.myRand(0, Uber.uberstaff.size() - 1);
