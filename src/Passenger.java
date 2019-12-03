@@ -189,8 +189,7 @@ public class Passenger extends Person {
         System.out.println("The estimated fair for your ride is "+ trip.getTotalCost() + ".");
         Uber.mySleep(1500);
         Boolean wrongVType = true;
-        while (wrongVType)
-          {
+        while (wrongVType) {
             System.out.println("Enter the vehicle type you would like to travel on:\n- Car\n- Motorcycle\n- Rickshaw");
             vType = input.nextLine();
             if (vType.equalsIgnoreCase("Car") || vType.equalsIgnoreCase("Motorcycle") || vType.equalsIgnoreCase("Rickshaw"))
@@ -202,15 +201,31 @@ public class Passenger extends Person {
               System.out.println("You have entered a wrong vehicle type. Kindly enter a correct option.");
             }
           }
+        //
+        //
+        //
+        //
+        //DO THE SCHEDULING HERE
         System.out.println("Your ride has successfully been scheduled. A driver will automatically reach " + trip.getStartingPoint() + " at " + schedTime);
-        Uber.mySleep(1500);
-        }
-        else {
+        Waiting obj = new Waiting();
+        Scheduling scheduleobj = new Scheduling(obj, schedTime);
+        ScheduleStarter starterobj = new ScheduleStarter(obj, trip);
+        Thread ttimer = new Thread(scheduleobj, "Timer");
+        Thread tstarter = new Thread(starterobj, "Do other things");
+        ttimer.start();
+        tstarter.start();
+        //
+        //
+        //
+        //
+        //Uber.mySleep(1500);
+
+      } else {
         System.out.println(
                 "Sorry, you've input the same starting point as the destination, or chosen an unavailable location! Please re-enter your choices.\n");
+        }
       }
     }
-  }
 
   public void callARide() throws ParseException, InterruptedException {
     Boolean validTrip = false;
