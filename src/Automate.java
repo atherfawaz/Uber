@@ -7,7 +7,7 @@ public class Automate {
 
   public static Complaints c = new Complaints();
 
-  static void simulateUber() throws ParseException, InterruptedException {
+  static void simulateUber(String arg) throws ParseException, InterruptedException {
 
     /*
     create uberstaff
@@ -19,16 +19,16 @@ public class Automate {
     create payment system
     */
 
-    ReadJSON.fetchDrivers();
-    ReadJSON.fetchPassengers();
-    ReadJSON.fetchTrips();
+    ReadJSON.fetchDrivers(arg);
+    ReadJSON.fetchPassengers(arg);
+    ReadJSON.fetchTrips(arg);
 
     Scanner input = new Scanner(System.in);
     int choice;
     int which;
     while (true) {
       Uber.mySleep(1000);
-      System.out.println("Loaded up the drivers and passengers...");
+      System.out.println("Loaded up the drivers, passengers, and trips for simulation...");
       System.out.println(
           "Which interface would you like to simulate? Enter the option number\n1. Passenger\n2. Driver\n3. Uberstaff\nAny other option will exit the simulator.");
       choice = input.nextInt();
@@ -38,17 +38,16 @@ public class Automate {
       } else if (choice == 2) {
         which = Uber.myRand(0, Uber.drivers.size() - 1);
         Uber.drivers.get(which).driverInterfaceSimulate();
-      } /*else if (choice == 3) {
+      } else if (choice == 3) {
 
         which = Uber.myRand(0, Uber.uberstaff.size() - 1);
         Uber.uberstaff.get(which).uberStaffInterface();
-      } */else {
+      } else {
         break;
       }
     }
     Uber.mySleep(2000);
     System.out.println(
         "Reached the end of the automate function. Switching control back to Uber.Java...");
-
   }
 }
