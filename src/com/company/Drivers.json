@@ -1,0 +1,92 @@
+[
+    {
+        "driver": {
+            "name": "Nico Rosberg",
+            "nationalid": "35201-12345678-9",
+            "dateofbirth": "01-12-1995",
+            "email": "nicorosberg@gmail.com",
+            "phonenumber": "0300-1231234",
+            "isdriver": true,
+            "iban": "1234567898765432",
+            "balance": 123.14,
+            "registrationnum": "LEA-7030",
+            "condition": "new",
+            "make": "Corolla",
+            "model": "2019",
+            "rating": 4.1,
+            "manufacturer": "Toyota" 
+        }
+    },
+    {
+        "driver": {
+            "name": "Lewis Hamilton",
+            "nationalid": "35201-12345678-7",
+            "dateofbirth": "01-12-1995",
+            "email": "hamilton@gmail.com",
+            "phonenumber": "0323-1231234",
+            "isdriver": true,
+            "iban": "12345678924765432",
+            "balance": 29910.24,
+            "registrationnum": "LEB-7030",
+            "condition": "new",
+            "make": "City",
+            "model": "2019",
+            "rating": 2.5,
+            "manufacturer": "Honda" 
+        }
+    },
+    {
+        "driver": {
+            "name": "Valterri Bottas",
+            "nationalid": "35201-98345678-7",
+            "dateofbirth": "01-12-1995",
+            "email": "bottas@gmail.com",
+            "phonenumber": "0123-1231234",
+            "isdriver": true,
+            "iban": "12309278924765432",
+            "balance": 2992.24,
+            "registrationnum": "LED-1230",
+            "condition": "old",
+            "make": "Formula 1",
+            "model": "2019",
+            "rating": 3.4,
+            "manufacturer": "Mercedes Benz" 
+        }
+    },
+    {
+        "driver": {
+            "name": "Sebastian Vettel",
+            "nationalid": "35201-1995678-7",
+            "dateofbirth": "01-12-1895",
+            "email": "grazzieragazzi@gmail.com",
+            "phonenumber": "0323-1238934",
+            "isdriver": true,
+            "iban": "12345678924765263",
+            "balance": 12445.24,
+            "registrationnum": "LEA-9090",
+            "condition": "new",
+            "make": "SF90",
+            "model": "2019",
+            "rating": 1.4,
+            "manufacturer": "Ferrari" 
+        }
+    },
+    {
+        "driver": {
+            "name": "Charles Leclerc",
+            "nationalid": "45201-12325678-7",
+            "dateofbirth": "01-12-1999",
+            "email": "charliieleclerc@gmail.com",
+            "phonenumber": "0323-1239134",
+            "isdriver": true,
+            "iban": "12345678921005432",
+            "balance": 20010.24,
+            "registrationnum": "LEA-9930",
+            "condition": "new",
+            "make": "Corolla",
+            "model": "2008",
+            "rating": 1.5,
+            "manufacturer": "Toyota"  
+        }
+    }
+]

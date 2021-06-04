@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -19,17 +20,21 @@ public class Database {
     return (int) (Math.random() * range) + min;
   }
 
-  static void showTable(Connection con) throws SQLException {
+  static void showTable(Connection con, String tableName) throws SQLException {
     /*
      * This function prints the Users table to the console
      * */
-    System.out.println("Database now:");
+    System.out.println("Printing table: " + tableName);
     Statement st = con.createStatement();
-    ResultSet rs = st.executeQuery("SELECT * FROM Drivers");
+    String str = "SELECT * FROM " + tableName;
+    ResultSet rs = st.executeQuery(str);
+    ResultSetMetaData rsmd = rs.getMetaData();
+    int column_count = rsmd.getColumnCount();
     while (rs.next()) {
-      System.out.print(rs.getString(1));
-      System.out.print(" " + rs.getString(2));
-      System.out.println(" " + rs.getString(3));
+      for (int i = 1; i <= column_count; i++) {
+        System.out.print(" " + rs.getString(i));
+      }
+      System.out.println(" ");
     }
   }
 
@@ -53,7 +58,7 @@ public class Database {
       }
       System.out.println(i + " records inserted.");
       //printing entries
-      showTable(con);
+      //showTable(con, "Drivers");
       return true;
     } catch (Exception ex) {
       System.out.println("Database Error occurred: " + ex);
@@ -94,11 +99,11 @@ public class Database {
       int i = stmt.executeUpdate();
       System.out.println(i + " records updated.");
       System.out.println("Username updated.");
-      showTable(con);
+      //showTable(con);
       return true;
     } else {
       System.out.println("Username not updated.");
-      showTable(con);
+      //showTable(con);
       return false;
     }
   }
@@ -113,11 +118,11 @@ public class Database {
       int i = stmt.executeUpdate();
       System.out.println(i + " records updated.");
       System.out.println("Password updated.");
-      showTable(con);
+      //showTable(con);
       return true;
     } else {
       System.out.println("Password not updated.");
-      showTable(con);
+      //showTable(con);
       return false;
     }
   }
