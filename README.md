@@ -1,1 +1,1 @@
-An object-oriented implementation in Java for the ride-hailing app, Uber.
+Front end of the project written in vue.js
