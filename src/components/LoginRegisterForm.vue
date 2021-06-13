@@ -25,133 +25,144 @@
 
     <Card class="container">
       <template #content>
-      <div class="p-d-flex p-jc-center">
-        <div class="card">
-          <h1 style="text-align: center">{{ current }}</h1>
-          <form @submit.prevent="handleSubmit(!v$.$invalid)" class="p-fluid">
-            <div class="p-field">
-              <div class="p-float-label">
-                <InputText
-                  v-if="current === 'Register'"
-                  id="name"
-                  v-model="v$.name.$model"
-                  :class="{ 'p-invalid': v$.name.$invalid && submitted }"
-                />
-                <label v-if="current === 'Register'"
-                  for="name"
-                  :class="{ 'p-error': v$.name.$invalid && submitted }"
-                  >Name*</label
+        <div class="p-d-flex p-jc-center">
+          <div class="card">
+            <h1 style="text-align: center">{{ current }}</h1>
+            <form @submit.prevent="handleSubmit(!v$.$invalid)" class="p-fluid">
+              <div class="p-field">
+                <div class="p-float-label">
+                  <InputText
+                    v-if="current === 'Register'"
+                    id="name"
+                    v-model="v$.name.$model"
+                    :class="{ 'p-invalid': v$.name.$invalid && submitted }"
+                  />
+                  <label
+                    v-if="current === 'Register'"
+                    for="name"
+                    :class="{ 'p-error': v$.name.$invalid && submitted }"
+                    >Name*</label
+                  >
+                </div>
+                <small
+                  v-if="
+                    current === 'Register' &&
+                    ((v$.name.$invalid && submitted) ||
+                      v$.name.$pending.$response)
+                  "
+                  class="p-error"
+                  >{{
+                    v$.name.required.$message.replace("Value", "Name")
+                  }}</small
                 >
               </div>
-              <small
-                v-if="
-                  current === 'Register' && ((v$.name.$invalid && submitted)
-                  || v$.name.$pending.$response)
-                "
-                class="p-error"
-                >{{ v$.name.required.$message.replace("Value", "Name") }}</small
-              >
-            </div>
-            <div class="p-field">
-              <div class="p-float-label p-input-icon-right">
-                <i class="pi pi-envelope" />
-                <InputText
-                  id="email"
-                  v-model="v$.email.$model"
-                  :class="{ 'p-invalid': v$.email.$invalid && submitted }"
-                  aria-describedby="email-error"
-                />
-                <label
-                  for="email"
-                  :class="{ 'p-error': v$.email.$invalid && submitted }"
-                  >Email*</label
-                >
-              </div>
-              <span v-if="v$.email.$error && submitted">
-                <span
-                  id="email-error"
-                  v-for="(error, index) of v$.email.$errors"
-                  :key="index"
-                >
-                  <small class="p-error">{{ error.$message }}</small>
+              <div class="p-field">
+                <div class="p-float-label p-input-icon-right">
+                  <i class="pi pi-envelope" />
+                  <InputText
+                    id="email"
+                    v-model="v$.email.$model"
+                    :class="{ 'p-invalid': v$.email.$invalid && submitted }"
+                    aria-describedby="email-error"
+                  />
+                  <label
+                    for="email"
+                    :class="{ 'p-error': v$.email.$invalid && submitted }"
+                    >Email*</label
+                  >
+                </div>
+                <span v-if="v$.email.$error && submitted">
+                  <span
+                    id="email-error"
+                    v-for="(error, index) of v$.email.$errors"
+                    :key="index"
+                  >
+                    <small class="p-error">{{ error.$message }}</small>
+                  </span>
                 </span>
-              </span>
-              <small
-                v-else-if="
-                  (v$.email.$invalid && submitted) || v$.email.$pending.$response
-                "
-                class="p-error"
-                >{{ v$.email.required.$message.replace("Value", "Email") }}</small
-              >
-            </div>
-            <div class="p-field">
-              <div class="p-float-label">
-                <Password
-                  id="password"
-                  v-model="v$.password.$model"
-                  :class="{ 'p-invalid': v$.password.$invalid && submitted }"
-                  toggleMask
-                >
-                  <template #header>
-                    <h6>Pick a password</h6>
-                  </template>
-                  <template #footer="sp">
-                    {{ sp.level }}
-                    <Divider />
-                    <p class="p-mt-2">Suggestions</p>
-                    <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
-                      <li>At least one lowercase</li>
-                      <li>At least one uppercase</li>
-                      <li>At least one numeric</li>
-                      <li>Minimum 8 characters</li>
-                    </ul>
-                  </template>
-                </Password>
-                <label
-                  for="password"
-                  :class="{ 'p-error': v$.password.$invalid && submitted }"
-                  >Password*</label
+                <small
+                  v-else-if="
+                    (v$.email.$invalid && submitted) ||
+                    v$.email.$pending.$response
+                  "
+                  class="p-error"
+                  >{{
+                    v$.email.required.$message.replace("Value", "Email")
+                  }}</small
                 >
               </div>
-              <small
-                v-if="
-                  (v$.password.$invalid && submitted) ||
-                  v$.password.$pending.$response
-                "
-                class="p-error"
-                >{{
-                  v$.password.required.$message.replace("Value", "Password")
-                }}</small
-              >
-            </div>
-            <Button type="submit" :label="current" class="p-mt-2" />
-            <Button @click="$router.push(opposite.toLowerCase())"
-          :label="opposite" class="p-mt-2 p-button-outlined" style="margin-top: 16px"/>
-          </form>
+              <div class="p-field">
+                <div class="p-float-label">
+                  <Password
+                    id="password"
+                    v-model="v$.password.$model"
+                    :class="{ 'p-invalid': v$.password.$invalid && submitted }"
+                    toggleMask
+                  >
+                    <template #header>
+                      <h6>Pick a password</h6>
+                    </template>
+                    <template #footer="sp">
+                      {{ sp.level }}
+                      <Divider />
+                      <p class="p-mt-2">Suggestions</p>
+                      <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+                        <li>At least one lowercase</li>
+                        <li>At least one uppercase</li>
+                        <li>At least one numeric</li>
+                        <li>Minimum 8 characters</li>
+                      </ul>
+                    </template>
+                  </Password>
+                  <label
+                    for="password"
+                    :class="{ 'p-error': v$.password.$invalid && submitted }"
+                    >Password*</label
+                  >
+                </div>
+                <small
+                  v-if="
+                    (v$.password.$invalid && submitted) ||
+                    v$.password.$pending.$response
+                  "
+                  class="p-error"
+                  >{{
+                    v$.password.required.$message.replace("Value", "Password")
+                  }}</small
+                >
+              </div>
+              <Button type="submit" :label="current" class="p-mt-2" />
+              <Button
+                @click="$router.push(opposite.toLowerCase())"
+                :label="opposite"
+                class="p-mt-2 p-button-outlined"
+                style="margin-top: 16px"
+              />
+            </form>
+          </div>
         </div>
-      </div>
       </template>
     </Card>
   </div>
 </template>
 
 <script>
-import { email, required } from '@vuelidate/validators';
-import { useVuelidate } from '@vuelidate/core';
-import Button from 'primevue/button';
-import Dialog from 'primevue/dialog';
-import InputText from 'primevue/inputtext';
-import Password from 'primevue/password';
-import Card from 'primevue/card';
-import Divider from 'primevue/divider';
+import { email, required } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+import Button from "primevue/button";
+import Dialog from "primevue/dialog";
+import InputText from "primevue/inputtext";
+import Password from "primevue/password";
+import Card from "primevue/card";
+import Divider from "primevue/divider";
 
 export default {
   setup: () => ({ v$: useVuelidate() }),
   data() {
     return {
-      name: '',
-      email: '',
-      password: '',
+      name: "",
+      email: "",
+      password: "",
       submitted: false,
       showMessage: false,
     };
@@ -200,9 +211,9 @@ export default {
       }
     },
     resetForm() {
-      this.name = '';
-      this.email = '';
-      this.password = '';
+      this.name = "";
+      this.email = "";
+      this.password = "";
       this.submitted = false;
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
@@ -11,6 +11,6 @@
 }
 
 body {
-  background-color:oldlace;
+  background-color: oldlace;
 }
 </style>

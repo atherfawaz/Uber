@@ -5,16 +5,14 @@
 </template>
 
 <script>
-import LoginRegisterForm from '../components/LoginRegisterForm.vue';
+import LoginRegisterForm from "../components/LoginRegisterForm.vue";
 
 export default {
-  name: 'Login',
+  name: "Login",
   components: {
     LoginRegisterForm,
   },
 };
 </script>
 
-<style>
-
-</style>
+<style></style>
