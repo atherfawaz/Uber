@@ -1,9 +1,9 @@
 <template>
   <div id="container">
     <div id="left-div" class="inner">
-      <p class="location">🟡{{ ride.start }}</p>
+      <p class="location">🔵{{ ride.start }}</p>
       <p id="line" class="location">⇣</p>
-      <p class="location">🔵{{ ride.destination }}</p>
+      <p class="location">🟢{{ ride.destination }}</p>
     </div>
     <div id="mid-div" class="inner">
       <p id="driver">{{ ride.driver }}</p>
