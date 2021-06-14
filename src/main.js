@@ -7,4 +7,12 @@ import "primevue/resources/themes/arya-orange/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 
-createApp(App).use(router).use(PrimeVue, { ripple: true }).mount("#app");
+import Toast from "primevue/toast";
+import ToastService from "primevue/toastservice";
+
+createApp(App)
+  .use(router)
+  .use(PrimeVue, { ripple: true })
+  .use(ToastService)
+  .component("Toast", Toast)
+  .mount("#app");

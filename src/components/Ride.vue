@@ -15,7 +15,7 @@
       <Button
         id="btn"
         icon="pi pi-exclamation-triangle"
-        @click="goToHome"
+        @click="goToReport(ride.id)"
         label="Report"
         style="height: 100%; width: 100%"
       />
@@ -33,6 +33,11 @@ export default {
   },
   components: {
     Button,
+  },
+  methods: {
+    goToReport(ID) {
+      this.$router.push({ name: "Report", params: { rideID: ID } });
+    },
   },
 };
 </script>

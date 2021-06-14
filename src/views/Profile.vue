@@ -1,5 +1,6 @@
 <template>
   <div id="container">
+    <Toast />
     <div id="top-div">
       <div id="profile-div">
         <ProfileCard />
@@ -36,7 +37,7 @@ export default {
 
 <style scoped>
 #container {
-  height: 97vh;
+  height: 95vh;
   width: 98vw;
 }
 #top-div {
