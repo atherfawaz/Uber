@@ -14,7 +14,10 @@
 		"primeicons": "^4.1.0",
 		"primevue": "^3.5.1",
 		"vue": "^3.0.0",
-		"vue-router": "^4.0.0-0"
+		"vue-router": "^4.0.0-0",
+		"vue-star-rating": "^1.7.0",
+		"vue3-geolocation": "^1.0.0",
+		"vuex": "^3.6.2"
 	},
 	"devDependencies": {
 		"@vue/cli-plugin-babel": "~4.5.0",

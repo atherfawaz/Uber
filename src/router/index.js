@@ -4,6 +4,9 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
 import Report from "../views/Report.vue";
+import BookRide from "../views/BookRide.vue";
+import CurrentRide from "../views/CurrentRide.vue";
+import Feedback from "../views/Feedback.vue";
 
 const routes = [
   {
@@ -30,6 +33,26 @@ const routes = [
     path: "/report",
     name: "Report",
     component: Report,
+  },
+  {
+    path: "/bookride",
+    name: "BookRide",
+    component: BookRide,
+  },
+  {
+    path: "/bookride",
+    name: "BookRide",
+    component: BookRide,
+  },
+  {
+    path: "/currentride",
+    name: "CurrentRide",
+    component: CurrentRide,
+  },
+  {
+    path: "/feedback",
+    name: "Feedback",
+    component: Feedback,
   },
 ];
 

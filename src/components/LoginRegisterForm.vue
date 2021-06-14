@@ -208,6 +208,7 @@ export default {
 
       if (!this.showMessage) {
         this.resetForm();
+        this.$router.push("profile");
       }
     },
     resetForm() {

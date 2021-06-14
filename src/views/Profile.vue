@@ -9,7 +9,12 @@
         <WalletCard />
       </div>
       <div id="button-div">
-        <Button id="btn" label="Book Ride" style="height: 100%; width: 100%" />
+        <Button
+          @click="$router.push('bookride')"
+          id="btn"
+          label="Book Ride"
+          style="height: 100%; width: 100%"
+        />
       </div>
     </div>
     <div id="bottom-div">

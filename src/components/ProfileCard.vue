@@ -10,9 +10,9 @@
             />
           </div>
           <div id="info">
-            <p id="p-name">John Doe</p>
+            <p id="p-name">Muhammad Osama Asif</p>
             <p id="p-rating">4.8⭐</p>
-            <p id="p-email">johndoe@gmail.com</p>
+            <p id="p-email">osamaasif07@gmail.com</p>
           </div>
           <div id="btn">
             <Button
