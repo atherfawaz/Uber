@@ -167,6 +167,7 @@ export default {
       showMessage: false,
     };
   },
+  mounted() {},
   validations() {
     return {
       name: {
@@ -201,13 +202,20 @@ export default {
         return;
       }
 
-      if(this.current === 'Register') {
+      if (this.current === "Register") {
         let data = {
-          "name": this.name,
-          "password": this.password,
-          "email": this.email
+          name: this.name,
+          password: this.password,
+          email: this.email,
         };
-        this.$store.dispatch('register', { data });
+        this.$store.dispatch("register", { data });
+      } else if (this.current === "Login") {
+        console.log("Here");
+        let data = {
+          email: this.email,
+          password: this.password,
+        };
+        this.$store.dispatch("login", { data });
       }
 
       this.toggleDialog();

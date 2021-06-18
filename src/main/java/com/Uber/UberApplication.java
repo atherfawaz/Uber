@@ -9,11 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class UberApplication {
 
-  public static void main(String[] args) throws SQLException {
+  public static void main(String[] args) {
     SpringApplication.run(UberApplication.class, args);
-    Connection con = Database.connectToDB();
-    assert con != null;
-    Database.showTable(con, "Drivers");
-
   }
 }

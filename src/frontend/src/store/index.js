@@ -33,4 +33,16 @@ export default createStore({
       });
     }
   },
+  login(context, data) {
+    fetch('api/login', {
+      mode: 'no-cors',
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    }).then(res => {
+      console.log("Res: ", res);
+    });
+  }
 });

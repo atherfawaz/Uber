@@ -55,3 +55,4 @@ pnpm-debug.log*
 *.sw?
 package-lock.json
 .gitignore
+src/frontend/package-lock.json

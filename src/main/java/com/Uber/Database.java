@@ -13,17 +13,10 @@ public class Database {
 
   private static final String privateKey = "uber4sec2ret0key";
 
-  static int generateID() {
-    int max = 100000000;
-    int min = 1;
-    int range = max - min + 1;
-    return (int) (Math.random() * range) + min;
-  }
-
   static void showTable(Connection con, String tableName) throws SQLException {
     /*
      * This function prints the Users table to the console
-     * */
+     */
     System.out.println("Printing table: " + tableName);
     Statement st = con.createStatement();
     String str = "SELECT * FROM " + tableName;
@@ -38,27 +31,28 @@ public class Database {
     }
   }
 
-  static boolean registerUser(Connection con, String username, String password) {
+  static boolean registerUser(Connection con, String name, String password, String email) {
     /*
      * This function adds a User to the table
-     * */
-    username = AES.encrypt(username, privateKey);
-    password = AES.encrypt(password, privateKey);
+     */
+    // name = AES.encrypt(name, privateKey);
+    // password = AES.encrypt(password, privateKey);
 
     try {
-      PreparedStatement stmt = con
-          .prepareStatement("INSERT INTO Users VALUES(?,?,?)");
-      stmt.setInt(1, generateID());
-      stmt.setString(2, username);
+      PreparedStatement stmt = con.prepareStatement("INSERT INTO Passengers VALUES(?,?,?,?,?)");
+      // stmt.setInt(1, );
+      stmt.setInt(1, 1);
+      stmt.setString(2, name);
       stmt.setString(3, password);
-
+      stmt.setString(4, email);
+      stmt.setInt(5, 0);
       int i = stmt.executeUpdate();
       if (i == 0) {
         return false;
       }
       System.out.println(i + " records inserted.");
-      //printing entries
-      //showTable(con, "Drivers");
+      // printing entries
+      // showTable(con, "Drivers");
       return true;
     } catch (Exception ex) {
       System.out.println("Database Error occurred: " + ex);
@@ -74,11 +68,10 @@ public class Database {
     return password.length() >= 4 && password.length() <= 10;
   }
 
-  static boolean loginUser(Connection con, String username, String password) throws SQLException {
-    PreparedStatement stmt = con
-        .prepareStatement("SELECT Username from Users WHERE Username=? AND Password=?");
-    stmt.setString(1, AES.encrypt(username, privateKey));
-    stmt.setString(2, AES.encrypt(password, privateKey));
+  static boolean loginUser(Connection con, String email, String password) throws SQLException {
+    PreparedStatement stmt = con.prepareStatement("SELECT Name from Passengers WHERE Email=? AND Password=?");
+    // stmt.setString(1, AES.encrypt(username, privateKey));
+    // stmt.setString(2, AES.encrypt(password, privateKey));
     ResultSet result = stmt.executeQuery();
     if (!result.isBeforeFirst()) {
       System.out.println("No person with that credentials exists in the system.");
@@ -89,8 +82,8 @@ public class Database {
     }
   }
 
-  static boolean changeUsername(Connection con, String oldUsername, String password,
-      String newUsername) throws SQLException {
+  static boolean changeUsername(Connection con, String oldUsername, String password, String newUsername)
+      throws SQLException {
     boolean loggedIn = loginUser(con, oldUsername, password);
     if (loggedIn) {
       PreparedStatement stmt = con.prepareStatement("UPDATE Users SET Username=? WHERE Username=?");
@@ -99,17 +92,17 @@ public class Database {
       int i = stmt.executeUpdate();
       System.out.println(i + " records updated.");
       System.out.println("Username updated.");
-      //showTable(con);
+      // showTable(con);
       return true;
     } else {
       System.out.println("Username not updated.");
-      //showTable(con);
+      // showTable(con);
       return false;
     }
   }
 
-  static boolean changePassword(Connection con, String username, String password,
-      String newPassword) throws SQLException {
+  static boolean changePassword(Connection con, String username, String password, String newPassword)
+      throws SQLException {
     boolean loggedIn = loginUser(con, username, password);
     if (loggedIn) {
       PreparedStatement stmt = con.prepareStatement("UPDATE Users SET Password=? WHERE Username=?");
@@ -118,15 +111,14 @@ public class Database {
       int i = stmt.executeUpdate();
       System.out.println(i + " records updated.");
       System.out.println("Password updated.");
-      //showTable(con);
+      // showTable(con);
       return true;
     } else {
       System.out.println("Password not updated.");
-      //showTable(con);
+      // showTable(con);
       return false;
     }
   }
-
 
   static Connection connectToDB() {
     try {
