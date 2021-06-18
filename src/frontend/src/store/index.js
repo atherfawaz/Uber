@@ -1,5 +1,4 @@
 import { createStore } from 'vuex';
-//import axios from 'axios';
 
 export default createStore({
   state: {
@@ -22,8 +21,7 @@ export default createStore({
 
   actions: {
     register(context, data) {
-      console.log("YOLO:", data);
-      fetch('http://localhost:8080/register', {
+      fetch('api/register', {
         mode: 'no-cors',
         method: 'POST',
         headers: {
