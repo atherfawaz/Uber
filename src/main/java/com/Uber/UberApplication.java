@@ -2,6 +2,7 @@ package com.Uber;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import org.json.simple.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,5 +14,6 @@ public class UberApplication {
     Connection con = Database.connectToDB();
     assert con != null;
     Database.showTable(con, "Drivers");
+
   }
 }
