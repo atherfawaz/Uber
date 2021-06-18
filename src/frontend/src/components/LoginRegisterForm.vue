@@ -7,14 +7,8 @@
       position="top"
     >
       <div class="p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
-        <i
-          class="pi pi-check-circle"
-          :style="{ fontSize: '5rem', color: 'var(--green-500)' }"
-        ></i>
-        <h5>Registration Successful!</h5>
-        <p :style="{ lineHeight: 1.5, textIndent: '1rem' }">
-          Your account is registered under name <b>{{ name }}</b>
-        </p>
+        <i :style="{ fontSize: '5rem', color: 'var(--green-500)' }"></i>
+        <h5>{{ dialogMsg }}</h5>
       </div>
       <template #footer>
         <div class="p-d-flex p-jc-center">
@@ -165,22 +159,35 @@ export default {
       password: "",
       submitted: false,
       showMessage: false,
+      moveForward: false,
+      dialogMsg: "",
     };
   },
-  mounted() {},
   validations() {
-    return {
-      name: {
-        required,
-      },
-      email: {
-        required,
-        email,
-      },
-      password: {
-        required,
-      },
-    };
+    if (this.current === "Register") {
+      return {
+        name: {
+          required,
+        },
+        email: {
+          required,
+          email,
+        },
+        password: {
+          required,
+        },
+      };
+    } else if (this.current === "Login") {
+      return {
+        email: {
+          required,
+          email,
+        },
+        password: {
+          required,
+        },
+      };
+    }
   },
   props: {
     current: String,
@@ -201,29 +208,41 @@ export default {
       if (!isFormValid) {
         return;
       }
-
       if (this.current === "Register") {
         let data = {
           name: this.name,
           password: this.password,
           email: this.email,
         };
-        this.$store.dispatch("register", { data });
-      } else if (this.current === "Login") {
-        console.log("Here");
+        this.$store.dispatch("register", { data }).then((payload) => {
+          if (payload === "OK") {
+            this.moveForward = true;
+            this.dialogMsg = `${this.current} success`;
+          } else if (payload === "!OK") {
+            this.dialogMsg = `Failed to ${this.current}, try again!`;
+          }
+        });
+      }
+      if (this.current === "Login") {
         let data = {
           email: this.email,
           password: this.password,
         };
-        this.$store.dispatch("login", { data });
+        this.$store.dispatch("login", { data }).then((payload) => {
+          if (payload === "OK") {
+            this.moveForward = true;
+            this.dialogMsg = `${this.current} success`;
+          } else if (payload === "!OK") {
+            this.dialogMsg = `Failed to ${this.current}, try again!`;
+          }
+        });
       }
-
       this.toggleDialog();
     },
     toggleDialog() {
       this.showMessage = !this.showMessage;
 
-      if (!this.showMessage) {
+      if (!this.showMessage && this.moveForward) {
         this.resetForm();
         this.$router.push("profile");
       }
