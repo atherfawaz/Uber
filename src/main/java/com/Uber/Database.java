@@ -39,6 +39,9 @@ public class Database {
     // password = AES.encrypt(password, privateKey);
 
     try {
+      if(loginUser(con, email, password))
+        return false;
+        
       PreparedStatement stmt = con.prepareStatement("INSERT INTO Passengers VALUES(?,?,?,?,?)");
       // stmt.setInt(1, );
       stmt.setInt(1, 1);

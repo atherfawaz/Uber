@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import axios from "axios";
 
 export default createStore({
   state: {
@@ -20,41 +21,43 @@ export default createStore({
 
   actions: {
     register(context, data) {
-      return new Promise((resolve, reject) => {
-        fetch("api/register", {
-          mode: "no-cors",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }).then((res) => {
-          if (res.ok) {
-            resolve("OK");
-          } else {
-            reject("!OK");
-          }
-        });
-      });
+      // return new Promise((resolve, reject) => {
+      //   fetch("api/register", {
+      //     mode: "no-cors",
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(data),
+      //   }).then((res) => {
+      //     if (res.ok) {
+      //       resolve("OK");
+      //     } else {
+      //       reject("!OK");
+      //     }
+      //   });
+      // });
+      return axios.post("api/register", data);
     },
 
     login(context, data) {
-      return new Promise((resolve, reject) => {
-        fetch("api/login", {
-          mode: "no-cors",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }).then((res) => {
-          if (res.ok) {
-            resolve("OK");
-          } else {
-            reject("!OK");
-          }
-        });
-      });
+      // return new Promise((resolve, reject) => {
+      //   fetch("api/login", {
+      //     mode: "no-cors",
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(data),
+      //   }).then((res) => {
+      //     if (res.ok) {
+      //       resolve("OK");
+      //     } else {
+      //       reject("!OK");
+      //     }
+      //   });
+      // });
+      return axios.post("api/login", data);
     },
   },
 });

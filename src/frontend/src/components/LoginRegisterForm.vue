@@ -1,28 +1,12 @@
 <template>
   <div class="form-demo">
-    <Dialog
-      v-model:visible="showMessage"
-      :breakpoints="{ '960px': '80vw' }"
-      :style="{ width: '30vw' }"
-      position="top"
-    >
-      <div class="p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
-        <i :style="{ fontSize: '5rem', color: 'var(--green-500)' }"></i>
-        <h5>{{ dialogMsg }}</h5>
-      </div>
-      <template #footer>
-        <div class="p-d-flex p-jc-center">
-          <Button label="OK" @click="toggleDialog" class="p-button-text" />
-        </div>
-      </template>
-    </Dialog>
-
     <Card class="container">
       <template #content>
         <div class="p-d-flex p-jc-center">
           <div class="card">
             <h1 style="text-align: center">{{ current }}</h1>
             <form @submit.prevent="handleSubmit(!v$.$invalid)" class="p-fluid">
+              <Toast />
               <div class="p-field">
                 <div class="p-float-label">
                   <InputText
@@ -144,7 +128,7 @@
 import { email, required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import Button from "primevue/button";
-import Dialog from "primevue/dialog";
+import Toast from "primevue/toast";
 import InputText from "primevue/inputtext";
 import Password from "primevue/password";
 import Card from "primevue/card";
@@ -158,9 +142,6 @@ export default {
       email: "",
       password: "",
       submitted: false,
-      showMessage: false,
-      moveForward: false,
-      dialogMsg: "",
     };
   },
   validations() {
@@ -195,9 +176,9 @@ export default {
   },
   components: {
     Button,
-    Dialog,
     InputText,
     Password,
+    Toast,
     Card,
     Divider,
   },
@@ -208,44 +189,34 @@ export default {
       if (!isFormValid) {
         return;
       }
+      let data = null;
       if (this.current === "Register") {
-        let data = {
+        data = {
           name: this.name,
           password: this.password,
           email: this.email,
         };
-        this.$store.dispatch("register", { data }).then((payload) => {
-          if (payload === "OK") {
-            this.moveForward = true;
-            this.dialogMsg = `${this.current} success`;
-          } else if (payload === "!OK") {
-            this.dialogMsg = `Failed to ${this.current}, try again!`;
-          }
-        });
-      }
-      if (this.current === "Login") {
-        let data = {
+      } else if (this.current === "Login") {
+        data = {
           email: this.email,
           password: this.password,
         };
-        this.$store.dispatch("login", { data }).then((payload) => {
-          if (payload === "OK") {
-            this.moveForward = true;
-            this.dialogMsg = `${this.current} success`;
-          } else if (payload === "!OK") {
-            this.dialogMsg = `Failed to ${this.current}, try again!`;
-          }
-        });
       }
-      this.toggleDialog();
-    },
-    toggleDialog() {
-      this.showMessage = !this.showMessage;
 
-      if (!this.showMessage && this.moveForward) {
-        this.resetForm();
-        this.$router.push("profile");
-      }
+      this.$store.dispatch(this.current.toLowerCase(), { data }).then(
+        () => {
+          this.resetForm();
+          this.$router.push("profile");
+        },
+        () => {
+          this.$toast.add({
+            severity: "error",
+            summary: `${this.current} Error`,
+            detail: `Failed to ${this.current}, please try again!`,
+            life: 3000,
+          });
+        }
+      );
     },
     resetForm() {
       this.name = "";
