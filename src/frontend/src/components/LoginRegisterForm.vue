@@ -201,6 +201,15 @@ export default {
         return;
       }
 
+      if(this.current === 'Register') {
+        let data = {
+          "name": this.name,
+          "password": this.password,
+          "email": this.email
+        };
+        this.$store.dispatch('register', { data });
+      }
+
       this.toggleDialog();
     },
     toggleDialog() {

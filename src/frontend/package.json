@@ -10,6 +10,7 @@
 	"dependencies": {
 		"@vuelidate/core": "^2.0.0-alpha.19",
 		"@vuelidate/validators": "^2.0.0-alpha.17",
+		"axios": "^0.21.1",
 		"core-js": "^3.6.5",
 		"primeicons": "^4.1.0",
 		"primevue": "^3.5.1",
@@ -17,7 +18,7 @@
 		"vue-router": "^4.0.0-0",
 		"vue-star-rating": "^1.7.0",
 		"vue3-geolocation": "^1.0.0",
-		"vuex": "^3.6.2"
+		"vuex": "^4.0.2"
 	},
 	"devDependencies": {
 		"@vue/cli-plugin-babel": "~4.5.0",
