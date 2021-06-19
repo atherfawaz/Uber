@@ -31,6 +31,15 @@ public class Database {
     }
   }
 
+  static int getAccountBalance(Connection con, String email) throws SQLException {
+    PreparedStatement stmt = con.prepareStatement("SELECT Balance FROM Passengers WHERE Email=?");
+    stmt.setString(1, email);
+    ResultSet rs = stmt.executeQuery();
+    int bal = Integer.parseInt(rs.getString(1));
+    System.out.println("Balance from DB: " + bal);
+    return bal;
+  }
+
   static boolean registerUser(Connection con, String name, String password, String email) {
     /*
      * This function adds a User to the table
@@ -39,9 +48,9 @@ public class Database {
     // password = AES.encrypt(password, privateKey);
 
     try {
-      if(loginUser(con, email, password))
+      if (loginUser(con, email, password))
         return false;
-        
+
       PreparedStatement stmt = con.prepareStatement("INSERT INTO Passengers VALUES(?,?,?,?,?)");
       // stmt.setInt(1, );
       stmt.setInt(1, 1);

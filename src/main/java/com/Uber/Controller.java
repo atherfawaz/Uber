@@ -26,23 +26,14 @@ public class Controller {
     name = passedData.getJSONObject("data").getString("name");
     password = passedData.getJSONObject("data").getString("password");
     email = passedData.getJSONObject("data").getString("email");
-    
+
     HttpHeaders responseHeaders = new HttpHeaders();
-    if(Database.registerUser(con, name, password, email)) {
-      responseHeaders.set("loginStatus", 
-      "User Found");
-
-      return ResponseEntity.ok()
-                          .headers(responseHeaders)
-                          .body("From Login");
-    }
-    else {
-      responseHeaders.set("loginStatus", 
-      "User Not Found");
-
-      return ResponseEntity.badRequest()
-                          .headers(responseHeaders)
-                          .body("From Login");
+    if (Database.registerUser(con, name, password, email)) {
+      responseHeaders.set("loginStatus", "User Found");
+      return ResponseEntity.ok().headers(responseHeaders).body("From Login");
+    } else {
+      responseHeaders.set("loginStatus", "User Not Found");
+      return ResponseEntity.badRequest().headers(responseHeaders).body("From Login");
     }
   }
 
@@ -52,23 +43,24 @@ public class Controller {
     String password, email;
     password = passedData.getJSONObject("data").getString("password");
     email = passedData.getJSONObject("data").getString("email");
-    
+
     HttpHeaders responseHeaders = new HttpHeaders();
-    if(Database.loginUser(con, email, password)) {
-      responseHeaders.set("loginStatus", 
-      "User Found");
-
-      return ResponseEntity.ok()
-                          .headers(responseHeaders)
-                          .body("From Login");
+    if (Database.loginUser(con, email, password)) {
+      responseHeaders.set("loginStatus", "User Found");
+      return ResponseEntity.ok().headers(responseHeaders).body("From Login");
+    } else {
+      responseHeaders.set("loginStatus", "User Not Found");
+      return ResponseEntity.badRequest().headers(responseHeaders).body("From Login");
     }
-    else {
-      responseHeaders.set("loginStatus", 
-      "User Not Found");
+  }
 
-      return ResponseEntity.badRequest()
-                          .headers(responseHeaders)
-                          .body("From Login");
-    }
+  @RequestMapping(value = "getAccountBalance", method = RequestMethod.POST)
+  public JSONObject getAccountBalance(@RequestBody String data) throws JSONException, SQLException {
+    JSONObject passedData = new JSONObject(data);
+    String email;
+    email = passedData.getJSONObject("data").getString("email");
+    JSONObject balJSON = new JSONObject();
+    balJSON.put("balance", Database.getAccountBalance(con, email));
+    return balJSON;
   }
 }
