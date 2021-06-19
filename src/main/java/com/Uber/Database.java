@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 public class Database {
 
-  //private static final String privateKey = "uber4sec2ret0key";
+  // private static final String privateKey = "uber4sec2ret0key";
 
   static void showTable(Connection con, String tableName) throws SQLException {
     /*
@@ -34,8 +34,24 @@ public class Database {
     }
   }
 
+  static boolean reportDriver(Connection con, String passengerEmail, String driverEmail, String tripID,
+      String complaint) throws SQLException {
+    PreparedStatement stmt = con.prepareStatement("INSERT INTO Reports VALUES(?,?,?,?,?)");
+    stmt.setInt(1, 1);
+    stmt.setString(2, passengerEmail);
+    stmt.setString(3, driverEmail);
+    stmt.setString(4, tripID);
+    stmt.setString(5, complaint);
+    int i = stmt.executeUpdate();
+    if (i == 0) {
+      return false;
+    }
+    System.out.println(i + " record(s) inserted into " + "Reports.");
+    return true;
+  }
+
   static boolean completeTrip(Connection con, String passengerEmail, String driverEmail, String pickup,
-      String destination, String fare, String uniqueID) throws SQLException {
+      String destination, String fare, String tripID) throws SQLException {
     PreparedStatement stmt = con.prepareStatement("INSERT INTO Trips VALUES(?,?,?,?,?,?,?)");
     stmt.setInt(1, 1);
     stmt.setString(2, driverEmail);
@@ -43,12 +59,12 @@ public class Database {
     stmt.setString(4, pickup);
     stmt.setString(5, destination);
     stmt.setString(6, fare);
-    stmt.setString(7, uniqueID);
+    stmt.setString(7, tripID);
     int i = stmt.executeUpdate();
     if (i == 0) {
       return false;
     }
-    System.out.println(i + " records inserted.");
+    System.out.println(i + " record(s) inserted into " + "Trips.");
     return true;
   }
 
@@ -68,15 +84,6 @@ public class Database {
       // System.out.println(" ");
     }
     return json;
-  }
-
-  static int getAccountBalance(Connection con, String email) throws SQLException {
-    PreparedStatement stmt = con.prepareStatement("SELECT Balance FROM Passengers WHERE Email=?");
-    stmt.setString(1, email);
-    ResultSet rs = stmt.executeQuery();
-    int bal = Integer.parseInt(rs.getString(1));
-    System.out.println("Balance from DB: " + bal);
-    return bal;
   }
 
   static int registerUser(Connection con, String name, String password, String email) {
@@ -100,7 +107,7 @@ public class Database {
       if (i == 0) {
         return 0;
       }
-      System.out.println(i + " records inserted.");
+      System.out.println(i + " record(s) inserted into " + "Passengers");
       // printing entries
       // showTable(con, "Drivers");
       return 1;
@@ -116,10 +123,10 @@ public class Database {
     stmt.setString(2, password);
     ResultSet result = stmt.executeQuery();
     if (!result.isBeforeFirst()) {
-      System.out.println("No person with that credentials exists in the system.");
+      System.out.println("No Passenger with those credentials exists in the system.");
       return false;
     } else {
-      System.out.println("User found.");
+      System.out.println("Passenger found and logged in successfully.");
       return true;
     }
   }
