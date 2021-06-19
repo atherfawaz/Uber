@@ -63,4 +63,13 @@ public class Controller {
     balJSON.put("balance", Database.getAccountBalance(con, email));
     return balJSON;
   }
+
+  @RequestMapping(value = "getPassengerDetails", method = RequestMethod.POST)
+  public JSONObject getPassengerDetails(@RequestBody String data) throws JSONException, SQLException {
+    JSONObject passedData = new JSONObject(data);
+    String email;
+    email = passedData.getJSONObject("data").getString("email");
+    JSONObject details = Database.getPassengerDetails(con, email);
+    return details;
+  }
 }

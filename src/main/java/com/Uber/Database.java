@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Database {
 
   private static final String privateKey = "uber4sec2ret0key";
@@ -29,6 +32,42 @@ public class Database {
       }
       System.out.println(" ");
     }
+  }
+
+  static boolean completeTrip(Connection con, String passengerEmail, String driverEmail, String pickup,
+      String destination, String fare, String uniqueID) throws SQLException {
+    PreparedStatement stmt = con.prepareStatement("INSERT INTO Trips VALUES(?,?,?,?,?,?,?)");
+    stmt.setInt(1, 1);
+    stmt.setString(2, driverEmail);
+    stmt.setString(3, passengerEmail);
+    stmt.setString(4, pickup);
+    stmt.setString(5, destination);
+    stmt.setString(6, fare);
+    stmt.setString(7, uniqueID);
+    int i = stmt.executeUpdate();
+    if (i == 0) {
+      return false;
+    }
+    System.out.println(i + " records inserted.");
+    return true;
+  }
+
+  static JSONObject getPassengerDetails(Connection con, String email) throws SQLException, JSONException {
+    JSONObject json = new JSONObject();
+    PreparedStatement stmt = con.prepareStatement("SELECT * FROM Passengers WHERE Email=?");
+    stmt.setString(1, email);
+    ResultSet rs = stmt.executeQuery();
+    ResultSetMetaData rsmd = rs.getMetaData();
+    int column_count = rsmd.getColumnCount();
+    while (rs.next()) {
+      for (int i = 1; i <= column_count; i++) {
+        String name = rsmd.getColumnName(i);
+        json.put(name, rs.getString(i));
+        // System.out.print(" " + rs.getString(i));
+      }
+      // System.out.println(" ");
+    }
+    return json;
   }
 
   static int getAccountBalance(Connection con, String email) throws SQLException {
@@ -52,7 +91,6 @@ public class Database {
         return false;
 
       PreparedStatement stmt = con.prepareStatement("INSERT INTO Passengers VALUES(?,?,?,?,?)");
-      // stmt.setInt(1, );
       stmt.setInt(1, 1);
       stmt.setString(2, name);
       stmt.setString(3, password);
@@ -72,14 +110,6 @@ public class Database {
     return true;
   }
 
-  static Boolean validateUsername(String username) {
-    return !username.isEmpty() && username.length() <= 20;
-  }
-
-  static Boolean validatePassword(String password) {
-    return password.length() >= 4 && password.length() <= 10;
-  }
-
   static boolean loginUser(Connection con, String email, String password) throws SQLException {
     PreparedStatement stmt = con.prepareStatement("SELECT Name from Passengers WHERE Email=? AND Password=?");
     stmt.setString(1, email);
@@ -91,44 +121,6 @@ public class Database {
     } else {
       System.out.println("User found.");
       return true;
-    }
-  }
-
-  static boolean changeUsername(Connection con, String oldUsername, String password, String newUsername)
-      throws SQLException {
-    boolean loggedIn = loginUser(con, oldUsername, password);
-    if (loggedIn) {
-      PreparedStatement stmt = con.prepareStatement("UPDATE Users SET Username=? WHERE Username=?");
-      stmt.setString(1, AES.encrypt(newUsername, privateKey));
-      stmt.setString(2, AES.encrypt(oldUsername, privateKey));
-      int i = stmt.executeUpdate();
-      System.out.println(i + " records updated.");
-      System.out.println("Username updated.");
-      // showTable(con);
-      return true;
-    } else {
-      System.out.println("Username not updated.");
-      // showTable(con);
-      return false;
-    }
-  }
-
-  static boolean changePassword(Connection con, String username, String password, String newPassword)
-      throws SQLException {
-    boolean loggedIn = loginUser(con, username, password);
-    if (loggedIn) {
-      PreparedStatement stmt = con.prepareStatement("UPDATE Users SET Password=? WHERE Username=?");
-      stmt.setString(1, AES.encrypt(newPassword, privateKey));
-      stmt.setString(2, AES.encrypt(username, privateKey));
-      int i = stmt.executeUpdate();
-      System.out.println(i + " records updated.");
-      System.out.println("Password updated.");
-      // showTable(con);
-      return true;
-    } else {
-      System.out.println("Password not updated.");
-      // showTable(con);
-      return false;
     }
   }
 
