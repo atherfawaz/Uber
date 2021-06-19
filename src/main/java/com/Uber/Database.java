@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 public class Database {
 
-  private static final String privateKey = "uber4sec2ret0key";
+  //private static final String privateKey = "uber4sec2ret0key";
 
   static void showTable(Connection con, String tableName) throws SQLException {
     /*
@@ -79,7 +79,7 @@ public class Database {
     return bal;
   }
 
-  static boolean registerUser(Connection con, String name, String password, String email) {
+  static int registerUser(Connection con, String name, String password, String email) {
     /*
      * This function adds a User to the table
      */
@@ -88,7 +88,7 @@ public class Database {
 
     try {
       if (loginUser(con, email, password))
-        return false;
+        return -1;
 
       PreparedStatement stmt = con.prepareStatement("INSERT INTO Passengers VALUES(?,?,?,?,?)");
       stmt.setInt(1, 1);
@@ -98,16 +98,16 @@ public class Database {
       stmt.setInt(5, 0);
       int i = stmt.executeUpdate();
       if (i == 0) {
-        return false;
+        return 0;
       }
       System.out.println(i + " records inserted.");
       // printing entries
       // showTable(con, "Drivers");
-      return true;
+      return 1;
     } catch (Exception ex) {
       System.out.println("Database Error occurred: " + ex);
     }
-    return true;
+    return 1;
   }
 
   static boolean loginUser(Connection con, String email, String password) throws SQLException {

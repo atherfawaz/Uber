@@ -203,16 +203,18 @@ export default {
         };
       }
 
+      let mainThis = this;
       this.$store.dispatch(this.current.toLowerCase(), { data }).then(
         () => {
-          this.resetForm();
-          this.$router.push("profile");
+          mainThis.$store.commit("setUser", this.email);
+          mainThis.resetForm();
+          mainThis.$router.push("profile");
         },
-        () => {
-          this.$toast.add({
+        (error) => {
+          mainThis.$toast.add({
             severity: "error",
             summary: `${this.current} Error`,
-            detail: `Failed to ${this.current}, please try again!`,
+            detail: error.response.data,
             life: 3000,
           });
         }

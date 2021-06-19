@@ -37,6 +37,16 @@ export default {
     WalletCard,
     RideHistoryCard,
   },
+  mounted() {
+    this.$store.dispatch("getDetails").then(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  },
 };
 </script>
 
