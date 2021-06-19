@@ -34,6 +34,25 @@ public class Database {
     }
   }
 
+  static JSONObject getVehicleDetails(Connection con, String driverEmail, String vehicleRegistration)
+      throws SQLException, JSONException {
+    PreparedStatement stmt = con.prepareStatement("SELECT * FROM Drivers WHERE Drivers.VehicleRegistration=?");
+    stmt.setString(1, vehicleRegistration);
+    ResultSet rs = stmt.executeQuery();
+    ResultSetMetaData rsmd = rs.getMetaData();
+    int column_count = rsmd.getColumnCount();
+    JSONObject json = new JSONObject();
+    while (rs.next()) {
+      for (int i = 1; i <= column_count; i++) {
+        String name = rsmd.getColumnName(i);
+        json.put(name, rs.getString(i));
+        // System.out.print(" " + rs.getString(i));
+      }
+      // System.out.println(" ");
+    }
+    return json;
+  }
+
   static boolean reportDriver(Connection con, String passengerEmail, String driverEmail, String tripID,
       String complaint) throws SQLException {
     PreparedStatement stmt = con.prepareStatement("INSERT INTO Reports VALUES(?,?,?,?,?)");

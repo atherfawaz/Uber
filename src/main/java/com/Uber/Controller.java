@@ -89,4 +89,14 @@ public class Controller {
           HttpStatus.BAD_REQUEST);
     }
   }
+
+  @RequestMapping(value = "getVehicleDetails", method = RequestMethod.POST)
+  public ResponseEntity<String> getVehicleDetails(@RequestBody String data) throws JSONException, SQLException {
+    JSONObject passedData = new JSONObject(data);
+    String driverEmail, vehicleRegistration;
+    driverEmail = passedData.getString("driverEmail");
+    vehicleRegistration = passedData.getString("vehicleRegistration");
+    JSONObject details = Database.getVehicleDetails(con, driverEmail, vehicleRegistration);
+    return new ResponseEntity<>(details.toString(), HttpStatus.OK);
+  }
 }
