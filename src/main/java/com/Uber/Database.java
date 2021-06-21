@@ -116,11 +116,11 @@ public class Database {
       if (loginUser(con, email, password))
         return -1;
 
-      PreparedStatement stmt = con.prepareStatement("INSERT INTO Passengers VALUES(?,?,?,?,?)");
-      stmt.setInt(1, 1);
-      stmt.setString(2, name);
-      stmt.setString(3, password);
-      stmt.setString(4, email);
+      PreparedStatement stmt = con.prepareStatement("INSERT INTO Passengers VALUES (?,?,?,?,?)");
+      stmt.setString(1, name);
+      stmt.setString(2, password);
+      stmt.setString(3, email);
+      stmt.setInt(4, 0);
       stmt.setInt(5, 0);
       int i = stmt.executeUpdate();
       if (i == 0) {
