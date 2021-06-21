@@ -146,6 +146,7 @@ export default {
 
       if (!this.showMessage) {
         this.resetForm();
+        this.$store.commit("setRideBooked", true);
         this.$router.push("currentRide");
       }
     },

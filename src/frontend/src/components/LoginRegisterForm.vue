@@ -208,6 +208,7 @@ export default {
         () => {
           mainThis.$store.commit("setUser", this.email);
           mainThis.resetForm();
+          mainThis.$store.commit("authenticated", true);
           mainThis.$router.push("profile");
         },
         (error) => {

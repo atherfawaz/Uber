@@ -43,8 +43,6 @@ export default {
   data() {
     return {
       id: 2987,
-      star_pressed: "pi pi-star",
-      star_npressed: "pi pi-star-o",
     };
   },
   created() {

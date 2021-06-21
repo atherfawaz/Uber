@@ -7,12 +7,20 @@ import Report from "../views/Report.vue";
 import BookRide from "../views/BookRide.vue";
 import CurrentRide from "../views/CurrentRide.vue";
 import Feedback from "../views/Feedback.vue";
+import store from "../store/index";
 
 const routes = [
   {
     path: "/",
     name: "Home",
     component: Home,
+    beforeEnter: (to, from, next) => {
+      if (store.state.isLoggedIn == false) {
+        next("/register");
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/login",
@@ -28,31 +36,73 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile,
+    beforeEnter: (to, from, next) => {
+      if (store.state.isLoggedIn == false) {
+        next("/register");
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/report",
     name: "Report",
     component: Report,
+    beforeEnter: (to, from, next) => {
+      if (store.state.isLoggedIn == false) {
+        next("/register");
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/bookride",
     name: "BookRide",
     component: BookRide,
-  },
-  {
-    path: "/bookride",
-    name: "BookRide",
-    component: BookRide,
+    beforeEnter: (to, from, next) => {
+      if (store.state.isLoggedIn == false) {
+        next("/register");
+      } else if (store.state.rideBooked == true) {
+        next("/currentride");
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/currentride",
     name: "CurrentRide",
     component: CurrentRide,
+    beforeEnter: (to, from, next) => {
+      if (store.state.isLoggedIn == false) {
+        next("/register");
+      } else if (store.state.rideBooked == false) {
+        next("/bookride");
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/feedback",
     name: "Feedback",
     component: Feedback,
+    beforeEnter: (to, from, next) => {
+      if (store.state.isLoggedIn == false) {
+        next("/register");
+      } else if (store.state.rideBooked == true) {
+        next("/currentride");
+      } else if (
+        store.state.rideBooked == false &&
+        from.name != "CurrentRide"
+      ) {
+        console.log(from);
+        next("/bookride");
+      } else {
+        next();
+      }
+    },
   },
 ];
 

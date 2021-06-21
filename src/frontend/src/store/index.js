@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import axios from "axios";
+import createPersistedState from "vuex-persistedstate";
 
 export default createStore({
   state: {
@@ -7,13 +8,21 @@ export default createStore({
       name: "",
       email: "",
     },
+    isLoggedIn: false,
+    rideBooked: false,
   },
 
-  getters: {},
+  plugins: [createPersistedState()],
 
   mutations: {
     setUser: (state, email) => {
       state.userDets.email = email;
+    },
+    authenticated(state, auth) {
+      state.isLoggedIn = auth;
+    },
+    setRideBooked(state, auth) {
+      state.rideBooked = auth;
     },
   },
 
