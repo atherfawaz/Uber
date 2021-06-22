@@ -1,31 +1,12 @@
 <template>
   <div class="form-demo">
-    <Dialog
-      v-model:visible="showMessage"
-      :breakpoints="{ '960px': '80vw' }"
-      :style="{ width: '30vw' }"
-      position="top"
-    >
-      <div class="p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
-        <i
-          class="pi pi-check-circle"
-          :style="{ fontSize: '5rem', color: 'var(--green-500)' }"
-        ></i>
-        <h5>Ride Booked!</h5>
-      </div>
-      <template #footer>
-        <div class="p-d-flex p-jc-center">
-          <Button label="OK" @click="toggleDialog" class="p-button-text" />
-        </div>
-      </template>
-    </Dialog>
-
     <Card class="container">
       <template #content>
         <div class="p-d-flex p-jc-center">
           <div class="card">
             <h1 style="text-align: center">Book Ride</h1>
             <form @submit.prevent="handleSubmit(!v$.$invalid)" class="p-fluid">
+              <Toast />
               <div class="p-field">
                 <div class="p-float-label">
                   <InputText
@@ -93,7 +74,7 @@
 import { required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import Button from "primevue/button";
-import Dialog from "primevue/dialog";
+import Toast from "primevue/toast";
 import InputText from "primevue/inputtext";
 import Card from "primevue/card";
 import Dropdown from "primevue/dropdown";
@@ -126,7 +107,7 @@ export default {
   },
   components: {
     Button,
-    Dialog,
+    Toast,
     InputText,
     Card,
     Dropdown,
@@ -145,9 +126,25 @@ export default {
       this.showMessage = !this.showMessage;
 
       if (!this.showMessage) {
-        this.resetForm();
         this.$store.commit("setRideBooked", true);
-        this.$router.push("currentRide");
+        this.$toast.add({
+          severity: "success",
+          summary: "Ride Booked",
+          detail: "Be Patient, the driver is on the way!",
+          life: 2500,
+        });
+        setTimeout(
+          () =>
+            this.$router.push({
+              name: "CurrentRide",
+              params: {
+                from: this.from,
+                to: this.to,
+                type: this.selectedType.name,
+              },
+            }),
+          2500
+        );
       }
     },
     resetForm() {

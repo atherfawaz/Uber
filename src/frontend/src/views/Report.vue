@@ -42,12 +42,8 @@ export default {
       id: 2987,
     };
   },
-  created() {
-    console.log(this.rideID);
-  },
   methods: {
     submit() {
-      console.log(this.id);
       this.$toast.add({
         severity: "success",
         summary: "Report Submitted",

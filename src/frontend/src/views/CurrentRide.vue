@@ -2,7 +2,7 @@
   <div>
     <h1>Ride is on the way!</h1>
     <div class="imgcontainer">
-      <img src="../images/car.jpg" class="img" />
+      <img src="../assets/car.jpg" class="img" />
     </div>
 
     <div class="float-container">
@@ -25,9 +25,9 @@
             <h2 style="text-align: center">Ride Details</h2>
           </template>
           <template #content>
-            <p class="details">From: Askari 11</p>
-            <p class="details">To: Fast-NU</p>
-            <p class="details">Type: Go</p>
+            <p class="details">From: {{ from }}</p>
+            <p class="details">To: {{ to }}</p>
+            <p class="details">Type: {{ type }}</p>
             <p class="details" style="color: transparent">aa⭐️</p>
           </template>
         </Card>
@@ -53,6 +53,11 @@ export default {
   components: {
     Card,
     Button,
+  },
+  props: {
+    from: String,
+    to: String,
+    type: String,
   },
   methods: {
     onCancel() {

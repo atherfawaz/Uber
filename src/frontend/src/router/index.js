@@ -17,6 +17,8 @@ const routes = [
     beforeEnter: (to, from, next) => {
       if (store.state.isLoggedIn == false) {
         next("/register");
+      } else if (store.state.isLoggedIn == true) {
+        next("/profile");
       } else {
         next();
       }
@@ -26,11 +28,25 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+    beforeEnter: (to, from, next) => {
+      if (store.state.isLoggedIn == true) {
+        next("/profile");
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/register",
     name: "Register",
     component: Register,
+    beforeEnter: (to, from, next) => {
+      if (store.state.isLoggedIn == true) {
+        next("/profile");
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/profile",
@@ -74,6 +90,7 @@ const routes = [
     path: "/currentride",
     name: "CurrentRide",
     component: CurrentRide,
+    props: true,
     beforeEnter: (to, from, next) => {
       if (store.state.isLoggedIn == false) {
         next("/register");
@@ -97,7 +114,6 @@ const routes = [
         store.state.rideBooked == false &&
         from.name != "CurrentRide"
       ) {
-        console.log(from);
         next("/bookride");
       } else {
         next();

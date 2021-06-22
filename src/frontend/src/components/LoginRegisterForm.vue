@@ -206,8 +206,13 @@ export default {
       let mainThis = this;
       this.$store.dispatch(this.current.toLowerCase(), { data }).then(
         () => {
-          mainThis.$store.commit("setUser", this.email);
           mainThis.resetForm();
+          mainThis.$store.commit("setUser", {
+            email: data.email,
+            name: "",
+            rating: 0.0,
+            balance: 0.0,
+          });
           mainThis.$store.commit("authenticated", true);
           mainThis.$router.push("profile");
         },

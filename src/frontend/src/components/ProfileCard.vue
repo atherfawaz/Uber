@@ -5,14 +5,12 @@
       <template #content>
         <div id="outer-div">
           <div id="image">
-            <img
-              src="https://pbs.twimg.com/media/EnyMTfFUcAACQny?format=jpg&name=medium"
-            />
+            <img src="../assets/user.png" />
           </div>
-          <div id="info">
-            <p id="p-name">Muhammad Osama Asif</p>
-            <p id="p-rating">4.8⭐</p>
-            <p id="p-email">osamaasif07@gmail.com</p>
+          <div id="info" v-if="dataPresent">
+            <p id="p-name">{{ getName() }}</p>
+            <p id="p-rating">{{ getRating() }} ⭐</p>
+            <p id="p-email">{{ getEmail() }}</p>
           </div>
           <div id="btn">
             <Button
@@ -38,10 +36,40 @@ export default {
     Card,
     Button,
   },
+  data() {
+    return {
+      dataPresent: false,
+    };
+  },
   methods: {
     goToHome() {
-      this.$router.push({ name: "Home" });
+      this.$store.commit("authenticated", false);
+      this.$store.commit("setUser", "", "", "", "");
+      this.$router.push({ name: "Login" });
     },
+    getName() {
+      return this.$store.getters.getName;
+    },
+    getRating() {
+      return this.$store.getters.getRating;
+    },
+    getEmail() {
+      return this.$store.getters.getEmail;
+    },
+  },
+  mounted() {
+    this.$store.dispatch("getDetails").then(
+      (response) => {
+        this.$store.commit("setUser", {
+          email: response.data["Email"],
+          name: response.data["Name"],
+          rating: parseFloat(response.data["Rating"]),
+          balance: parseFloat(response.data["Balance"]),
+        });
+        this.dataPresent = true;
+      },
+      () => {}
+    );
   },
 };
 </script>

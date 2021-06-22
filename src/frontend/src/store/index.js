@@ -4,19 +4,40 @@ import createPersistedState from "vuex-persistedstate";
 
 export default createStore({
   state: {
-    userDets: {
-      name: "",
-      email: "",
-    },
+    username: "",
+    email: "",
+    rating: 0.0,
+    balance: 0.0,
     isLoggedIn: false,
     rideBooked: false,
   },
 
   plugins: [createPersistedState()],
 
+  getters: {
+    getName: (state) => {
+      return state.username;
+    },
+
+    getRating: (state) => {
+      return state.rating;
+    },
+
+    getBalance: (state) => {
+      return state.balance;
+    },
+
+    getEmail: (state) => {
+      return state.email;
+    },
+  },
+
   mutations: {
-    setUser: (state, email) => {
-      state.userDets.email = email;
+    setUser: (state, payload) => {
+      state.email = payload.email;
+      state.username = payload.name;
+      state.rating = payload.rating;
+      state.balance = payload.balance;
     },
     authenticated(state, auth) {
       state.isLoggedIn = auth;
@@ -37,7 +58,7 @@ export default createStore({
 
     getDetails() {
       return axios.post("api/getPassengerDetails", {
-        email: this.state.userDets.email,
+        email: this.state.email,
       });
     },
   },

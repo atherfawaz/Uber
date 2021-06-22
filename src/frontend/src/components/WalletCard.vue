@@ -4,7 +4,7 @@
       <template #subtitle> Wallet Details </template>
       <template #content>
         <div>
-          <p id="p-balance">PKR 254</p>
+          <p id="p-balance">{{ getBalance() }}</p>
           <p id="p-text">Remaining Balance</p>
         </div>
       </template>
@@ -20,6 +20,11 @@ export default {
   name: "WalletCard",
   components: {
     Card,
+  },
+  methods: {
+    getBalance() {
+      return this.$store.getters.getBalance;
+    },
   },
 };
 </script>
