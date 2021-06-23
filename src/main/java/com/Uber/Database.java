@@ -34,10 +34,9 @@ public class Database {
     }
   }
 
-  static JSONObject getVehicleDetails(Connection con, String driverEmail, String vehicleRegistration)
+  static JSONObject getVehicleDetails(Connection con)
       throws SQLException, JSONException {
-    PreparedStatement stmt = con.prepareStatement("SELECT * FROM Drivers WHERE Drivers.VehicleRegistration=?");
-    stmt.setString(1, vehicleRegistration);
+    PreparedStatement stmt = con.prepareStatement("SELECT TOP 1 * FROM Drivers");
     ResultSet rs = stmt.executeQuery();
     ResultSetMetaData rsmd = rs.getMetaData();
     int column_count = rsmd.getColumnCount();

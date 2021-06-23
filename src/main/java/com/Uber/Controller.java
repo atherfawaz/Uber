@@ -91,12 +91,8 @@ public class Controller {
   }
 
   @RequestMapping(value = "getVehicleDetails", method = RequestMethod.POST)
-  public ResponseEntity<String> getVehicleDetails(@RequestBody String data) throws JSONException, SQLException {
-    JSONObject passedData = new JSONObject(data);
-    String driverEmail, vehicleRegistration;
-    driverEmail = passedData.getString("driverEmail");
-    vehicleRegistration = passedData.getString("vehicleRegistration");
-    JSONObject details = Database.getVehicleDetails(con, driverEmail, vehicleRegistration);
+  public ResponseEntity<String> getVehicleDetails() throws JSONException, SQLException {
+    JSONObject details = Database.getVehicleDetails(con);
     return new ResponseEntity<>(details.toString(), HttpStatus.OK);
   }
 }

@@ -127,24 +127,18 @@ export default {
 
       if (!this.showMessage) {
         this.$store.commit("setRideBooked", true);
+        this.$store.commit("setRideDets", {
+          to: this.to,
+          from: this.from,
+          type: this.selectedType.name,
+        });
         this.$toast.add({
           severity: "success",
           summary: "Ride Booked",
           detail: "Be Patient, the driver is on the way!",
           life: 2500,
         });
-        setTimeout(
-          () =>
-            this.$router.push({
-              name: "CurrentRide",
-              params: {
-                from: this.from,
-                to: this.to,
-                type: this.selectedType.name,
-              },
-            }),
-          2500
-        );
+        setTimeout(() => this.$router.push("/currentride"), 2500);
       }
     },
     resetForm() {

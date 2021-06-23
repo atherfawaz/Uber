@@ -58,7 +58,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch("getDetails").then(
+    this.$store.dispatch("getPassengerDetails").then(
       (response) => {
         this.$store.commit("setUser", {
           email: response.data["Email"],

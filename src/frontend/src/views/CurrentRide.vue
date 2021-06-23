@@ -12,10 +12,10 @@
             <h2 style="text-align: center">Driver Details</h2>
           </template>
           <template #content>
-            <p class="details">Name: Muhammad Hamza</p>
-            <p class="details">Rating: 4.8⭐️</p>
-            <p class="details">Car: Suzuki Cultus</p>
-            <p class="details">License Number: LZA-1234</p>
+            <p class="details">Name: {{ getDriverName() }}</p>
+            <p class="details">Rating: {{ getDriverRating() }}⭐️</p>
+            <p class="details">Car: {{ getCar() }}</p>
+            <p class="details">License Number: {{ getLicense() }}</p>
           </template>
         </Card>
       </div>
@@ -25,9 +25,9 @@
             <h2 style="text-align: center">Ride Details</h2>
           </template>
           <template #content>
-            <p class="details">From: {{ from }}</p>
-            <p class="details">To: {{ to }}</p>
-            <p class="details">Type: {{ type }}</p>
+            <p class="details">From: {{ getFrom() }}</p>
+            <p class="details">To: {{ getTo() }}</p>
+            <p class="details">Type: {{ getType() }}</p>
             <p class="details" style="color: transparent">aa⭐️</p>
           </template>
         </Card>
@@ -54,15 +54,44 @@ export default {
     Card,
     Button,
   },
-  props: {
-    from: String,
-    to: String,
-    type: String,
+  mounted() {
+    this.$store.dispatch("getVehicleDetails").then(
+      (response) => {
+        this.$store.commit("setDriverDets", {
+          name: response.data["DriverName"],
+          rating: response.data["Rating"],
+          car: response.data["VehicleMake"],
+          license: response.data["VehicleRegistration"],
+        });
+      },
+      () => {}
+    );
   },
   methods: {
     onCancel() {
       this.$store.commit("setRideBooked", false);
       this.$router.push("feedback");
+    },
+    getTo() {
+      return this.$store.getters.getTo;
+    },
+    getFrom() {
+      return this.$store.getters.getFrom;
+    },
+    getType() {
+      return this.$store.getters.getType;
+    },
+    getDriverName() {
+      return this.$store.getters.getDriverName;
+    },
+    getDriverRating() {
+      return this.$store.getters.getDriverRating;
+    },
+    getCar() {
+      return this.$store.getters.getCar;
+    },
+    getLicense() {
+      return this.$store.getters.getLicense;
     },
   },
 };
