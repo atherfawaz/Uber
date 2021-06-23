@@ -63,6 +63,29 @@ export default {
           car: response.data["VehicleMake"],
           license: response.data["VehicleRegistration"],
         });
+
+        this.$store
+          .dispatch("addRide", {
+            driverName: response.data["DriverName"],
+            passEmail: this.$store.getters.getUserEmail,
+            to: this.$store.getters.getTo,
+            from: this.$store.getters.getTo,
+            fare: Math.floor(Math.random() * 300) + 100,
+            tripID: Math.floor(Math.random() * 1000) + 1,
+          })
+          .then(
+            () => {
+              this.$store.commit("addRide", {
+                driverName: response.data["DriverName"],
+                passEmail: this.$store.getters.getUserEmail,
+                to: this.$store.getters.getTo,
+                from: this.$store.getters.getTo,
+                fare: Math.floor(Math.random() * 300) + 100,
+                tripID: Math.floor(Math.random() * 1000) + 1,
+              });
+            },
+            () => {}
+          );
       },
       () => {}
     );

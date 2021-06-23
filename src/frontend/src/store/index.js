@@ -24,6 +24,9 @@ export default createStore({
     to: "",
     from: "",
     type: "",
+
+    // current rides
+    rides: [],
   },
 
   plugins: [createPersistedState()],
@@ -31,6 +34,10 @@ export default createStore({
   getters: {
     getName: (state) => {
       return state.username;
+    },
+
+    getUserEmail: (state) => {
+      return state.email;
     },
 
     getRating: (state) => {
@@ -66,6 +73,9 @@ export default createStore({
     getLicense: (state) => {
       return state.carLicense;
     },
+    getRides: (state) => {
+      return state.rides;
+    },
   },
 
   mutations: {
@@ -92,6 +102,9 @@ export default createStore({
     setRideBooked(state, auth) {
       state.rideBooked = auth;
     },
+    addRide(state, dets) {
+      state.rides.push(dets);
+    },
   },
 
   actions: {
@@ -111,6 +124,10 @@ export default createStore({
 
     getVehicleDetails() {
       return axios.post("api/getVehicleDetails");
+    },
+
+    addRide(context, data) {
+      return axios.post("api/completeTrip", data);
     },
   },
 });

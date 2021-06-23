@@ -7,7 +7,7 @@
           id="scroll"
           style="width: 100%; height: 52vh; margin-top: -2vh"
         >
-          <Rides :rides="rides" />
+          <Rides :rides="$store.getters.getRides" />
         </ScrollPanel>
       </template>
     </Card>

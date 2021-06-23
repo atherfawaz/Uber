@@ -56,10 +56,10 @@ public class Controller {
   public ResponseEntity<String> completeTrip(@RequestBody String data) throws JSONException, SQLException {
     JSONObject passedData = new JSONObject(data);
     String passengerEmail, driverEmail, pickup, destination, fare, tripID;
-    passengerEmail = passedData.getString("passengerEmail");
-    driverEmail = passedData.getString("driverEmail");
-    pickup = passedData.getString("pickup");
-    destination = passedData.getString("destination");
+    passengerEmail = passedData.getString("passEmail");
+    driverEmail = passedData.getString("driverName");
+    pickup = passedData.getString("from");
+    destination = passedData.getString("to");
     fare = passedData.getString("fare");
     tripID = passedData.getString("tripID");
     boolean response = Database.completeTrip(con, passengerEmail, driverEmail, pickup, destination, fare, tripID);

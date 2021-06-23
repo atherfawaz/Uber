@@ -1,21 +1,21 @@
 <template>
   <div id="container">
     <div id="left-div" class="inner">
-      <p class="location">🔵{{ ride.start }}</p>
+      <p class="location">🔵{{ ride.to }}</p>
       <p id="line" class="location">⇣</p>
-      <p class="location">🟢{{ ride.destination }}</p>
+      <p class="location">🟢{{ ride.from }}</p>
     </div>
     <div id="mid-div" class="inner">
-      <p id="driver">{{ ride.driver }}</p>
+      <p id="driver">{{ ride.driverName }}</p>
     </div>
     <div id="right-div" class="inner">
-      <p id="cost">{{ ride.cost }}</p>
+      <p id="cost">{{ ride.fare }}</p>
     </div>
     <div id="report-div" class="inner">
       <Button
         id="btn"
         icon="pi pi-exclamation-triangle"
-        @click="goToReport(ride.id)"
+        @click="goToReport(ride.tripID)"
         label="Report"
         style="height: 100%; width: 100%"
       />

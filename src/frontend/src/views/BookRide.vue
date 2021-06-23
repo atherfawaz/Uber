@@ -87,7 +87,7 @@ export default {
       to: "",
       submitted: false,
       showMessage: false,
-      selectedType: "Go",
+      selectedType: { name: "Go", code: "Go" },
       types: [
         { name: "Go", code: "Go" },
         { name: "Go+", code: "GoP" },
