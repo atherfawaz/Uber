@@ -95,4 +95,13 @@ public class Controller {
     JSONObject details = Database.getVehicleDetails(con);
     return new ResponseEntity<>(details.toString(), HttpStatus.OK);
   }
+
+  @RequestMapping(value = "getTrips", method = RequestMethod.POST)
+  public ResponseEntity<String> getTrips(@RequestBody String data) throws JSONException, SQLException {
+    JSONObject passedData = new JSONObject(data);
+    String passengerEmail;
+    passengerEmail = passedData.getString("email");
+    JSONObject details = Database.getTrips(con, passengerEmail);
+    return new ResponseEntity<>(details.toString(), HttpStatus.OK);
+  }
 }

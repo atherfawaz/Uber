@@ -34,9 +34,26 @@ public class Database {
     }
   }
 
-  static JSONObject getVehicleDetails(Connection con)
-      throws SQLException, JSONException {
+  static JSONObject getVehicleDetails(Connection con) throws SQLException, JSONException {
     PreparedStatement stmt = con.prepareStatement("SELECT TOP 1 * FROM Drivers");
+    ResultSet rs = stmt.executeQuery();
+    ResultSetMetaData rsmd = rs.getMetaData();
+    int column_count = rsmd.getColumnCount();
+    JSONObject json = new JSONObject();
+    while (rs.next()) {
+      for (int i = 1; i <= column_count; i++) {
+        String name = rsmd.getColumnName(i);
+        json.put(name, rs.getString(i));
+        // System.out.print(" " + rs.getString(i));
+      }
+      // System.out.println(" ");
+    }
+    return json;
+  }
+
+  static JSONObject getTrips(Connection con, String passengerEmail) throws SQLException, JSONException {
+    PreparedStatement stmt = con.prepareStatement("SELECT * FROM Trips WHERE PassengerEmail=?");
+    stmt.setString(1, passengerEmail);
     ResultSet rs = stmt.executeQuery();
     ResultSetMetaData rsmd = rs.getMetaData();
     int column_count = rsmd.getColumnCount();
