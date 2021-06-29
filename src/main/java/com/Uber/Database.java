@@ -57,16 +57,20 @@ public class Database {
     ResultSet rs = stmt.executeQuery();
     ResultSetMetaData rsmd = rs.getMetaData();
     int column_count = rsmd.getColumnCount();
-    JSONObject json = new JSONObject();
+    JSONObject jsonArray = new JSONObject();
+    JSONObject json;
+    int z = 0;
     while (rs.next()) {
+      json = new JSONObject();
       for (int i = 1; i <= column_count; i++) {
         String name = rsmd.getColumnName(i);
         json.put(name, rs.getString(i));
-        // System.out.print(" " + rs.getString(i));
       }
-      // System.out.println(" ");
+      jsonArray.put(Integer.toString(z), json);
+      z += 1;
     }
-    return json;
+    System.out.println(jsonArray);
+    return jsonArray;
   }
 
   static boolean reportDriver(Connection con, String passengerEmail, String driverEmail, String tripID,
@@ -86,15 +90,15 @@ public class Database {
   }
 
   static boolean completeTrip(Connection con, String passengerEmail, String driverEmail, String pickup,
-      String destination, String fare, String tripID) throws SQLException {
+      String destination, String fare, String tripID, String vehicleReg) throws SQLException {
     PreparedStatement stmt = con.prepareStatement("INSERT INTO Trips VALUES(?,?,?,?,?,?,?)");
-    stmt.setInt(1, 1);
-    stmt.setString(2, driverEmail);
-    stmt.setString(3, passengerEmail);
-    stmt.setString(4, pickup);
-    stmt.setString(5, destination);
-    stmt.setString(6, fare);
-    stmt.setString(7, tripID);
+    stmt.setString(1, driverEmail);
+    stmt.setString(2, passengerEmail);
+    stmt.setString(3, pickup);
+    stmt.setString(4, destination);
+    stmt.setString(5, fare);
+    stmt.setString(6, tripID);
+    stmt.setString(7, vehicleReg);
     int i = stmt.executeUpdate();
     if (i == 0) {
       return false;
@@ -122,12 +126,6 @@ public class Database {
   }
 
   static int registerUser(Connection con, String name, String password, String email) {
-    /*
-     * This function adds a User to the table
-     */
-    // name = AES.encrypt(name, privateKey);
-    // password = AES.encrypt(password, privateKey);
-
     try {
       if (loginUser(con, email, password))
         return -1;

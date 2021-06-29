@@ -55,14 +55,15 @@ public class Controller {
   @RequestMapping(value = "completeTrip", method = RequestMethod.POST)
   public ResponseEntity<String> completeTrip(@RequestBody String data) throws JSONException, SQLException {
     JSONObject passedData = new JSONObject(data);
-    String passengerEmail, driverEmail, pickup, destination, fare, tripID;
-    passengerEmail = passedData.getString("passEmail");
+    String passengerEmail, driverEmail, pickup, destination, fare, tripID, vehicleReg;
     driverEmail = passedData.getString("driverName");
-    pickup = passedData.getString("from");
+    passengerEmail = passedData.getString("passEmail");
     destination = passedData.getString("to");
+    pickup = passedData.getString("from");
     fare = passedData.getString("fare");
     tripID = passedData.getString("tripID");
-    boolean response = Database.completeTrip(con, passengerEmail, driverEmail, pickup, destination, fare, tripID);
+    vehicleReg = passedData.getString("vehicleReg");
+    boolean response = Database.completeTrip(con, passengerEmail, driverEmail, pickup, destination, fare, tripID, vehicleReg);
     if (response) {
       return new ResponseEntity<>("Trip completed successfully. Thank you for using Uber.", HttpStatus.OK);
     } else {

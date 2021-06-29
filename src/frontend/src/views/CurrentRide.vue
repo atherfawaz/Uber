@@ -57,8 +57,10 @@ export default {
   mounted() {
     this.$store.dispatch("getVehicleDetails").then(
       (response) => {
+        console.log(response.data);
         this.$store.commit("setDriverDets", {
           name: response.data["DriverName"],
+          email: response.data["Email"],
           rating: response.data["Rating"],
           car: response.data["VehicleMake"],
           license: response.data["VehicleRegistration"],
@@ -66,23 +68,17 @@ export default {
 
         this.$store
           .dispatch("addRide", {
-            driverName: response.data["DriverName"],
+            driverName: response.data["Email"],
             passEmail: this.$store.getters.getUserEmail,
             to: this.$store.getters.getTo,
-            from: this.$store.getters.getTo,
+            from: this.$store.getters.getFrom,
             fare: Math.floor(Math.random() * 300) + 100,
             tripID: Math.floor(Math.random() * 1000) + 1,
+            vehicleReg: response.data["VehicleRegistration"],
           })
           .then(
             () => {
-              this.$store.commit("addRide", {
-                driverName: response.data["DriverName"],
-                passEmail: this.$store.getters.getUserEmail,
-                to: this.$store.getters.getTo,
-                from: this.$store.getters.getTo,
-                fare: Math.floor(Math.random() * 300) + 100,
-                tripID: Math.floor(Math.random() * 1000) + 1,
-              });
+              // add getTrips here
             },
             () => {}
           );

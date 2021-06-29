@@ -16,6 +16,7 @@ export default createStore({
 
     // driver details
     driverName: "",
+    driverEmail: "",
     carName: "",
     carLicense: "",
     driverRating: 0.0,
@@ -92,6 +93,7 @@ export default createStore({
     },
     setDriverDets: (state, payload) => {
       state.driverName = payload.name;
+      state.driverEmail = payload.email;
       state.carName = payload.car;
       state.carLicense = payload.license;
       state.driverRating = payload.rating;
@@ -104,6 +106,9 @@ export default createStore({
     },
     addRide(state, dets) {
       state.rides.push(dets);
+    },
+    setRides: (state, payload) => {
+      state.rides = payload;
     },
   },
 
@@ -128,6 +133,12 @@ export default createStore({
 
     addRide(context, data) {
       return axios.post("api/completeTrip", data);
+    },
+
+    getTrips() {
+      return axios.post("api/getTrips", {
+        email: this.state.email,
+      });
     },
   },
 });

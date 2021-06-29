@@ -29,7 +29,7 @@ import ProfileCard from "../components/ProfileCard.vue";
 import WalletCard from "../components/WalletCard.vue";
 import RideHistoryCard from "../components/RideHistoryCard.vue";
 
-export default {  
+export default {
   name: "Profile",
   components: {
     Button,

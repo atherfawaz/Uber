@@ -44,7 +44,9 @@ export default {
   methods: {
     goToHome() {
       this.$store.commit("authenticated", false);
+      this.$store.commit("rideBooked", false);
       this.$store.commit("setUser", "", "", "", "");
+      this.$store.commit("rides", []);
       this.$router.push({ name: "Login" });
     },
     getName() {
@@ -75,9 +77,6 @@ export default {
 </script>
 
 <style scoped>
-/* div {
-  border-style: solid;
-} */
 .container {
   height: 100%;
   width: 100%;

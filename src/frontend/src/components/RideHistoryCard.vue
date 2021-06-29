@@ -26,95 +26,19 @@ export default {
     ScrollPanel,
     Rides,
   },
-  data() {
-    return {
-      rides: [
-        {
-          id: 1,
-          start: "Lahore",
-          destination: "Islamabad",
-          driver: "Jane Doe",
-          cost: "PKR 230",
-        },
-        {
-          id: 2,
-          start: "Lahore",
-          destination: "Islamabad",
-          driver: "Jane Doe",
-          cost: "PKR 230",
-        },
-        {
-          id: 3,
-          start: "Lahore",
-          destination: "Islamabad",
-          driver: "Jane Doe",
-          cost: "PKR 230",
-        },
-        {
-          id: 4,
-          start: "Lahore",
-          destination: "Islamabad",
-          driver: "Jane Doe",
-          cost: "PKR 230",
-        },
-        {
-          id: 5,
-          start: "Lahore",
-          destination: "Islamabad",
-          driver: "Jane Doe",
-          cost: "PKR 230",
-        },
-        {
-          id: 6,
-          start: "Lahore",
-          destination: "Islamabad",
-          driver: "Jane Doe",
-          cost: "PKR 230",
-        },
-        {
-          id: 7,
-          start: "Lahore",
-          destination: "Islamabad",
-          driver: "Jane Doe",
-          cost: "PKR 230",
-        },
-        {
-          id: 8,
-          start: "Lahore",
-          destination: "Islamabad",
-          driver: "Jane Doe",
-          cost: "PKR 230",
-        },
-        {
-          id: 9,
-          start: "Lahore",
-          destination: "Islamabad",
-          driver: "Jane Doe",
-          cost: "PKR 230",
-        },
-        {
-          id: 10,
-          start: "Lahore",
-          destination: "Islamabad",
-          driver: "Jane Doe",
-          cost: "PKR 230",
-        },
-        {
-          id: 11,
-          start: "Lahore",
-          destination: "Islamabad",
-          driver: "Jane Doe",
-          cost: "PKR 230",
-        },
-        {
-          id: 12,
-          start: "Lahore",
-          destination: "Islamabad",
-          driver: "Jane Doe",
-          cost: "PKR 230",
-        },
-      ],
-    };
+  mounted() {
+    this.$store.dispatch("getTrips").then(
+      (res) => {
+        let d = res.data;
+        let trips = [];
+        for (const key in d) {
+          trips.push(d[key]);
+        }
+        console.log(trips);
+        this.$store.commit("setRides", trips);
+      },
+      () => {}
+    );
   },
 };
 </script>

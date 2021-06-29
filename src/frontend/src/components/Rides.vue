@@ -1,6 +1,8 @@
 <template>
-  <div :key="ride.id" v-for="ride in rides">
-    <Ride :ride="ride" />
+  <div>
+    <div :key="ride.id" v-for="ride in rides">
+      <Ride :ride="ride" />
+    </div>
   </div>
 </template>
 
